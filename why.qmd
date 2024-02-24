@@ -1,0 +1,23 @@
+---
+title: "Why we develop this website"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Start with Why: How Great Leaders Inspire Everyone to Take Action
+
+I believe start with asking why is an very important thinking track that could benefit us the most. Figuring out the real reason and purpose behind your move can really help you successfully communicating the passion behind the "Why". [Simon Sinek](https://simonsinek.com/)'s Golden Circle theory attempts to explain how successful leaders and organizations inspire others and differentiate themselves through communicate your "Why" to your customers.
+
+![Start with Why](images/start-w-why.png) \# Interactive learning of modern technologies
+
+## Why the interactive learning is crucial?
+
+-   Engagement: Interactive learning actively involves learners, keeping them engaged and interested in the subject matter. This active participation promotes better retention of information. It helps students to try and error, learning from mistakes, and most importantly, understanding the reasons and purpose of why we should learn. 
+
+-   Customization: Interactive learning allows for personalized learning experiences tailored to individual needs and preferences. Learners can explore content at their own pace and focus on areas where they need improvement.
+
+-   Feedback: Interactive learning platforms often provide immediate feedback, allowing learners to assess their understanding and progress in real-time. This feedback loop helps identify areas for improvement and promotes continuous learning. With the help of GPT techniques, we can have tailored feedbacks. 
+
+-   Collaboration: Interactive learning encourages collaboration among learners, fostering a sense of community and peer support. Collaborative activities promote critical thinking, communication skills, and teamwork.
+
+-   Application: Interactive learning often involves hands-on activities, simulations, and real-world scenarios, allowing learners to apply theoretical knowledge to practical situations. This application-oriented approach enhances learning outcomes and prepares learners for real-world challenges.

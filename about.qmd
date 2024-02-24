@@ -1,0 +1,5 @@
+---
+title: "About Us"
+---
+
+This is the website for the course **Data Mining for Business Analytics** developed by [Dr. Xiaorui Zhu](https://xiaorui.site/) with the help of [ChatGPT](https://chatgpt.com/). 

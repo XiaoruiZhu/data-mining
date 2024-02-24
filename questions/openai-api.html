@@ -1,0 +1,80 @@
+
+<script>
+        // Initialize conversation history for each chat
+        const chatHistory = {
+            1: [],
+            101: [],
+            102: [],
+            103: [],
+            104: []
+        };
+
+        async function sendMessage(chatId) {
+            const userInput = document.getElementById(`user-input-${chatId}`).value;
+            const chatContainer = document.getElementById(`chat-messages-${chatId}`);
+           
+            // Add user's message to chat container
+            chatContainer.innerHTML += `<div class="chat-message user-message">Me: ${userInput}</div>`;
+
+            // Send user's message to ChatGPT API
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY // Replace with your actual API key
+                },
+                body: JSON.stringify({
+                model: 'gpt-3.5-turbo-0125',
+                messages: [
+                    {
+                        role: 'system',
+                        content: process.env.OPENAI_SYSTEM_TEMPLATE
+                    },
+                    // Include chat history in the request
+                    ...chatHistory[chatId],
+                    {
+                        role: 'user',
+                        content: userInput
+                    }
+                ]
+            })
+            });
+            if (!response.ok) {
+                throw new Error('An error occurred in the request to the \'API');
+            }
+        
+            // Display ChatGPT's response
+        const data = await response.json();
+        const botResponse = data.choices[0].message.content;
+        // Check if the response contains code blocks
+        
+        const formattedResponsetemp = formatCode(botResponse);
+        
+        const formattedResponse = formattedResponsetemp.replace(/\n/g, '<br>'); // Preserve line breaks
+        
+        chatContainer.innerHTML += `<div class="chat-message card-text"><strong>EducateUsGPT:</strong> ${formattedResponse}</div>`;
+        
+        // Add user's message to chat history
+        chatHistory[chatId].push({ role: 'user', content: userInput });
+        // Add bot's response to chat history
+        chatHistory[chatId].push({ role: 'assistant', content: botResponse });
+
+        // Clear user input
+        document.getElementById(`user-input-${chatId}`).value = '';
+        // Re-enable input field after sending message
+        document.getElementById(`user-input-${chatId}`).disabled = false;
+        document.getElementById(`user-input-${chatId}`).focus();
+        
+        }
+
+        function formatCode(message) {
+            // Format code blocks
+            message = message.replace(/```([\s\S]+?)```/g, '<pre><code>$1</code></pre>');
+
+            // Format inline code
+            message = message.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            return message;
+        }
+    
+    </script>

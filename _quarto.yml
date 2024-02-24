@@ -1,0 +1,31 @@
+project:
+  type: website
+
+website:
+  title: "Data Mining for Business Analytics"
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Preface"
+        contents:
+          - why.qmd
+          - how.qmd
+      - section: "1 Data Mining"
+        contents:
+          - href: overview.qmd
+            text: Data Mining Overview 
+      - section: "About"
+        contents:
+          - about.qmd
+          
+
+format:
+  html:
+    theme: Litera
+    css: styles.css
+    toc: true
+
+editor: visual
+execute: 
+  freeze: auto
