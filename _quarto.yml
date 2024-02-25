@@ -37,4 +37,4 @@ format:
 
 editor: source
 execute: 
-  freeze: false
+  freeze: auto
