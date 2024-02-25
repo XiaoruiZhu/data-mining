@@ -13,32 +13,31 @@ htmltools::includeHTML("questions/openai-api.html")
 
 ## Artificial Intelligence (AI)
 
-The terms "**artificial intelligence**", "**machine learning**",  and "**data mining**" are all used interchangeably. 
-The boundaries between their definitions are ambiguous, with significant overlap. They delineate the uses of computer software to derive insightful solutions that conventional data analysis methods might struggle to attain. 
+The terms "**artificial intelligence**", "**machine learning**", and "**data mining**" are all used interchangeably. The boundaries between their definitions are ambiguous, with significant overlap. They delineate the uses of computer software to derive insightful solutions that conventional data analysis methods might struggle to attain.
 
-In a broad context, **artificial intelligence (AI)** refers to computer systems exhibiting human-like intelligence and cognitive capabilities. Examples: 
+In a broad context, **artificial intelligence (AI)** refers to computer systems exhibiting human-like intelligence and cognitive capabilities. Examples:
 
-- Deep Blue playing chess, 
-- Alpha Go, 
-- Watson
+-   Deep Blue playing chess,
+-   Alpha Go,
+-   Watson
 
 ## Machine Learning
 
-Machine learning describes techniques that the machine <span style="color:red;">integrate self-learning algorithms to uncover hidden patterns and relationships in data</span>. The Machine learning techniques are designed to evaluate results and be able to improve its performance over time. Its an application of artificial intelligence 
+Machine learning describes techniques that the machine [integrate self-learning algorithms to uncover hidden patterns and relationships in data]{style="color:red;"}. The Machine learning techniques are designed to evaluate results and be able to improve its performance over time. Its an application of artificial intelligence
 
 Examples: Predict rider demand to strategically dispatch drivers for Uber
 
-### Machine Learning in Different Fields 
+### Machine Learning in Different Fields
 
-Learning from data is essential in different scientific disciplines 
+Learning from data is essential in different scientific disciplines
 
-- Predict stock returns in the next six months based on historical data; 
-- Predict the probability of a loan default based on the customer’s information and historical records; 
-- Identify certain diseases based on medical image; 
-- Identify handwritten digits from the image;
-- Facial recognition;
-- Natural language processing; 
-- Cluster customers based on their purchase behavior and other information 
+-   Predict stock returns in the next six months based on historical data;
+-   Predict the probability of a loan default based on the customer’s information and historical records;
+-   Identify certain diseases based on medical image;
+-   Identify handwritten digits from the image;
+-   Facial recognition;
+-   Natural language processing;
+-   Cluster customers based on their purchase behavior and other information
 
 ```{r, echo=FALSE, results='asis'}
 # source(file = "_environment.local")
@@ -51,11 +50,11 @@ Data mining entails the application of a range of analytical techniques crucial 
 
 ### Difference between Data Mining and Machine Learning
 
-1. Data mining focuses on discovering patterns and relationships in a given data 
-2. Machine learning focuses on training models and predicting future 
-3. A large overlap, but have different focuses
-4. No need to distinguish them conceptually for our course 
-6. Article: [Difference between Data Mining and Machine Learning](https://bernardmarr.com/default.asp?contentID=1741) 
+1.  Data mining focuses on discovering patterns and relationships in a given data
+2.  Machine learning focuses on training models and predicting future
+3.  A large overlap, but have different focuses
+4.  No need to distinguish them conceptually for our course
+5.  Article: [Difference between Data Mining and Machine Learning](https://bernardmarr.com/default.asp?contentID=1741)
 
 ```{r, echo=FALSE, results='asis'}
 # source(file = "_environment.local")
