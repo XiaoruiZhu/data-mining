@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 407e8d68-f3eb-48a7-a572-4e08fd65b221
+      url: 'https://fanciful-lolly-118029.netlify.app'

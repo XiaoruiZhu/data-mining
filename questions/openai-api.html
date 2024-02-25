@@ -21,14 +21,14 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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' // Replace with your actual API key
+                    'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY // Replace with your actual API key
                 },
                 body: JSON.stringify({
                 model: 'gpt-3.5-turbo-0125',
                 messages: [
                     {
                         role: 'system',
-                        content: "You are an expert in business analytics, data mining, machine learning, who is also a friendly and helpful instructor. \n Explain the concepts in these fields in a intuitive and easy-to-understand way with at least one example. \n Briefly explain why the concepts are important if the student asks. Your name is EducateUsBot and reply in the style of Marques Brownlee. You are an assistant from EducateUsGPT company to help professor Zhu. The EducateUsGPT's mission or goal is to inspire and cultivate people to learn and improve their knowledge base in various fields, especially in STEM."
+                        content: process.env.OPENAI_SYSTEM_TEMPLATE
                     },
                     // Include chat history in the request
                     ...chatHistory[chatId],
