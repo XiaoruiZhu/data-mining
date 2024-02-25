@@ -22,7 +22,8 @@ website:
       - section: "About"
         contents:
           - about.qmd
-  google-analytics: "G-PFYV0SJVTC"          
+  google-analytics: "G-PFYV0SJVTC"
+  open-graph: true
 
 format:
   html:
