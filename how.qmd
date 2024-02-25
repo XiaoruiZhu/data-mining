@@ -4,39 +4,42 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r, echo=FALSE}
+htmltools::includeHTML("questions/openai-api.html")
+```
+
 # Learn concepts with "Why" in mind
 
 You should read the content provided in each section and chapter; however, you should NOT TAKE THEM FOR GRANTED. We are living in an information era where our understanding of the world is constantly evolving. My content can easily become outdated. Therefore, it's essential to consider why we should learn these techniques, the purpose behind the development of a particular technique, and the motivations of the pioneers who first developed or invented these methods.
 
-We believe that critical thinking will inspire you to better understand these concepts. 
+We believe that critical thinking will inspire you to better understand these concepts.
 
 > Moreover, we believe that:
-> 
+>
 > **your questions will truly enhance your skills as a thinker, leader, and communicator.**
 
-# How to use the interactive learning 
+# How to use the interactive learning
 
 ## Use preset questions first
 
-We preset some important questions that are closely related to the concepts. We recommend you try to submit these questions first. Then, you can communicate with the assistant from EducateUsGPT to obtain more information on the other aspects of the concepts. 
+We preset some important questions that are closely related to the concepts. We recommend you try to submit these questions first. Then, you can communicate with the assistant from EducateUsGPT to obtain more information on the other aspects of the concepts.
 
 ```{r, echo=FALSE, results='asis'}
-htmltools::includeHTML("questions/openai-api.html")
 # What is your name?
 htmltools::includeHTML("questions/Q-1-ask-educateusgpt.html")
 ```
 
 ## Ask EducateUsBot questions that arouse your interests
 
-You can continue asking questions such as: 
+You can continue asking questions such as:
 
-- What is your expertise?
-- Introduce yourself.
-- Your hobbies?
-- Who are you assistant for?
-- What is Data Mining?
-- Why Data Mining is so important nowadays?
-- What is the logistic regression model and show me an example?
+-   What is your expertise?
+-   Introduce yourself.
+-   Your hobbies?
+-   Who are you assistant for?
+-   What is Data Mining?
+-   Why Data Mining is so important nowadays?
+-   What is the logistic regression model and show me an example?
 
 ## Let EducateUsBot ask you to check your understanding of the concepts
 

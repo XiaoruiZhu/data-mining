@@ -1,6 +1,11 @@
 project:
   type: website
-
+  render:
+    - why.qmd
+    - how.qmd
+    - overview.qmd
+    - about.qmd
+    
 website:
   title: "Data Mining for Business Analytics"
   sidebar:
@@ -9,12 +14,11 @@ website:
     contents:
       - section: "Preface"
         contents:
-          - why.qmd
+          - href: why.qmd
           - how.qmd
       - section: "1 Data Mining"
         contents:
-          - href: overview.qmd
-            text: Data Mining Overview 
+          - overview.qmd
       - section: "About"
         contents:
           - about.qmd
@@ -25,7 +29,9 @@ format:
     theme: Litera
     css: styles.css
     toc: true
+    grid:
+      sidebar-width: 300px
 
-editor: visual
+editor: source
 execute: 
   freeze: auto
