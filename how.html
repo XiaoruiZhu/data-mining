@@ -207,6 +207,8 @@ ul.task-list li input[type="checkbox"] {
             103: [],
             104: []
         };
+        const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+        const OPENAI_SYSTEM_TEMPLATE = process.env.OPENAI_SYSTEM_TEMPLATE;
 
         async function sendMessage(chatId) {
             const userInput = document.getElementById(`user-input-${chatId}`).value;
@@ -220,14 +222,14 @@ ul.task-list li input[type="checkbox"] {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY // Replace with your actual API key
+                    'Authorization': `Bearer ${OPENAI_API_KEY}`  // Replace with your actual API key
                 },
                 body: JSON.stringify({
                 model: 'gpt-3.5-turbo-0125',
                 messages: [
                     {
                         role: 'system',
-                        content: process.env.OPENAI_SYSTEM_TEMPLATE
+                        content: `${OPENAI_SYSTEM_TEMPLATE}`
                     },
                     // Include chat history in the request
                     ...chatHistory[chatId],
