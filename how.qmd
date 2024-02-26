@@ -22,7 +22,7 @@ We believe that critical thinking will inspire you to better understand these co
 
 ## Use preset questions first
 
-We preset some important questions that are closely related to the concepts. We recommend you try to submit these questions first. Then, you can communicate with the assistant from EducateUsGPT to obtain more information on the other aspects of the concepts.
+We have preset some important questions that are closely related to the concepts. We recommend you try to submit these questions first. Then, you can communicate with the assistant from EducateUsGPT to obtain more information on the other aspects of the concepts.
 
 ```{r, echo=FALSE, results='asis'}
 # What is your name?

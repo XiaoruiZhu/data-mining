@@ -3,7 +3,12 @@ project:
   render:
     - why.qmd
     - how.qmd
-    - overview.qmd
+    - sec-1-1-overview.qmd
+    - sec-1-2-examples.qmd
+    # - Ch-2-EDA-vis.qmd
+    # - Ch-3-LM.qmd
+    # - Ch-3-VarSele.qmd
+    # - Ch-3-Logit.qmd
     - about.qmd
     
 website:
@@ -18,7 +23,16 @@ website:
           - how.qmd
       - section: "1 Data Mining"
         contents:
-          - overview.qmd
+          - sec-1-1-overview.qmd
+          - sec-1-2-examples.qmd
+      # - section: "2 Exploratory Data Analysis"
+      #   contents:
+      #     - Ch-2-EDA-vis.qmd
+      # - section: "3 Supervised Data Mining"
+      #   contents:
+      #     - Ch-3-LM.qmd
+      #     - Ch-3-VarSele.qmd
+      #     - Ch-3-Logit.qmd
       - section: "About"
         contents:
           - about.qmd
@@ -33,7 +47,7 @@ format:
     css: styles.css
     toc: true
     grid:
-      sidebar-width: 300px
+      sidebar-width: 310px
 
 editor: source
 execute: 
