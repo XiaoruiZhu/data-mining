@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -47,13 +47,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -62,7 +56,6 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -81,7 +74,9 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Data Mining for Business Analytics - Data Mining Overview">
-<meta property="og:site_name" content="Data Mining for Business Analytics">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://XiaoruiZhu.github.io/data-mining/images/digits.jpg">
+<meta property="og:site-name" content="Data Mining for Business Analytics">
 </head>
 
 <body class="nav-sidebar docked">
@@ -90,12 +85,12 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./overview.html">1 Data Mining</a></li><li class="breadcrumb-item"><a href="./overview.html">Data Mining Overview</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">1 Data Mining</a></li><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">Data Mining Overview</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -105,7 +100,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Mining for Business Analytics</a> 
@@ -133,7 +128,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./why.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Why should you use</span></a>
+ <span class="menu-text">Why should you use this website</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -155,8 +150,14 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./overview.html" class="sidebar-item-text sidebar-link active">
+  <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Data Mining Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-1-2-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple Data Mining Algorithms</span></a>
   </div>
 </li>
       </ul>
@@ -181,7 +182,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -200,13 +201,28 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
   <li><a href="#difference-between-data-mining-and-machine-learning" id="toc-difference-between-data-mining-and-machine-learning" class="nav-link" data-scroll-target="#difference-between-data-mining-and-machine-learning">Difference between Data Mining and Machine Learning</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#data-mining-algorithms" id="toc-data-mining-algorithms" class="nav-link" data-scroll-target="#data-mining-algorithms">Data Mining Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#supervised-data-mining" id="toc-supervised-data-mining" class="nav-link" data-scroll-target="#supervised-data-mining">Supervised data mining</a>
+  <ul class="collapse">
+  <li><a href="#an-example-neural-neworks-for-identifying-digits" id="toc-an-example-neural-neworks-for-identifying-digits" class="nav-link" data-scroll-target="#an-example-neural-neworks-for-identifying-digits">An example: Neural Neworks for identifying digits</a></li>
+  </ul></li>
+  <li><a href="#unsupervised-data-mining" id="toc-unsupervised-data-mining" class="nav-link" data-scroll-target="#unsupervised-data-mining">Unsupervised data mining</a>
+  <ul class="collapse">
+  <li><a href="#dimension-reduction" id="toc-dimension-reduction" class="nav-link" data-scroll-target="#dimension-reduction">Dimension reduction</a></li>
+  <li><a href="#pattern-recognition" id="toc-pattern-recognition" class="nav-link" data-scroll-target="#pattern-recognition">Pattern recognition</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering">Clustering</a></li>
+  <li><a href="#association-rules" id="toc-association-rules" class="nav-link" data-scroll-target="#association-rules">Association rules</a></li>
+  </ul></li>
+  <li><a href="#skill-sets-for-data-science" id="toc-skill-sets-for-data-science" class="nav-link" data-scroll-target="#skill-sets-for-data-science">Skill sets for Data Science</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./overview.html">1 Data Mining</a></li><li class="breadcrumb-item"><a href="./overview.html">Data Mining Overview</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Data Mining Overview</h1>
 </div>
@@ -221,9 +237,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
   </div>
   
 
-
 </header>
-
 
 <div class="cell">
 <div class="cell-output-display">
@@ -250,14 +264,14 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY // Replace with your actual API key
+                    'Authorization': 'Bearer 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' // Replace with your actual API key
                 },
                 body: JSON.stringify({
                 model: 'gpt-3.5-turbo-0125',
                 messages: [
                     {
                         role: 'system',
-                        content: process.env.OPENAI_SYSTEM_TEMPLATE
+                        content: "You are an expert in business analytics, data mining, machine learning, who is also a friendly and helpful instructor. \n Explain the concepts in these fields in a intuitive and easy-to-understand way with at least one example. \n Briefly explain why the concepts are important if the student asks. Your name is EducateUsBot and reply in the style of Marques Brownlee. You are an assistant from EducateUsGPT company to help professor Zhu. The EducateUsGPT's mission or goal is to inspire and cultivate people to learn and improve their knowledge base in various fields, especially in STEM. "
                     },
                     // Include chat history in the request
                     ...chatHistory[chatId],
@@ -311,14 +325,15 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 </div>
 <section id="artificial-intelligence-vs.-machine-learning-vs.-data-mining" class="level1">
 <h1>Artificial Intelligence vs.&nbsp;Machine Learning vs.&nbsp;Data Mining</h1>
+<p>The terms “<strong>artificial intelligence</strong>”, “<strong>machine learning</strong>”, and “<strong>data mining</strong>” are all used interchangeably. The boundaries between their definitions are ambiguous, with significant overlap. They delineate the uses of computer software to derive insightful solutions that conventional data analysis methods might struggle to attain.</p>
 <section id="artificial-intelligence-ai" class="level2">
 <h2 class="anchored" data-anchor-id="artificial-intelligence-ai">Artificial Intelligence (AI)</h2>
-<p>The terms “<strong>artificial intelligence</strong>”, “<strong>machine learning</strong>”, and “<strong>data mining</strong>” are all used interchangeably. The boundaries between their definitions are ambiguous, with significant overlap. They delineate the uses of computer software to derive insightful solutions that conventional data analysis methods might struggle to attain.</p>
 <p>In a broad context, <strong>artificial intelligence (AI)</strong> refers to computer systems exhibiting human-like intelligence and cognitive capabilities. Examples:</p>
 <ul>
-<li>Deep Blue playing chess,</li>
-<li>Alpha Go,</li>
-<li>Watson</li>
+<li>Deep Blue playing chess (mid-1980s),</li>
+<li>Watson by IBM (2011),</li>
+<li>Alpha Go (2014),</li>
+<li>ChatGPT (2022): designed for generating human-like text responses based on the input it receives. It uses a large-scale deep learning model called GPT (Generative Pre-trained Transformer).</li>
 </ul>
 </section>
 <section id="machine-learning" class="level2">
@@ -355,15 +370,6 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 <section id="data-mining" class="level2">
 <h2 class="anchored" data-anchor-id="data-mining">Data Mining</h2>
 <p>Data mining entails the application of a range of analytical techniques crucial for the advancement of machine learning and artificial intelligence. It is widely acknowledged as a fundamental component of both fields. Through data mining, hidden patterns and relationships within data are unearthed, enabling the extraction of valuable insights to inform decision-making processes.</p>
-<section id="difference-between-data-mining-and-machine-learning" class="level3">
-<h3 class="anchored" data-anchor-id="difference-between-data-mining-and-machine-learning">Difference between Data Mining and Machine Learning</h3>
-<ol type="1">
-<li>Data mining focuses on discovering patterns and relationships in a given data</li>
-<li>Machine learning focuses on training models and predicting future</li>
-<li>A large overlap, but have different focuses</li>
-<li>No need to distinguish them conceptually for our course</li>
-<li>Article: <a href="https://bernardmarr.com/default.asp?contentID=1741">Difference between Data Mining and Machine Learning</a></li>
-</ol>
 <div class="cell-output-display">
 <div class="card bg-light mb-3" style="max-width: 1200px;">
   <div class="card-header">Ask Educate Us GPT</div>
@@ -379,6 +385,15 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 
     
 </div>
+<section id="difference-between-data-mining-and-machine-learning" class="level3">
+<h3 class="anchored" data-anchor-id="difference-between-data-mining-and-machine-learning">Difference between Data Mining and Machine Learning</h3>
+<ol type="1">
+<li>Data mining focuses on discovering patterns and relationships in a given data</li>
+<li>Machine learning focuses on training models and predicting future</li>
+<li>A large overlap, but have different focuses</li>
+<li>No need to distinguish them conceptually for our course</li>
+<li>Article: <a href="https://bernardmarr.com/default.asp?contentID=1741">Difference between Data Mining and Machine Learning</a></li>
+</ol>
 <div class="cell-output-display">
 <div class="card bg-light mb-3" style="max-width: 1200px;">
   <div class="card-header">Ask Educate Us GPT</div>
@@ -392,24 +407,110 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
   </div>
 </div>
 </div>
+</section>
+</section>
+</section>
+<section id="data-mining-algorithms" class="level1">
+<h1>Data Mining Algorithms</h1>
+<p>Two types of techniques depending on the way they learn about data.</p>
+<ul>
+<li><p><strong>Supervised data mining</strong> techniques are used for developing predictive models.</p></li>
+<li><p><strong>Unsupervised data mining</strong> techniques are effective for data exploration, dimension reduction, and pattern recognition.</p></li>
+<li><p><strong>Semi-supervised learning</strong>: Mixture of both</p></li>
+</ul>
+<p>The key distinction:</p>
+<ul>
+<li>in <strong>supervised</strong> data mining, <span style="color:red;"><strong>the target variable is identified</strong></span>.</li>
+<li>in <strong>unsupervised</strong> data mining, <span style="color:red;"><strong>no target variable is identified</strong></span>.</li>
+</ul>
+<section id="supervised-data-mining" class="level2">
+<h2 class="anchored" data-anchor-id="supervised-data-mining">Supervised data mining</h2>
+<p>Common applications of supervised data mining include prediction models and classification.</p>
+<ol type="1">
+<li>Prediction model: The response variable is <span style="color:red;"><strong>numerical</strong></span>
+<ul>
+<li>Regression method</li>
+<li>e.g., stock return, housing price, temperature, spending of a customer.</li>
+</ul></li>
+<li>Classification model: The response variable is <span style="color:red;"><strong>categorical</strong></span>.
+<ul>
+<li>e.g., {A, B, C}, {dog, cat}, {0, 1}.</li>
+<li>Predict the class memberships of customer.</li>
+<li>logistic regression model can do the classification.</li>
+</ul></li>
+</ol>
 <div class="cell">
 <div class="cell-output-display">
 <div class="card bg-light mb-3" style="max-width: 1200px;">
   <div class="card-header">Ask Educate Us GPT</div>
   <div class="card-body">
-    <h4 class="card-title anchored">Show me an example of logistic regression model?</h4>
+    <h4 class="card-title anchored">Give me an example of logistic regression model?</h4>
     <div class="chat-container" id="chat-container-104">
         <div id="chat-messages-104"></div>
-        <input type="text" id="user-input-104" class="chat-input" placeholder="Ask your question here ..." value="Show me an example of logistic regression model?">
+        <input type="text" id="user-input-104" class="chat-input" placeholder="Ask your question here ..." value="Give me an example of logistic regression model?">
         <button onclick="sendMessage(104)" class="chat-button">Ask</button>
     </div>
   </div>
 </div>
 </div>
 </div>
-
-
+<section id="an-example-neural-neworks-for-identifying-digits" class="level3">
+<h3 class="anchored" data-anchor-id="an-example-neural-neworks-for-identifying-digits">An example: Neural Neworks for identifying digits</h3>
+<p><img src="images/digits.jpg" class="img-fluid"></p>
+<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*FLD5PNYJgWknPvJQ.gif#center" class="img-fluid"></p>
+<p>Here is an intuitive and complete explanation with animation for identifying digits using neural networks: <a href="https://www.3blue1brown.com/lessons/neural-networks">What is neural networks</a>.</p>
 </section>
+</section>
+<section id="unsupervised-data-mining" class="level2">
+<h2 class="anchored" data-anchor-id="unsupervised-data-mining">Unsupervised data mining</h2>
+<p>The algorithms allow the computer to identify patterns and relationships in the data without any specific guidance from the analyst.</p>
+<ul>
+<li>Subjective, no simple goal such as prediction</li>
+<li>Common applications: <strong>dimension reduction</strong> and <strong>pattern recognition</strong></li>
+<li>Other Examples: Recommendation systems, clustering, principle component analysis (PCA), association rules</li>
+</ul>
+<p><img src="images/clustering.png" class="img-fluid"></p>
+<section id="dimension-reduction" class="level3">
+<h3 class="anchored" data-anchor-id="dimension-reduction">Dimension reduction</h3>
+<ul>
+<li>Attempt: converts a set of high-dimensional data (large number of variables) into data with lesser dimensions without losing much of the information.</li>
+<li>Why: Reduce information redundancy, improve model stability.</li>
+<li>When: Deploy before other data mining methods.</li>
+<li>When: Relevant for big data to bring out important patterns and build more stable models.</li>
+<li>Example: principle component analysis (PCA): reduce the dimensionality of data while preserving most of the variability present in the dataset.</li>
+</ul>
+</section>
+<section id="pattern-recognition" class="level3">
+<h3 class="anchored" data-anchor-id="pattern-recognition">Pattern recognition</h3>
+<ul>
+<li>Attempt: recognizing patterns using machine learning.</li>
+<li>Examples: Recurring sequences, Frequent combinations, Recognizable features, Common characteristics.</li>
+</ul>
+</section>
+<section id="clustering" class="level3">
+<h3 class="anchored" data-anchor-id="clustering">Clustering</h3>
+<ol type="1">
+<li><p>K-Means Clustering: This is a popular clustering algorithm that partitions data into k clusters based on the mean distance between data points and cluster centers. It aims to minimize the intra-cluster variance and is efficient for large datasets.</p></li>
+<li><p>Hierarchical Clustering: This method creates a hierarchy of clusters by either starting with each data point as a single cluster (agglomerative) or starting with all data points in one cluster and recursively splitting them (divisive). It does not require specifying the number of clusters beforehand.</p></li>
+<li><p>Gaussian Mixture Models (GMM): GMM assumes that the data is generated from a mixture of several Gaussian distributions and assigns probabilities to data points belonging to each cluster. It is suitable for data with complex multivariate distributions.</p></li>
+</ol>
+</section>
+<section id="association-rules" class="level3">
+<h3 class="anchored" data-anchor-id="association-rules">Association rules</h3>
+<p>Essentially, association rules reveal how items or attributes are related to each other, based on their co-occurrence or association in transactions or records.</p>
+<p>For example, in a retail dataset, association rules can help identify patterns like “If a customer buys product A, they are likely to buy product B as well.” This information can be used for market basket analysis, recommendations, and decision-making in various domains.</p>
+</section>
+</section>
+<section id="skill-sets-for-data-science" class="level2">
+<h2 class="anchored" data-anchor-id="skill-sets-for-data-science">Skill sets for Data Science</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="http://2.bp.blogspot.com/-Qi-0utjhySM/UsteLrV6NyI/AAAAAAAACNQ/AdkizQfS8l8/s1600/moz-screenshot-3-729576.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Data Science Venn Diagram by Steve Geringer</figcaption>
+</figure>
+</div>
+
+
 </section>
 </section>
 
@@ -455,33 +556,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -550,15 +624,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -637,9 +709,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -649,17 +722,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -672,125 +736,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -834,7 +779,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -860,32 +804,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -946,7 +864,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 

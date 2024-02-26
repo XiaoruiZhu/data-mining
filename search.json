@@ -4,98 +4,104 @@
     "href": "about.html",
     "title": "About Us",
     "section": "",
-    "text": "This is the website for the course Data Mining for Business Analytics developed by Dr. Xiaorui Zhu with the help of ChatGPT.",
-    "crumbs": [
-      "About",
-      "About Us"
-    ]
+    "text": "This is the website for the course Data Mining for Business Analytics developed by Dr. Xiaorui Zhu with the help of ChatGPT."
+  },
+  {
+    "objectID": "sec-1-1-overview.html#artificial-intelligence-ai",
+    "href": "sec-1-1-overview.html#artificial-intelligence-ai",
+    "title": "Data Mining Overview",
+    "section": "Artificial Intelligence (AI)",
+    "text": "Artificial Intelligence (AI)\nIn a broad context, artificial intelligence (AI) refers to computer systems exhibiting human-like intelligence and cognitive capabilities. Examples:\n\nDeep Blue playing chess (mid-1980s),\nWatson by IBM (2011),\nAlpha Go (2014),\nChatGPT (2022): designed for generating human-like text responses based on the input it receives. It uses a large-scale deep learning model called GPT (Generative Pre-trained Transformer)."
+  },
+  {
+    "objectID": "sec-1-1-overview.html#machine-learning",
+    "href": "sec-1-1-overview.html#machine-learning",
+    "title": "Data Mining Overview",
+    "section": "Machine Learning",
+    "text": "Machine Learning\nMachine learning describes techniques that the machine integrate self-learning algorithms to uncover hidden patterns and relationships in data. The Machine learning techniques are designed to evaluate results and be able to improve its performance over time. Its an application of artificial intelligence\nExamples: Predict rider demand to strategically dispatch drivers for Uber\n\nMachine Learning in Different Fields\nLearning from data is essential in different scientific disciplines\n\nPredict stock returns in the next six months based on historical data;\nPredict the probability of a loan default based on the customer’s information and historical records;\nIdentify certain diseases based on medical image;\nIdentify handwritten digits from the image;\nFacial recognition;\nNatural language processing;\nCluster customers based on their purchase behavior and other information\n\n\n\n  Ask Educate Us GPT\n  \n    Give me a few very important application of Machine Learning?\n    \n        \n        \n        Ask"
+  },
+  {
+    "objectID": "sec-1-1-overview.html#data-mining",
+    "href": "sec-1-1-overview.html#data-mining",
+    "title": "Data Mining Overview",
+    "section": "Data Mining",
+    "text": "Data Mining\nData mining entails the application of a range of analytical techniques crucial for the advancement of machine learning and artificial intelligence. It is widely acknowledged as a fundamental component of both fields. Through data mining, hidden patterns and relationships within data are unearthed, enabling the extraction of valuable insights to inform decision-making processes.\n\n\n  Ask Educate Us GPT\n  \n    What is Data Mining with real world example?\n    \n        \n        \n        Ask\n    \n  \n\n\n    \n\n\nDifference between Data Mining and Machine Learning\n\nData mining focuses on discovering patterns and relationships in a given data\nMachine learning focuses on training models and predicting future\nA large overlap, but have different focuses\nNo need to distinguish them conceptually for our course\nArticle: Difference between Data Mining and Machine Learning\n\n\n\n  Ask Educate Us GPT\n  \n    Why Data Mining is so important nowadays?\n    \n        \n        \n        Ask"
+  },
+  {
+    "objectID": "sec-1-1-overview.html#supervised-data-mining",
+    "href": "sec-1-1-overview.html#supervised-data-mining",
+    "title": "Data Mining Overview",
+    "section": "Supervised data mining",
+    "text": "Supervised data mining\nCommon applications of supervised data mining include prediction models and classification.\n\nPrediction model: The response variable is numerical\n\nRegression method\ne.g., stock return, housing price, temperature, spending of a customer.\n\nClassification model: The response variable is categorical.\n\ne.g., {A, B, C}, {dog, cat}, {0, 1}.\nPredict the class memberships of customer.\nlogistic regression model can do the classification.\n\n\n\n\n\n  Ask Educate Us GPT\n  \n    Give me an example of logistic regression model?\n    \n        \n        \n        Ask\n    \n  \n\n\n\n\nAn example: Neural Neworks for identifying digits\n\n\nHere is an intuitive and complete explanation with animation for identifying digits using neural networks: What is neural networks."
+  },
+  {
+    "objectID": "sec-1-1-overview.html#unsupervised-data-mining",
+    "href": "sec-1-1-overview.html#unsupervised-data-mining",
+    "title": "Data Mining Overview",
+    "section": "Unsupervised data mining",
+    "text": "Unsupervised data mining\nThe algorithms allow the computer to identify patterns and relationships in the data without any specific guidance from the analyst.\n\nSubjective, no simple goal such as prediction\nCommon applications: dimension reduction and pattern recognition\nOther Examples: Recommendation systems, clustering, principle component analysis (PCA), association rules\n\n\n\nDimension reduction\n\nAttempt: converts a set of high-dimensional data (large number of variables) into data with lesser dimensions without losing much of the information.\nWhy: Reduce information redundancy, improve model stability.\nWhen: Deploy before other data mining methods.\nWhen: Relevant for big data to bring out important patterns and build more stable models.\nExample: principle component analysis (PCA): reduce the dimensionality of data while preserving most of the variability present in the dataset.\n\n\n\nPattern recognition\n\nAttempt: recognizing patterns using machine learning.\nExamples: Recurring sequences, Frequent combinations, Recognizable features, Common characteristics.\n\n\n\nClustering\n\nK-Means Clustering: This is a popular clustering algorithm that partitions data into k clusters based on the mean distance between data points and cluster centers. It aims to minimize the intra-cluster variance and is efficient for large datasets.\nHierarchical Clustering: This method creates a hierarchy of clusters by either starting with each data point as a single cluster (agglomerative) or starting with all data points in one cluster and recursively splitting them (divisive). It does not require specifying the number of clusters beforehand.\nGaussian Mixture Models (GMM): GMM assumes that the data is generated from a mixture of several Gaussian distributions and assigns probabilities to data points belonging to each cluster. It is suitable for data with complex multivariate distributions.\n\n\n\nAssociation rules\nEssentially, association rules reveal how items or attributes are related to each other, based on their co-occurrence or association in transactions or records.\nFor example, in a retail dataset, association rules can help identify patterns like “If a customer buys product A, they are likely to buy product B as well.” This information can be used for market basket analysis, recommendations, and decision-making in various domains."
+  },
+  {
+    "objectID": "sec-1-1-overview.html#skill-sets-for-data-science",
+    "href": "sec-1-1-overview.html#skill-sets-for-data-science",
+    "title": "Data Mining Overview",
+    "section": "Skill sets for Data Science",
+    "text": "Skill sets for Data Science\n\n\n\nData Science Venn Diagram by Steve Geringer"
+  },
+  {
+    "objectID": "why.html",
+    "href": "why.html",
+    "title": "Why should you use this website",
+    "section": "",
+    "text": "I believe start with asking why is an very important thinking track that could benefit us the most. Figuring out the real reason and purpose behind your move can really help you successfully communicating the passion behind the “Why”. Simon Sinek’s Golden Circle theory attempts to explain how successful leaders and organizations inspire others and differentiate themselves through communicate your “Why” to your customers."
+  },
+  {
+    "objectID": "why.html#why-the-interactive-learning-is-crucial",
+    "href": "why.html#why-the-interactive-learning-is-crucial",
+    "title": "Why should you use this website",
+    "section": "Why the interactive learning is crucial?",
+    "text": "Why the interactive learning is crucial?\n\nEngagement: Interactive learning actively involves learners, keeping them engaged and interested in the subject matter. This active participation promotes better retention of information. It helps students to try and error, learning from mistakes, and most importantly, understanding the reasons and purpose of why we should learn.\nCustomization: Interactive learning allows for personalized learning experiences tailored to individual needs and preferences. Learners can explore content at their own pace and focus on areas where they need improvement.\nFeedback: Interactive learning platforms often provide immediate feedback, allowing learners to assess their understanding and progress in real-time. This feedback loop helps identify areas for improvement and promotes continuous learning. With the help of GPT techniques, we can provide tailored feedback.\nCollaboration: Interactive learning encourages collaboration among learners, fostering a sense of community and peer support. Collaborative activities promote critical thinking, communication skills, and teamwork.\nApplication: Interactive learning often involves hands-on activities, simulations, and real-world scenarios, allowing learners to apply theoretical knowledge to practical situations. This application-oriented approach enhances learning outcomes and prepares learners for real-world challenges."
   },
   {
     "objectID": "how.html#use-preset-questions-first",
     "href": "how.html#use-preset-questions-first",
     "title": "How to use this website",
     "section": "Use preset questions first",
-    "text": "Use preset questions first\nWe preset some important questions that are closely related to the concepts. We recommend you try to submit these questions first. Then, you can communicate with the assistant from EducateUsGPT to obtain more information on the other aspects of the concepts.\n\n\n  Ask Educate Us GPT\n  \n    What is your name?\n    \n        \n        \n        Ask",
-    "crumbs": [
-      "Preface",
-      "How to use this website"
-    ]
+    "text": "Use preset questions first\nWe have preset some important questions that are closely related to the concepts. We recommend you try to submit these questions first. Then, you can communicate with the assistant from EducateUsGPT to obtain more information on the other aspects of the concepts.\n\n\n  Ask Educate Us GPT\n  \n    What is your name?\n    \n        \n        \n        Ask"
   },
   {
     "objectID": "how.html#ask-educateusbot-questions-that-arouse-your-interests",
     "href": "how.html#ask-educateusbot-questions-that-arouse-your-interests",
     "title": "How to use this website",
     "section": "Ask EducateUsBot questions that arouse your interests",
-    "text": "Ask EducateUsBot questions that arouse your interests\nYou can continue asking questions such as:\n\nWhat is your expertise?\nIntroduce yourself.\nYour hobbies?\nWho are you assistant for?\nWhat is Data Mining?\nWhy Data Mining is so important nowadays?\nWhat is the logistic regression model and show me an example?",
-    "crumbs": [
-      "Preface",
-      "How to use this website"
-    ]
+    "text": "Ask EducateUsBot questions that arouse your interests\nYou can continue asking questions such as:\n\nWhat is your expertise?\nIntroduce yourself.\nYour hobbies?\nWho are you assistant for?\nWhat is Data Mining?\nWhy Data Mining is so important nowadays?\nWhat is the logistic regression model and show me an example?"
   },
   {
     "objectID": "how.html#let-educateusbot-ask-you-to-check-your-understanding-of-the-concepts",
     "href": "how.html#let-educateusbot-ask-you-to-check-your-understanding-of-the-concepts",
     "title": "How to use this website",
     "section": "Let EducateUsBot ask you to check your understanding of the concepts",
-    "text": "Let EducateUsBot ask you to check your understanding of the concepts\nWill come soon…",
-    "crumbs": [
-      "Preface",
-      "How to use this website"
-    ]
+    "text": "Let EducateUsBot ask you to check your understanding of the concepts\nWill come soon…"
   },
   {
-    "objectID": "why.html",
-    "href": "why.html",
-    "title": "Why should you use",
-    "section": "",
-    "text": "I believe start with asking why is an very important thinking track that could benefit us the most. Figuring out the real reason and purpose behind your move can really help you successfully communicating the passion behind the “Why”. Simon Sinek’s Golden Circle theory attempts to explain how successful leaders and organizations inspire others and differentiate themselves through communicate your “Why” to your customers.",
-    "crumbs": [
-      "Preface",
-      "Why should you use"
-    ]
+    "objectID": "sec-1-2-examples.html#prediction-model-response-variable-is-numerical",
+    "href": "sec-1-2-examples.html#prediction-model-response-variable-is-numerical",
+    "title": "Simple Data Mining Algorithms",
+    "section": "Prediction model: response variable is numerical",
+    "text": "Prediction model: response variable is numerical\n\nRegression method\ne.g., stock return,\nhousing price,\ntemperature,\nspending of a customer.\n\n\n\n\n  Ask Educate Us GPT\n  \n    Give me two real-world business applications using the prediction models.\n    \n        \n        \n        Ask\n    \n  \n\n\n\n\n\nExample: Boston Housing Data\nWe use Boston Housing Data as an illustrative example in this lab. Boston housing data is a built-in dataset in MASS package, so you do not need to download externally. Package MASS comes with R when you installed R, so no need to use install.packages(MASS) to download and install, but you do need to load this package.\n\nLoad Data\n\nlibrary(MASS)\ndata(Boston); #this data is in MASS package\ncolnames(Boston) \n\n [1] \"crim\"    \"zn\"      \"indus\"   \"chas\"    \"nox\"     \"rm\"      \"age\"    \n [8] \"dis\"     \"rad\"     \"tax\"     \"ptratio\" \"black\"   \"lstat\"   \"medv\"   \n\n\nYou can find details of the dataset from help document.\n\n?Boston\n\nThe original data are 506 observations on 14 variables, medv being the response variable \\(y\\):\n\n\nEDA\nWe have introduced many EDA techniques before. We will only briefly go through some of them here.\n\ndim(Boston) \n\n[1] 506  14\n\nnames(Boston)\n\n [1] \"crim\"    \"zn\"      \"indus\"   \"chas\"    \"nox\"     \"rm\"      \"age\"    \n [8] \"dis\"     \"rad\"     \"tax\"     \"ptratio\" \"black\"   \"lstat\"   \"medv\"   \n\nstr(Boston)\n\n'data.frame':   506 obs. of  14 variables:\n $ crim   : num  0.00632 0.02731 0.02729 0.03237 0.06905 ...\n $ zn     : num  18 0 0 0 0 0 12.5 12.5 12.5 12.5 ...\n $ indus  : num  2.31 7.07 7.07 2.18 2.18 2.18 7.87 7.87 7.87 7.87 ...\n $ chas   : int  0 0 0 0 0 0 0 0 0 0 ...\n $ nox    : num  0.538 0.469 0.469 0.458 0.458 0.458 0.524 0.524 0.524 0.524 ...\n $ rm     : num  6.58 6.42 7.18 7 7.15 ...\n $ age    : num  65.2 78.9 61.1 45.8 54.2 58.7 66.6 96.1 100 85.9 ...\n $ dis    : num  4.09 4.97 4.97 6.06 6.06 ...\n $ rad    : int  1 2 2 3 3 3 5 5 5 5 ...\n $ tax    : num  296 242 242 222 222 222 311 311 311 311 ...\n $ ptratio: num  15.3 17.8 17.8 18.7 18.7 18.7 15.2 15.2 15.2 15.2 ...\n $ black  : num  397 397 393 395 397 ...\n $ lstat  : num  4.98 9.14 4.03 2.94 5.33 ...\n $ medv   : num  24 21.6 34.7 33.4 36.2 28.7 22.9 27.1 16.5 18.9 ...\n\nsummary(Boston)\n\n      crim                zn             indus            chas        \n Min.   : 0.00632   Min.   :  0.00   Min.   : 0.46   Min.   :0.00000  \n 1st Qu.: 0.08205   1st Qu.:  0.00   1st Qu.: 5.19   1st Qu.:0.00000  \n Median : 0.25651   Median :  0.00   Median : 9.69   Median :0.00000  \n Mean   : 3.61352   Mean   : 11.36   Mean   :11.14   Mean   :0.06917  \n 3rd Qu.: 3.67708   3rd Qu.: 12.50   3rd Qu.:18.10   3rd Qu.:0.00000  \n Max.   :88.97620   Max.   :100.00   Max.   :27.74   Max.   :1.00000  \n      nox               rm             age              dis        \n Min.   :0.3850   Min.   :3.561   Min.   :  2.90   Min.   : 1.130  \n 1st Qu.:0.4490   1st Qu.:5.886   1st Qu.: 45.02   1st Qu.: 2.100  \n Median :0.5380   Median :6.208   Median : 77.50   Median : 3.207  \n Mean   :0.5547   Mean   :6.285   Mean   : 68.57   Mean   : 3.795  \n 3rd Qu.:0.6240   3rd Qu.:6.623   3rd Qu.: 94.08   3rd Qu.: 5.188  \n Max.   :0.8710   Max.   :8.780   Max.   :100.00   Max.   :12.127  \n      rad              tax           ptratio          black       \n Min.   : 1.000   Min.   :187.0   Min.   :12.60   Min.   :  0.32  \n 1st Qu.: 4.000   1st Qu.:279.0   1st Qu.:17.40   1st Qu.:375.38  \n Median : 5.000   Median :330.0   Median :19.05   Median :391.44  \n Mean   : 9.549   Mean   :408.2   Mean   :18.46   Mean   :356.67  \n 3rd Qu.:24.000   3rd Qu.:666.0   3rd Qu.:20.20   3rd Qu.:396.23  \n Max.   :24.000   Max.   :711.0   Max.   :22.00   Max.   :396.90  \n     lstat            medv      \n Min.   : 1.73   Min.   : 5.00  \n 1st Qu.: 6.95   1st Qu.:17.02  \n Median :11.36   Median :21.20  \n Mean   :12.65   Mean   :22.53  \n 3rd Qu.:16.95   3rd Qu.:25.00  \n Max.   :37.97   Max.   :50.00  \n\n\nWe skip the Exploratory Data Analysis (EDA) in this notes, but you should not omit it in your real world cases. EDA is very important and always the first analysis to do before any modeling. You should also provide some visualization to present some exploratory analysis.\n\n\n\n  Ask Educate Us GPT\n  \n    Give me the sample codes in R to do the exploratory analysis for the \"Boston\" dataset\n    \n        \n        \n        Ask\n    \n  \n\n\n\n\n\nSplitting data to training and testing samples\nNext we sample 90% of the original data and use it as the training set. The remaining 10% is used as test set. The regression model will be built on the training set and future performance of your model will be evaluated with the test set.\n\nsample_index &lt;- sample(nrow(Boston),nrow(Boston)*0.90)\nBoston_train &lt;- Boston[sample_index,]\nBoston_test &lt;- Boston[-sample_index,]\n\n\n\n(Optional) Standardization\nIf we want our results to be invariant to the units and the parameter estimates \\(\\beta_i\\) to be comparable, we can standardize the variables. Essentially we are replacing the original values with their z-score.\n1st Way: create new variables manually.\n\nBoston$sd.crim &lt;- (Boston$crim-mean(Boston$crim))/sd(Boston$crim); \n\nThis does the same thing.\n\nBoston$sd.crim &lt;- scale(Boston$crim); \n\ngo to top\n\n\nModel Building\nYou task is to build a best model with training data. You can refer to the regression and variable selection code on the slides for more detailed description of linear regression.\nThe following model includes all \\(x\\) variables in the dataeset\n\nmodel_1 &lt;- lm(medv~crim+zn+chas+nox+rm+dis+rad+tax+ptratio+black+lstat, data=Boston_train)\n\nTo include all variables in the model, you can write the statement this simpler way.\n\nmodel_1 &lt;- lm(medv~., data=Boston_train)\nsummary(model_1)\n\n\nCall:\nlm(formula = medv ~ ., data = Boston_train)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.0562  -2.7051  -0.4805   1.6344  28.4977 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  27.340220   5.336852   5.123 4.51e-07 ***\ncrim         -0.072222   0.039357  -1.835 0.067175 .  \nzn            0.044421   0.013877   3.201 0.001468 ** \nindus         0.014421   0.062337   0.231 0.817153    \nchas          3.013078   0.882052   3.416 0.000694 ***\nnox         -14.480181   4.032035  -3.591 0.000366 ***\nrm            4.528840   0.446885  10.134  &lt; 2e-16 ***\nage          -0.010704   0.013517  -0.792 0.428865    \ndis          -1.407211   0.199872  -7.041 7.38e-12 ***\nrad           0.255322   0.068532   3.726 0.000220 ***\ntax          -0.012062   0.003844  -3.138 0.001815 ** \nptratio      -0.842009   0.133832  -6.292 7.58e-10 ***\nblack         0.011316   0.002818   4.015 6.99e-05 ***\nlstat        -0.461955   0.052630  -8.777  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4.568 on 441 degrees of freedom\nMultiple R-squared:  0.7492,    Adjusted R-squared:  0.7418 \nF-statistic: 101.3 on 13 and 441 DF,  p-value: &lt; 2.2e-16\n\n\nBut, is this the model you want to use?\n\n\n(Optional) Interaction terms in model\nIf you suspect the effect of one predictor x1 on the response y depends on the value of another predictor x2, you can add interaction terms in model. To specify interaction in the model, you put : between two variables with interaction effect. For example\n\nlm(medv~crim+zn+crim:zn, data=Boston_train)\n#The following way automatically add the main effects of crim and zn\nlm(medv~crim*zn, data=Boston_train)\n\nFor now we will not investigate the interactions of variables. But you can try to do these analyses with the help of EducateUsBot.\n\n\n\n  Ask Educate Us GPT\n  \n    Show me sample codes to fit a linear regression model with interaction terms between age and rm for \"Boston\" dataset.\n    \n        \n        \n        Ask\n    \n  \n\n\n\n\n\nModel Assessment\nSuppose that everything in model diagnostics is okay. In other words, the model we have built is fairly a valid model. Then we need to evaluate the model performance in terms of different metrics.\nCommonly used metrics include MSE, (adjusted) \\(R^2\\), AIC, BIC for in-sample performance, and MSPE for out-of-sample performance.\n\nIn-sample model evaluation (train error)\nMSE of the regression, which is the square of ‘Residual standard error’ in the above summary. It is the sum of squared residuals(SSE) divided by degrees of freedom (n-p-1). In some textbooks the sum of squred residuals(SSE) is called residual sum of squares(RSS). MSE of the regression should be the unbiased estimator for variance of \\(\\epsilon\\), the error term in the regression model.\n\nmodel_summary &lt;- summary(model_1)\n(model_summary$sigma)^2\n\n[1] 20.86273\n\n\n\\(R^2\\) of the model\n\nmodel_summary$r.squared\n\n[1] 0.7492038\n\n\nAdjusted-\\(R^2\\) of the model, if you add a variable (or several in a group), SSE will decrease, \\(R^2\\) will increase, but Adjusted-\\(R^2\\) could go either way.\n\nmodel_summary$adj.r.squared\n\n[1] 0.7418107\n\n\nAIC and BIC of the model, these are information criteria. Smaller values indicate better fit.\n\nAIC(model_1)\n\n[1] 2689.288\n\nBIC(model_1)\n\n[1] 2751.092\n\n\nBIC, AIC, and Adjusted \\(R^2\\) have complexity penalty in the definition, thus when comparing across different models they are better indicators on how well the model will perform on future data.\n\n\nOut-of-sample prediction (test error)\nTo evaluate how the model performs on future data, we use predict() to get the predicted values from the test set.\n\n#medv_pred is a vector that contains predicted values for test set.\nmedv_pred &lt;- predict(object = model_1, newdata = Boston_test)\n\nJust as any other function, you can write the above statement the following way as long as the arguments are in the right order.\n\nmedv_pred &lt;- predict(model_1, Boston_test)\n\nThe most common measure is the Mean Squared Error (MSE): average of the squared differences between the predicted and actual values\n\nmean((medv_pred - Boston_test$medv)^2)\n\n[1] 23.12064\n\n\nA less popular measure is the Mean Absolute Error (MAE). You can probably guess that here instead of taking the average of squared error, MAE is the average of absolute value of error.\n\nmean(abs(medv_pred - Boston_test$medv))\n\n[1] 2.867489\n\n\nNote that if you ignore the second argument of predict(), it gives you the in-sample prediction on the training set:\n\npredict(model_1)\n\nWhich is the same as\n\nmodel_1$fitted.values\n\ngo to top"
   },
   {
-    "objectID": "why.html#why-the-interactive-learning-is-crucial",
-    "href": "why.html#why-the-interactive-learning-is-crucial",
-    "title": "Why should you use",
-    "section": "Why the interactive learning is crucial?",
-    "text": "Why the interactive learning is crucial?\n\nEngagement: Interactive learning actively involves learners, keeping them engaged and interested in the subject matter. This active participation promotes better retention of information. It helps students to try and error, learning from mistakes, and most importantly, understanding the reasons and purpose of why we should learn.\nCustomization: Interactive learning allows for personalized learning experiences tailored to individual needs and preferences. Learners can explore content at their own pace and focus on areas where they need improvement.\nFeedback: Interactive learning platforms often provide immediate feedback, allowing learners to assess their understanding and progress in real-time. This feedback loop helps identify areas for improvement and promotes continuous learning. With the help of GPT techniques, we can provide tailored feedback.\nCollaboration: Interactive learning encourages collaboration among learners, fostering a sense of community and peer support. Collaborative activities promote critical thinking, communication skills, and teamwork.\nApplication: Interactive learning often involves hands-on activities, simulations, and real-world scenarios, allowing learners to apply theoretical knowledge to practical situations. This application-oriented approach enhances learning outcomes and prepares learners for real-world challenges.",
-    "crumbs": [
-      "Preface",
-      "Why should you use"
-    ]
+    "objectID": "sec-1-2-examples.html#classification-model-response-variable-is-categorical",
+    "href": "sec-1-2-examples.html#classification-model-response-variable-is-categorical",
+    "title": "Simple Data Mining Algorithms",
+    "section": "Classification model: response variable is categorical",
+    "text": "Classification model: response variable is categorical\n\ngeneralized linear regression, CART, gradient boosting, neural network, deep learning\nexample: problems that has response as {A, B, C}, {dog, cat}, {0, 1}.\nlogistic regression model can do the classification."
   },
   {
-    "objectID": "overview.html#artificial-intelligence-ai",
-    "href": "overview.html#artificial-intelligence-ai",
-    "title": "Data Mining Overview",
-    "section": "Artificial Intelligence (AI)",
-    "text": "Artificial Intelligence (AI)\nThe terms “artificial intelligence”, “machine learning”, and “data mining” are all used interchangeably. The boundaries between their definitions are ambiguous, with significant overlap. They delineate the uses of computer software to derive insightful solutions that conventional data analysis methods might struggle to attain.\nIn a broad context, artificial intelligence (AI) refers to computer systems exhibiting human-like intelligence and cognitive capabilities. Examples:\n\nDeep Blue playing chess,\nAlpha Go,\nWatson",
-    "crumbs": [
-      "1 Data Mining",
-      "Data Mining Overview"
-    ]
-  },
-  {
-    "objectID": "overview.html#machine-learning",
-    "href": "overview.html#machine-learning",
-    "title": "Data Mining Overview",
-    "section": "Machine Learning",
-    "text": "Machine Learning\nMachine learning describes techniques that the machine integrate self-learning algorithms to uncover hidden patterns and relationships in data. The Machine learning techniques are designed to evaluate results and be able to improve its performance over time. Its an application of artificial intelligence\nExamples: Predict rider demand to strategically dispatch drivers for Uber\n\nMachine Learning in Different Fields\nLearning from data is essential in different scientific disciplines\n\nPredict stock returns in the next six months based on historical data;\nPredict the probability of a loan default based on the customer’s information and historical records;\nIdentify certain diseases based on medical image;\nIdentify handwritten digits from the image;\nFacial recognition;\nNatural language processing;\nCluster customers based on their purchase behavior and other information\n\n\n\n  Ask Educate Us GPT\n  \n    Give me a few very important application of Machine Learning?\n    \n        \n        \n        Ask",
-    "crumbs": [
-      "1 Data Mining",
-      "Data Mining Overview"
-    ]
-  },
-  {
-    "objectID": "overview.html#data-mining",
-    "href": "overview.html#data-mining",
-    "title": "Data Mining Overview",
-    "section": "Data Mining",
-    "text": "Data Mining\nData mining entails the application of a range of analytical techniques crucial for the advancement of machine learning and artificial intelligence. It is widely acknowledged as a fundamental component of both fields. Through data mining, hidden patterns and relationships within data are unearthed, enabling the extraction of valuable insights to inform decision-making processes.\n\nDifference between Data Mining and Machine Learning\n\nData mining focuses on discovering patterns and relationships in a given data\nMachine learning focuses on training models and predicting future\nA large overlap, but have different focuses\nNo need to distinguish them conceptually for our course\nArticle: Difference between Data Mining and Machine Learning\n\n\n\n  Ask Educate Us GPT\n  \n    What is Data Mining with real world example?\n    \n        \n        \n        Ask\n    \n  \n\n\n    \n\n\n\n  Ask Educate Us GPT\n  \n    Why Data Mining is so important nowadays?\n    \n        \n        \n        Ask\n    \n  \n\n\n\n\n\n  Ask Educate Us GPT\n  \n    Show me an example of logistic regression model?\n    \n        \n        \n        Ask",
-    "crumbs": [
-      "1 Data Mining",
-      "Data Mining Overview"
-    ]
+    "objectID": "sec-1-2-examples.html#clustering",
+    "href": "sec-1-2-examples.html#clustering",
+    "title": "Simple Data Mining Algorithms",
+    "section": "Clustering",
+    "text": "Clustering\nK-Means Clustering: This is a popular clustering algorithm that partitions data into k clusters based on the mean distance between data points and cluster centers. It aims to minimize the intra-cluster variance and is efficient for large datasets.\n\nIris dataset\nLet’s first load the Iris dataset. This is a very famous dataset in almost all data mining, machine learning courses, and it has been an R build-in dataset. The dataset consists of 50 samples from each of three species of Iris flowers (Iris setosa, Iris virginicaand Iris versicolor). Four features(variables) were measured from each sample, they are the length and the width of sepal and petal, in centimeters. It is introduced by Sir Ronald Fisher in 1936.\n\n3 Species\n\n\n\nFour features of flower: length and the width of sepal and petal\n\n\nThe iris flower data set is included in R. It is a data frame with 150 cases (rows) and 5 variables (columns) named Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, and Species.\n\n\n\n  Ask Educate Us GPT\n  \n    Why we apply clustering analysis to Iris dataset?\n    \n        \n        \n        Ask\n    \n  \n\n\n\nFirst, load iris data to the current workspace\n\n# Scale the Iris dataset columns (excluding columns 2, 4, and 5)\niris1 &lt;- scale(iris[,-c(2,4,5)])\n\n# Get the number of rows in the scaled dataset\nn &lt;- nrow(iris1)\n\n# Create a random index sample for splitting the dataset\nindex &lt;- sample(2, n, replace = TRUE)\n\n# Create two subsets based on the random index\niris.sub1 &lt;- iris1[index == 1,]\niris.sub2 &lt;- iris1[index == 2,]\n\n# Calculate the mean of each column in the subsets\nmean.sub1 &lt;- apply(iris.sub1, 2, mean)\nmean.sub2 &lt;- apply(iris.sub2, 2, mean)\n\n# Plot the scaled Iris dataset with different colors based on the subset index\nplot(iris1, col = index + 1, pch = 16)\n\n# Plot the mean of each subset as points in different colors\npoints(x = mean.sub1[1], y = mean.sub1[2], col = 2, pch = 8)\npoints(x = mean.sub2[1], y = mean.sub2[2], col = 3, pch = 8)\n\n\n\n\n\n# Define a function 'Eudist' to calculate Euclidean distance between two vectors\nEudist &lt;- function(x, y) sqrt(sum((x - y)^2))\n\n# Calculate Euclidean distance between mean.sub1 and each row in iris1\nd1 &lt;- sapply(1:n, function(i) Eudist(mean.sub1, iris1[i,]))\n\n# Calculate Euclidean distance between mean.sub2 and each row in iris1\nd2 &lt;- sapply(1:n, function(i) Eudist(mean.sub2, iris1[i,]))\n\n# Determine the index of the minimum distance for each row to assign to a new index\nindex.new &lt;- apply(cbind(d1, d2), 1, which.min)\n\n# Create new subsets 'iris.sub1' and 'iris.sub2' based on the new index\niris.sub1 &lt;- iris1[index.new == 1,]\niris.sub2 &lt;- iris1[index.new == 2,]\n\n# Calculate the mean of each column in the new subsets\nmean.sub1 &lt;- apply(iris.sub1, 2, mean)\nmean.sub2 &lt;- apply(iris.sub2, 2, mean)\n\n# Create a scatter plot of iris1 with points colored based on the new index\nplot(iris1, col = index.new + 1, pch = 16)\n\n# Plot the mean of each new subset as points in different colors on the scatter plot\npoints(x = mean.sub1[1], y = mean.sub1[2], col = 2, pch = 8)\npoints(x = mean.sub2[1], y = mean.sub2[2], col = 3, pch = 8)\n\n\n\n\n\n# Calculate the Euclidean distance between 'mean.sub1' and each row in 'iris1' and store in 'd1'\nd1 &lt;- sapply(1:n, function(i) Eudist(mean.sub1, iris1[i,]))\n\n# Calculate the Euclidean distance between 'mean.sub2' and each row in 'iris1' and store in 'd2'\nd2 &lt;- sapply(1:n, function(i) Eudist(mean.sub2, iris1[i,]))\n\n# Determine the index of the minimum distance between 'd1' and 'd2' for each row and assign to 'index.new'\nindex.new &lt;- apply(cbind(d1, d2), 1, which.min)\n\n# Create new subsets 'iris.sub1' and 'iris.sub2' based on 'index.new'\niris.sub1 &lt;- iris1[index.new == 1,]\niris.sub2 &lt;- iris1[index.new == 2,]\n\n# Calculate the mean of each column in the new subsets\nmean.sub1 &lt;- apply(iris.sub1, 2, mean)\nmean.sub2 &lt;- apply(iris.sub2, 2, mean)\n\n# Create a scatter plot of 'iris1' with points colored based on 'index.new'\nplot(iris1, col = index.new + 1, pch = 16)\n\n# Plot the mean of 'iris.sub1' as points in color 2 on the scatter plot\npoints(x = mean.sub1[1], y = mean.sub1[2], col = 2, pch = 8)\n\n# Plot the mean of 'iris.sub2' as points in color 3 on the scatter plot\npoints(x = mean.sub2[1], y = mean.sub2[2], col = 3, pch = 8)"
   }
 ]
