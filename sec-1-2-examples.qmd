@@ -1,5 +1,5 @@
 ---
-title: "Simple Data Mining Algorithms"
+title: "Examples of Data Mining Algorithms"
 editor_options: 
   chunk_output_type: console
 ---
@@ -9,7 +9,7 @@ editor_options:
 htmltools::includeHTML("questions/openai-api.html")
 ```
 
-# Example of supervised data mining
+# Examples of supervised data mining {#header}
 
 1. In **supervised** data mining, [**the target variable is identified**]{style="color:red;"}
 2. The goal is to predict or explain certain outcome
@@ -29,7 +29,7 @@ htmltools::includeHTML("questions/openai-api.html")
 htmltools::includeHTML("questions/Q-121-prediction.html")
 ```
 
-### Example: Boston Housing Data
+### Example: Predicting median house value using `Boston` Housing Data
 
 We use Boston Housing Data as an illustrative example in this lab. Boston housing data is a built-in dataset in `MASS` package, so you do not need to download externally. Package `MASS` comes with R when you installed R, so no need to use install.packages(MASS) to download and install, but you do need to load this package.
 
@@ -245,13 +245,15 @@ model_1$fitted.values
   - logistic regression model can do the classification. 
 
 
+[go to top](#header)
+
 # Example of unsupervised data mining
 
 ## Clustering
 
 **K-Means Clustering**: This is a popular clustering algorithm that partitions data into k clusters based on the mean distance between data points and cluster centers. It aims to minimize the intra-cluster variance and is efficient for large datasets.
 
-### Iris dataset
+### Example: Clustering Iris flowers in `Iris` dataset
 
 Let's first load the **Iris** dataset. This is a very famous dataset in almost all data mining, machine learning courses, and it has been an R build-in dataset. The dataset consists of 50 samples from each of three species of Iris flowers (Iris setosa, Iris virginicaand Iris versicolor). Four features(variables) were measured from each sample, they are the **length** and the **width** of sepal and petal, in centimeters. It is introduced by Sir Ronald Fisher in 1936.
 
@@ -355,3 +357,5 @@ points(x = mean.sub1[1], y = mean.sub1[2], col = 2, pch = 8)
 points(x = mean.sub2[1], y = mean.sub2[2], col = 3, pch = 8)
 ```
 
+
+[go to top](#header)

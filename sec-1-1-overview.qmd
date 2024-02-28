@@ -103,9 +103,13 @@ Common applications of supervised data mining include prediction models and clas
 htmltools::includeHTML("questions/Q-104-logit.html")
 ```
 
-### An example: Neural Neworks for identifying digits
+### An example: Neural Networks for identifying digits
+
+How to recognize these handwritten digits? 
 
 ![](images/digits.jpg)
+
+The neural networks is one of the models that can identify digits. 
 
 ![](https://miro.medium.com/v2/resize:fit:640/format:webp/0*FLD5PNYJgWknPvJQ.gif#center)
 
