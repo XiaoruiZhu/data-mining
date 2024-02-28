@@ -561,30 +561,30 @@ lm(formula = medv ~ ., data = Boston_train)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--15.9387  -2.7762  -0.5371   1.9602  25.1892 
+-15.5394  -2.8070  -0.5881   1.7437  26.3550 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  38.578394   5.537556   6.967 1.19e-11 ***
-crim         -0.112193   0.035061  -3.200  0.00147 ** 
-zn            0.046347   0.014472   3.203  0.00146 ** 
-indus         0.028683   0.066602   0.431  0.66692    
-chas          2.883303   0.919951   3.134  0.00184 ** 
-nox         -20.213940   4.140364  -4.882 1.47e-06 ***
-rm            3.708284   0.445380   8.326 1.06e-15 ***
-age           0.012876   0.014506   0.888  0.37522    
-dis          -1.480961   0.214957  -6.890 1.94e-11 ***
-rad           0.330632   0.071659   4.614 5.19e-06 ***
-tax          -0.012701   0.004047  -3.138  0.00181 ** 
-ptratio      -0.982164   0.142577  -6.889 1.95e-11 ***
-black         0.009171   0.002874   3.191  0.00152 ** 
-lstat        -0.554310   0.055150 -10.051  &lt; 2e-16 ***
+(Intercept)  36.208741   5.484331   6.602 1.17e-10 ***
+crim         -0.116788   0.034919  -3.345 0.000895 ***
+zn            0.049012   0.014834   3.304 0.001031 ** 
+indus         0.007588   0.066939   0.113 0.909805    
+chas          2.634957   1.049178   2.511 0.012380 *  
+nox         -17.233935   4.127753  -4.175 3.59e-05 ***
+rm            3.836320   0.446857   8.585  &lt; 2e-16 ***
+age           0.001158   0.014129   0.082 0.934728    
+dis          -1.516591   0.213989  -7.087 5.46e-12 ***
+rad           0.318521   0.070749   4.502 8.62e-06 ***
+tax          -0.013314   0.004027  -3.306 0.001023 ** 
+ptratio      -0.945445   0.141070  -6.702 6.30e-11 ***
+black         0.009506   0.002893   3.285 0.001099 ** 
+lstat        -0.510840   0.054834  -9.316  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 4.842 on 441 degrees of freedom
-Multiple R-squared:  0.7415,    Adjusted R-squared:  0.7339 
-F-statistic: 97.32 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 4.87 on 441 degrees of freedom
+Multiple R-squared:  0.7311,    Adjusted R-squared:  0.7232 
+F-statistic: 92.24 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>But, is this the model you want to use?</p>
@@ -625,32 +625,32 @@ F-statistic: 97.32 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(model_1)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>(model_summary<span class="sc">$</span>sigma)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 23.44229</code></pre>
+<pre><code>[1] 23.71937</code></pre>
 </div>
 </div>
 <p><span class="math inline">\(R^2\)</span> of the model</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7415191</code></pre>
+<pre><code>[1] 0.7311276</code></pre>
 </div>
 </div>
 <p>Adjusted-<span class="math inline">\(R^2\)</span> of the model, if you add a variable (or several in a group), SSE will decrease, <span class="math inline">\(R^2\)</span> will increase, but Adjusted-<span class="math inline">\(R^2\)</span> could go either way.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>adj.r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7338995</code></pre>
+<pre><code>[1] 0.7232016</code></pre>
 </div>
 </div>
 <p>AIC and BIC of the model, these are information criteria. Smaller values indicate better fit.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2742.331</code></pre>
+<pre><code>[1] 2747.677</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2804.135</code></pre>
+<pre><code>[1] 2809.482</code></pre>
 </div>
 </div>
 <p>BIC, AIC, and Adjusted <span class="math inline">\(R^2\)</span> have complexity penalty in the definition, thus when comparing across different models they are better indicators on how well the model will perform on future data.</p>
@@ -670,14 +670,14 @@ F-statistic: 97.32 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((medv_pred <span class="sc">-</span> Boston_test<span class="sc">$</span>medv)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 40.75232</code></pre>
+<pre><code>[1] 23.5782</code></pre>
 </div>
 </div>
 <p>A less popular measure is the Mean Absolute Error (MAE). You can probably guess that here instead of taking the average of squared error, MAE is the average of absolute value of error.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(medv_pred <span class="sc">-</span> Boston_test<span class="sc">$</span>medv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.436621</code></pre>
+<pre><code>[1] 3.275529</code></pre>
 </div>
 </div>
 <p>Note that if you ignore the second argument of predict(), it gives you the in-sample prediction on the training set:</p>
