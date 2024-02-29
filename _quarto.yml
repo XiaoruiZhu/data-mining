@@ -39,6 +39,8 @@ website:
   google-analytics: "G-PFYV0SJVTC"
   open-graph: true
 
+resources: 
+  - CRAME
 format:
   html:
     theme: 
