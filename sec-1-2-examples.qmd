@@ -63,6 +63,7 @@ summary(Boston)
 We skip the Exploratory Data Analysis (EDA) in this notes, but you should not omit it in your real world cases. EDA is very important and always the first analysis to do before any modeling. You should also provide some visualization to present some exploratory analysis. 
 
 ```{r, echo=FALSE}
+# Give me the sample codes in R to do the exploratory analysis for the "Boston" dataset
 htmltools::includeHTML("questions/Q-122-show-vis.html")
 ```
 
@@ -160,6 +161,7 @@ lm(medv~crim*zn, data=Boston_train)
 For now we will not investigate the interactions of variables. But you can try to do these analyses with the help of EducateUsBot. 
 
 ```{r, echo=FALSE}
+# Show me sample codes in R to add interaction terms between age and rm to a linear regression model for the "Boston" dataset
 htmltools::includeHTML("questions/Q-123-boston-interaction.html")
 ```
 
@@ -216,11 +218,13 @@ model_1 <- lm(medv~., data=Boston_train)
 medv_pred <- predict(model_1, Boston_test)
 ```
 
-The most common measure is the Mean Squared Error (MSE): average of the squared differences between the predicted and actual values
+The most common measure is the Mean Squared Prediction Error (MSPE): average of the squared differences between the predicted and actual values
+
 ```{r}
 mean((medv_pred - Boston_test$medv)^2)
 ```
-A less popular measure is the Mean Absolute Error (MAE). You can probably guess that here instead of taking the average of squared error, MAE is the average of absolute value of error.
+
+A less popular measure is the Mean Absolute Prediction Error (MAPE). You can probably guess that here instead of taking the average of squared error, MAE is the average of absolute value of error.
 ```{r}
 mean(abs(medv_pred - Boston_test$medv))
 ```
@@ -244,6 +248,86 @@ model_1$fitted.values
   - example: problems that has response as {A, B, C}, {dog, cat}, {0, 1}. 
   - logistic regression model can do the classification. 
 
+### Example: Predicting binary purchase action using [`Purchase`](examples/Purchase.csv) dataset
+
+Suppose we need predict whether a customer will purchase a product based on factors like their age, gender, browsing history, and the time of day they visit the website.
+
+#### Splitting the data into training and testing sets
+
+```{r}
+library(readr)
+Purchase <- read_csv("examples/Purchase.csv")
+View(Purchase)
+
+sample_index <- sample(nrow(Purchase),nrow(Purchase)*0.80)
+train <- Purchase[sample_index,]
+test <- Purchase[-sample_index,]
+```
+
+#### Fitting a logistic regression model
+
+The estimated coefficient of a logistic model does not allow us to determine the partial effect of a predictor variable on the probability.
+It is preferable to interpret logistic regression coefficients in terms of odds rather than probabilities.
+Odds are defined as the **ratio of the probability of success and the probability of failure**.
+
+Let $p = p(y = 1)$, between $[0,1]$.
+
+Odds = $\frac{p}{1-p}$, between 0 and infinity. 
+
+After fitted, the odds(logit) can be expressed as $\frac{\hat{p}}{(1-\hat{p})}= \exp(b_0 + b_1 x_1)$. 
+
+- The natural log of the odds (logit) is a linear function. $\log{odds}= b_0 + b_1 x_1$
+- So the $b_1\times 100$ is is the approximate percentage change in the odds when the predictor variable increases by one unit.
+
+```{r}
+# Fitting a logistic regression model
+model <- 
+  glm(Purchase ~ Age + Browsing_History +
+        Gender + Time_Of_Day, 
+      data=train, 
+      family='binomial')
+summary(model)
+```
+
+#### Making predictions
+
+```{r}
+train_pred <- predict(model, newdata=train, type='response')
+test_pred <- predict(model, newdata=test, type='response')
+```
+
+What about purchase probability of a female, 35-year-old customer who has browsed the product in the evening?
+
+```{r, eval=FALSE, echo=FALSE}
+predict(model, newdata = data.frame(Age=35, 
+                                    Gender = "Female", 
+                                    Browsing_History = 1, 
+                                    Time_Of_Day = "Evening"), 
+        type = "response")
+```
+
+#### Evaluating the model
+
+```{r, echo=FALSE}
+# How should I evaluate a logistic regression model?
+htmltools::includeHTML("questions/Q-125-purchase-evaluate.html")
+```
+
+```{r}
+# Evaluating the accuracy
+train_accuracy <- mean((train_pred > 0.5) == train$Purchase)
+print(paste('Train_Accuracy:', train_accuracy))
+test_accuracy <- mean((test_pred > 0.5) == test$Purchase)
+print(paste('Test_Accuracy:', test_accuracy))
+
+
+# Calculating AUC for training and testing sets
+
+library(pROC)
+train_auc <- roc(train$Purchase, train_pred)
+test_auc <- roc(test$Purchase, test_pred)
+
+```
 
 [go to top](#header)
 
@@ -255,9 +339,7 @@ model_1$fitted.values
 
 ### Example: Clustering Iris flowers in `Iris` dataset
 
-Let's first load the **Iris** dataset. This is a very famous dataset in almost all data mining, machine learning courses, and it has been an R build-in dataset. The dataset consists of 50 samples from each of three species of Iris flowers (Iris setosa, Iris virginicaand Iris versicolor). Four features(variables) were measured from each sample, they are the **length** and the **width** of sepal and petal, in centimeters. It is introduced by Sir Ronald Fisher in 1936.
-
-- 3 Species
+Let's first load the **Iris** dataset. This is a very famous dataset in almost all data mining, machine learning courses, and it has been an R build-in dataset. The dataset consists of 50 samples from each of three species of Iris flowers (Iris setosa, Iris virginicaand Iris versicolor). Four features(variables) were measured from each sample, they are the **length** and the **width** of sepal and petal, in centimeters. It is introduced by Sir Ronald Fisher in 1936 with 3 Iris Species.
 
 ![](images/flower.png)
 
@@ -269,12 +351,15 @@ The *iris* flower data set is included in R. It is a data frame with 150 cases (
 
 
 ```{r, echo=FALSE}
+# Why do we apply clustering analysis to the Iris dataset?
 htmltools::includeHTML("questions/Q-124-iris-curious.html")
 ```
 
-First, load iris data to the current workspace
+First, load iris data to the current workspace. This is a random grouping (first step).
  
 ```{r}
+data("iris")
+
 # Scale the Iris dataset columns (excluding columns 2, 4, and 5)
 iris1 <- scale(iris[,-c(2,4,5)])
 
@@ -299,6 +384,8 @@ plot(iris1, col = index + 1, pch = 16)
 points(x = mean.sub1[1], y = mean.sub1[2], col = 2, pch = 8)
 points(x = mean.sub2[1], y = mean.sub2[2], col = 3, pch = 8)
 ```
+
+The next step
 
 ```{r}
 # Define a function 'Eudist' to calculate Euclidean distance between two vectors
