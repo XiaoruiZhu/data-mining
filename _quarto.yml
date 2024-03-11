@@ -5,6 +5,7 @@ project:
     - how.qmd
     - sec-1-1-overview.qmd
     - sec-1-2-examples.qmd
+    - sec-3-2-Logit.qmd
     # - Ch-2-EDA-vis.qmd
     # - Ch-3-LM.qmd
     # - Ch-3-VarSele.qmd
@@ -28,11 +29,11 @@ website:
       # - section: "2 Exploratory Data Analysis"
       #   contents:
       #     - Ch-2-EDA-vis.qmd
-      # - section: "3 Supervised Data Mining"
-      #   contents:
-      #     - Ch-3-LM.qmd
-      #     - Ch-3-VarSele.qmd
-      #     - Ch-3-Logit.qmd
+      - section: "3 Supervised Data Mining"
+        contents:
+          # - Ch-3-LM.qmd
+          - sec-3-2-Logit.qmd
+          # - Ch-3-VarSele.qmd
       - section: "About"
         contents:
           - about.qmd

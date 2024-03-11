@@ -1,0 +1,208 @@
+---
+title: "Logistic regression and classifications"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(message=FALSE)
+```
+
+```{r, echo=FALSE}
+htmltools::includeHTML("questions/openai-api.html")
+
+```
+
+# Logistic regression and classifications
+
+Please read the lecture to gain the understanding of logistic regression.
+
+# Application 1: Mortgage loan
+The Great Recession has forced financial institutions to be extra stringent in granting mortgage loans. Thirty recent mortgage applications are obtained to analyze the mortgage approval rate.
+
+The response variable $y$ equals 1 if the mortgage loan is approved, 0 otherwise.
+It is believed that approval depends on the percentage of the down payment ($x_1$) and the percentage of the income-to-loan ratio ($x_2$).
+
+## Download and import the [`Morgage.csv`](examples/Morgage.csv) dataset
+
+```{r, message=FALSE}
+library(readr)
+Morgage <- read_csv("examples/Morgage.csv")
+```
+
+```{r, echo=FALSE}
+library(kableExtra)
+Morgage %>%
+  kbl() %>%
+  kable_paper(full_width = F, position = "center") %>%
+  scroll_box(width = "500px", height = "200px")
+```
+
+## Fit the linear probability model
+
+Try to ask EducateUsGPT assistant to figure out the codes that can help you to develop the linear probability model for the mortgage dataset. 
+
+```{r, echo=FALSE, results='asis'}
+# Me: How to fit a linear probability model in R for the dataset that has y as response, x1 and x2 as predictors?
+htmltools::includeHTML("questions/Q-321-LPM.html")
+```
+
+```{r, echo=FALSE, results='hide'}
+# Assuming your dataset is named 'data'
+LPM_mod <- lm(y ~ x1 + x2, data = Morgage)
+
+# Print the summary of the model
+summary(LPM_mod)
+```
+
+## Fit the logistic regression model
+
+Try to ask EducateUsGPT assistant to figure out the codes that can help you to develop the logistic regression model for the mortgage dataset. 
+
+```{r, echo=FALSE, results='asis'}
+# Me: What question you should ask?
+htmltools::includeHTML("questions/Q-322-Logit.html")
+```
+
+```{r, echo=FALSE, results='hide'}
+# Assuming your dataset is named 'Morgage'
+Logit_mod <- glm(y ~ x1 + x2, data = Morgage, family = binomial)
+
+# Print the summary of the model
+summary(Logit_mod)
+```
+
+## Compare these two models
+
+Compare and interpret the estimation of the two models you developed above. 
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+library(stargazer)
+stargazer(LPM_mod, Logit_mod, 
+          type = "html")
+```
+
+## Predict a loan application
+
+Predict the loan approval probability for an applicant with a 20% down payment and a 30% income-to-loan ratio using the two models respectively.
+
+```{r, echo=FALSE}
+# Predict using LPM
+predict(LPM_mod, 
+        newdata = data.frame(x1 = 20, x2 = 30), 
+        type='response')
+# Predict using logistic regression model
+predict(Logit_mod, 
+        newdata = data.frame(x1 = 20, x2 = 30), 
+        type='response')
+```
+
+What if the down payment was 5%, income-to-loan ratio was 20%?
+
+```{r, eval=FALSE, echo=FALSE}
+# Predict using LPM
+predict(LPM_mod, 
+        newdata = data.frame(x1 = 5, x2 = 20), 
+        type='response')
+# Predict using logistic regression model
+predict(Logit_mod, 
+        newdata = data.frame(x1 = 5, x2 = 20), 
+        type='response')
+```
+
+
+
+
+# Application 2: Spam detector
+
+Electronic mail (email) is one of the most widely used Internet services.
+
+While emails can greatly benefit productivity, they are susceptible to unsolicited, unwanted, and possibly virus-infested spam messages from illegitimate email addresses.
+
+Peter Derby works as a cybersecurity analyst at a private equity firm.
+His colleagues at the firm have been overwhelmed by large-scale spam emails.
+Peter would like to implement an effective spam detection system on the company’s email server.
+He has been tasked to create spam filters that detect spam emails and stop them from getting into email inboxes.
+
+The objective is to detect spam based on the number of recipients, the number of hyperlinks, and the number of characters for each email.
+
+## Download and import the [`Spam.csv`](examples/Spam.csv) dataset
+
+```{r, message=FALSE}
+library(readr)
+Spam <- read_csv("examples/Spam.csv")
+```
+
+```{r, echo=FALSE}
+library(kableExtra)
+Spam %>%
+  kbl() %>%
+  kable_paper(full_width = F, position = "center") %>%
+  scroll_box(width = "500px", height = "200px")
+```
+
+## Splitting the data into training and testing sets
+
+```{r, eval=FALSE, echo=TRUE}
+sample_index <- 
+train <- 
+test <- 
+```
+
+```{r, echo=FALSE}
+sample_index <- sample(nrow(Spam),nrow(Spam)*0.80)
+train <- Spam[sample_index,]
+test <- Spam[-sample_index,]
+```
+
+## Fit the logistic regression model
+
+Develop the logistic regression model for the Spam dataset. 
+
+```{r, echo=FALSE, results='hide'}
+# Assuming your dataset is named 'Spam'
+Logit_mod <- glm(Spam ~ Recipients + Hyperlinks + Characters,
+                 data = train, 
+                 family = binomial)
+
+# Print the summary of the model
+summary(Logit_mod)
+```
+
+If you cannot write your own codes, try to ask EducateUsGPT assistant to help you out. 
+
+```{r, echo=FALSE, results='asis'}
+# Me: What question you should ask?
+htmltools::includeHTML("questions/Q-323-Logit-spam.html")
+```
+
+## Making predictions
+
+```{r}
+train_pred <- predict(Logit_mod, newdata=train, type='response')
+test_pred <- predict(Logit_mod, newdata=test, type='response')
+```
+
+## Evaluating the model
+
+```{r, echo=FALSE}
+# How should I evaluate a logistic regression model?
+htmltools::includeHTML("questions/Q-125-purchase-evaluate.html")
+```
+
+```{r}
+# Evaluating the accuracy
+train_accuracy <- mean((train_pred > 0.5) == train$Spam)
+print(paste('Train_Accuracy:', train_accuracy))
+test_accuracy <- mean((test_pred > 0.5) == test$Spam)
+print(paste('Test_Accuracy:', test_accuracy))
+
+# Calculating AUC for training and testing sets
+
+library(pROC)
+train_auc <- roc(train$Spam, train_pred)
+test_auc <- roc(test$Spam, test_pred)
+train_auc; test_auc
+```
+
+[go to top](#header)
