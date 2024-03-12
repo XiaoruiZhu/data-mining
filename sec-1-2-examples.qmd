@@ -258,7 +258,7 @@ Suppose we need predict whether a customer will purchase a product based on fact
 ```{r}
 library(readr)
 Purchase <- read_csv("examples/Purchase.csv")
-View(Purchase)
+# View(Purchase)
 
 sample_index <- sample(nrow(Purchase),nrow(Purchase)*0.80)
 train <- Purchase[sample_index,]
