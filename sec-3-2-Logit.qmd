@@ -24,7 +24,7 @@ It is believed that approval depends on the percentage of the down payment ($x_1
 
 ```{r, message=FALSE}
 library(readr)
-Morgage <- read_csv("examples/Morgage.csv")
+Morgage <- read_csv("examples/Morgage.csv", show_col_types = FALSE)
 ```
 
 ```{r, echo=FALSE}
@@ -117,7 +117,7 @@ predict(Logit_mod,
 > 
 > Hint: what you've found from the prediction above. 
 
-```{r, echo=FALSE, results='asis'}
+```{r Q-325, echo=FALSE, results='asis'}
 id <- 325
 que <- "What is the drawback of the linear probability model?"
 filename <- educateusgpt(id = id, question = que)
@@ -127,6 +127,56 @@ htmltools::includeHTML(filename)
 ![](images/LPM-Logit.png)
 
 As shown in the above figure, the linear probability model can lead to predicted probabilities that are outside the range of 0 to 1 at the extreme ends of the predictor variable values. The predicted probabilities that are negative or greater than 100% are not meaningful and interpretable. So it is more appropriate to use a logistic regression model for the classification of the problems with a binary outcome such that the predicted probability is always within the rage of 0 to 1. 
+
+## Predict all applications in training and testing sets
+
+For the logistic regression models, you can predict the log odds ratio, the probability being 1, or you can have binary predicted outcome of 0 or 1 given a cut-off probability. 
+
+1. In logistic regression, the $\hat{\eta}$ are called **log odds ratio**, which is $\log(P(y_i=1)/(1-P(y_i=1)))$. The fitted model $\hat{\eta} = b_0 +b_1 x_1 + b_2 x_2 + ...$ provides the estimated log odds ratio before the inverse of link (such as the logit function in logistic regression). In R, the `predict()` function is utilized to obtain a vector containing all in-sample $\hat{\eta}$ values for each training observation.
+
+```{r, fig.width=6, fig.height=4, fig.align='center'}
+hist(predict(Logit_mod))
+```
+
+2. To calculate the **predicted probability** $P(y_i=1)$, you apply the inverse of the link function (in this case, the logit function) to $\hat{\eta}$. This is expressed by the equation $P(y_i=1) = 1 / (1 + \exp(-\hat{\eta}_i))$. In R, you can obtain the predicted probability for each training observation using either the `fitted()` function or `predict(, type="response")`.
+
+```{r, fig.width=6, fig.height=4, fig.align='center'}
+pred_resp <- predict(Logit_mod, type="response")
+hist(pred_resp)
+```
+
+3. Finally, consider the necessity of a binary classification decision rule. An intuitive rule is to assign the outcome a value of 1 if the estimated probability ($P(y=1)$) exceeds 0.5. This threshold probability of 0.5 is commonly referred to as the **cut-off probability**. However, it's crucial to note that you have the flexibility to adjust this cut-off probability according to various factors such as the misclassification rate or the implications of the decision. For instance, one may weigh the cost function, which assesses the balance between the risk of approving a loan for someone unable to repay (predicting 0 when the truth is 1) and the risk of denying a loan to someone who is qualified (predicting 1 when the truth is 0).
+
+These tables (confusion matrix) below illustrate the impact of choosing different cut-off probabilities. Choosing a large cut-off probability will result in few cases being predicted as 1, and choosing a small cut-off probability will result in many cases being predicted as 1.
+
+```{r}
+# This line of code generates a contingency table comparing the actual values of the response variable 'y' in the Logit_mod dataset 
+# with the predicted values obtained from the logistic regression model 'pred_resp'. 
+# The predicted values are dichotomized using a threshold of 0.5, where any value greater than 0.5 is classified as 1 and any value less than or equal to 0.5 is classified as 0. 
+# The resulting table displays the counts of observations where the actual value and the predicted value fall into each category.
+table(Logit_mod$y, (pred_resp > 0.5)*1, dnn=c("Truth","Predicted"))
+
+# This line of code is similar to the previous one, but it uses a different threshold value of 0.2 to dichotomize the predicted values. 
+# Consequently, the resulting table provides counts of observations based on a lower threshold for predicting the positive class (1).
+table(Logit_mod$y, (pred_resp > 0.2)*1, dnn=c("Truth","Predicted"))
+
+# This line of code again generates a contingency table, but this time using an extremely low threshold value of 0.0001 to dichotomize the predicted values. 
+# As a result, almost all predicted values are likely to be classified as 1. 
+# This table helps to understand the impact of setting an extremely low threshold on the classification of observations.
+table(Logit_mod$y, (pred_resp > 0.0001)*1, dnn=c("Truth","Predicted"))
+```
+
+
+```{r Q-326, echo=FALSE, results='asis'}
+id <- 326
+que <- "what is the limitation of evaluating confusion matrix of the logistic regression model with only one specific cut-off-probability?"
+filename <- educateusgpt(id = id, question = que)
+htmltools::includeHTML(filename)
+```
+
+> One limitation is that the choice of the cut-off probability can significantly impact the model evaluation metrics such as accuracy, precision, recall, and F1 score. Different cut-off probabilities can lead to different trade-offs between true positive rate and false positive rate, making it challenging to accurately assess the model's overall performance.
+> 
+> Practitioners often use Receiver operating characteristic (ROC) curves or precision-recall curves evaluate the model's performance across various cut-off probabilities and gain a more comprehensive understanding of its predictive power.
 
 ## Fitting performance 
 
@@ -316,10 +366,20 @@ test_pred <- predict(Logit_mod, newdata=test, type='response')
 
 ## Evaluating the model
 
-```{r, echo=FALSE}
-# How should I evaluate a logistic regression model?
-htmltools::includeHTML("questions/Q-125-purchase-evaluate.html")
+```{r Q-327, echo=FALSE, results='asis'}
+id <- 327
+que <- "What are the popular evaluation metrics of a logistic regression model?"
+filename <- educateusgpt(id = id, question = que)
+htmltools::includeHTML(filename)
 ```
+
+### Accuracy ratio 
+
+It measures the proportion of correctly classified instances out of the total instances.
+
+$$\text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}} \times 100\% $$
+Based on the confusion matrix we introduced before, the accuracy ratio can be written as: 
+$$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \times 100\%$$
 
 ```{r}
 # Evaluating the accuracy
@@ -327,9 +387,14 @@ train_accuracy <- mean((train_pred > 0.5) == train$Spam)
 print(paste('Train_Accuracy:', train_accuracy))
 test_accuracy <- mean((test_pred > 0.5) == test$Spam)
 print(paste('Test_Accuracy:', test_accuracy))
+```
 
+### ROC Curve and area under the ROC curve (AUC-ROC)
+
+We will thoroughly introduce the ROC and AUC-ROC in a separate tutorial. 
+
+```{r}
 # Calculating AUC for training and testing sets
-
 library(pROC)
 train_auc <- roc(train$Spam, train_pred)
 test_auc <- roc(test$Spam, test_pred)
