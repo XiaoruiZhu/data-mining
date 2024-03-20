@@ -214,6 +214,12 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
  <span class="menu-text">Logistic regression and classifications</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-3-3-Logit-AUC-ROC.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluation metrics: ROC and AUC</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -291,6 +297,9 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
         // Initialize conversation history for each chat
         const chatHistory = {
             1: [],
+            331: [],
+            327: [],
+            326: [],
             324: [],
             325: [],
             101: [],
@@ -553,31 +562,31 @@ Call:
 lm(formula = medv ~ ., data = Boston_train)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--15.631  -2.781  -0.483   1.891  25.683 
+     Min       1Q   Median       3Q      Max 
+-15.9317  -2.7111  -0.5104   1.7559  25.4728 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  37.569472   5.476946   6.860 2.35e-11 ***
-crim         -0.113152   0.033529  -3.375 0.000804 ***
-zn            0.046690   0.014222   3.283 0.001109 ** 
-indus        -0.004958   0.065223  -0.076 0.939437    
-chas          2.616568   0.922146   2.837 0.004757 ** 
-nox         -17.411266   4.074397  -4.273 2.36e-05 ***
-rm            3.694086   0.437746   8.439 4.64e-16 ***
-age          -0.003041   0.014111  -0.216 0.829445    
-dis          -1.561798   0.214412  -7.284 1.50e-12 ***
-rad           0.320362   0.070308   4.557 6.74e-06 ***
-tax          -0.012681   0.003909  -3.244 0.001267 ** 
-ptratio      -0.899432   0.140336  -6.409 3.77e-10 ***
-black         0.008277   0.002839   2.915 0.003732 ** 
-lstat        -0.545811   0.053865 -10.133  &lt; 2e-16 ***
+(Intercept)  39.358293   5.353361   7.352 9.57e-13 ***
+crim         -0.104729   0.033506  -3.126 0.001891 ** 
+zn            0.035605   0.015048   2.366 0.018411 *  
+indus         0.008943   0.066817   0.134 0.893581    
+chas          3.418458   0.938892   3.641 0.000304 ***
+nox         -18.495817   4.157505  -4.449 1.09e-05 ***
+rm            3.574126   0.434154   8.232 2.10e-15 ***
+age           0.008041   0.013932   0.577 0.564123    
+dis          -1.430890   0.212649  -6.729 5.33e-11 ***
+rad           0.287796   0.070153   4.102 4.87e-05 ***
+tax          -0.011178   0.004049  -2.761 0.006008 ** 
+ptratio      -1.002205   0.140543  -7.131 4.11e-12 ***
+black         0.008368   0.002823   2.965 0.003196 ** 
+lstat        -0.561399   0.054030 -10.391  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 4.802 on 441 degrees of freedom
-Multiple R-squared:  0.7418,    Adjusted R-squared:  0.7342 
-F-statistic: 97.47 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 4.801 on 441 degrees of freedom
+Multiple R-squared:  0.737, Adjusted R-squared:  0.7292 
+F-statistic: 95.04 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>But, is this the model you want to use?</p>
@@ -618,32 +627,32 @@ F-statistic: 97.47 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(model_1)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>(model_summary<span class="sc">$</span>sigma)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 23.06345</code></pre>
+<pre><code>[1] 23.05293</code></pre>
 </div>
 </div>
 <p><span class="math inline">\(R^2\)</span> of the model</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7418213</code></pre>
+<pre><code>[1] 0.7369581</code></pre>
 </div>
 </div>
 <p>Adjusted-<span class="math inline">\(R^2\)</span> of the model, if you add a variable (or several in a group), SSE will decrease, <span class="math inline">\(R^2\)</span> will increase, but Adjusted-<span class="math inline">\(R^2\)</span> could go either way.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>adj.r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7342106</code></pre>
+<pre><code>[1] 0.729204</code></pre>
 </div>
 </div>
 <p>AIC and BIC of the model, these are information criteria. Smaller values indicate better fit.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2734.917</code></pre>
+<pre><code>[1] 2734.71</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2796.722</code></pre>
+<pre><code>[1] 2796.514</code></pre>
 </div>
 </div>
 <p>BIC, AIC, and Adjusted <span class="math inline">\(R^2\)</span> have complexity penalty in the definition, thus when comparing across different models they are better indicators on how well the model will perform on future data.</p>
@@ -663,14 +672,14 @@ F-statistic: 97.47 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((medv_pred <span class="sc">-</span> Boston_test<span class="sc">$</span>medv)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 18.33824</code></pre>
+<pre><code>[1] 21.26627</code></pre>
 </div>
 </div>
 <p>A less popular measure is the Mean Absolute Prediction Error (MAPE). You can probably guess that here instead of taking the average of squared error, MAE is the average of absolute value of error.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(medv_pred <span class="sc">-</span> Boston_test<span class="sc">$</span>medv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.419211</code></pre>
+<pre><code>[1] 3.636968</code></pre>
 </div>
 </div>
 <p>Note that if you ignore the second argument of predict(), it gives you the in-sample prediction on the training set:</p>
@@ -734,20 +743,20 @@ glm(formula = Purchase ~ Age + Browsing_History + Gender + Time_Of_Day,
 
 Coefficients:
                     Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)        -2.225200   0.334636  -6.650 2.94e-11 ***
-Age                 0.039292   0.006793   5.784 7.28e-09 ***
-Browsing_History    1.975302   0.168956  11.691  &lt; 2e-16 ***
-GenderMale         -0.014316   0.161714  -0.089    0.929    
-Time_Of_DayEvening  0.309500   0.200457   1.544    0.123    
-Time_Of_DayMorning -0.209680   0.193539  -1.083    0.279    
+(Intercept)        -2.019038   0.337048  -5.990 2.09e-09 ***
+Age                 0.032394   0.006795   4.767 1.87e-06 ***
+Browsing_History    2.020452   0.168181  12.014  &lt; 2e-16 ***
+GenderMale          0.001081   0.162599   0.007   0.9947    
+Time_Of_DayEvening  0.393350   0.200513   1.962   0.0498 *  
+Time_Of_DayMorning -0.331727   0.195092  -1.700   0.0891 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 1100.2  on 799  degrees of freedom
-Residual deviance:  909.3  on 794  degrees of freedom
-AIC: 921.3
+    Null deviance: 1100.20  on 799  degrees of freedom
+Residual deviance:  902.56  on 794  degrees of freedom
+AIC: 914.56
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -783,12 +792,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>train_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((train_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> train<span class="sc">$</span>Purchase)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Train_Accuracy:'</span>, train_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Train_Accuracy: 0.7125"</code></pre>
+<pre><code>[1] "Train_Accuracy: 0.7175"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((test_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> test<span class="sc">$</span>Purchase)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Test_Accuracy:'</span>, test_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Test_Accuracy: 0.695"</code></pre>
+<pre><code>[1] "Test_Accuracy: 0.69"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating AUC for training and testing sets</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>

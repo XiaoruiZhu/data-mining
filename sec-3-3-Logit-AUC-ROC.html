@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Mining for Business Analytics - Evaluation metrics: ROC and AUC</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-PFYV0SJVTC"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Data Mining for Business Analytics - Evaluation metrics: ROC and AUC">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://www.educateusgpt.org/images/ClassTable.PNG">
+<meta property="og:site-name" content="Data Mining for Business Analytics">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-3-2-Logit.html">3 Supervised Data Mining</a></li><li class="breadcrumb-item"><a href="./sec-3-3-Logit-AUC-ROC.html">Evaluation metrics: ROC and AUC</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Mining for Business Analytics</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Preface</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./why.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Why should you use this website</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to use this website</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">1 Data Mining</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Mining Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-1-2-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples of Data Mining Algorithms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">3 Supervised Data Mining</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-3-2-Logit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logistic regression and classifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-3-3-Logit-AUC-ROC.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Evaluation metrics: ROC and AUC</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">About</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About Us</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#logistic-regression-and-roc" id="toc-logistic-regression-and-roc" class="nav-link active" data-scroll-target="#logistic-regression-and-roc">Logistic regression and ROC</a>
+  <ul class="collapse">
+  <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve">ROC Curve</a></li>
+  </ul></li>
+  <li><a href="#example-credit-card-default" id="toc-example-credit-card-default" class="nav-link" data-scroll-target="#example-credit-card-default">Example: Credit Card Default</a>
+  <ul class="collapse">
+  <li><a href="#a-brief-exploratory-data-analysis" id="toc-a-brief-exploratory-data-analysis" class="nav-link" data-scroll-target="#a-brief-exploratory-data-analysis">A brief exploratory data analysis</a></li>
+  <li><a href="#fit-logistic-regression-model" id="toc-fit-logistic-regression-model" class="nav-link" data-scroll-target="#fit-logistic-regression-model">Fit logistic regression model</a></li>
+  <li><a href="#in-sample-auc-roc" id="toc-in-sample-auc-roc" class="nav-link" data-scroll-target="#in-sample-auc-roc">In-sample AUC-ROC</a></li>
+  <li><a href="#out-of-sample-auc-roc-more-important" id="toc-out-of-sample-auc-roc-more-important" class="nav-link" data-scroll-target="#out-of-sample-auc-roc-more-important">Out-of-sample AUC-ROC (more important)</a></li>
+  <li><a href="#optional-precision-recall-curve" id="toc-optional-precision-recall-curve" class="nav-link" data-scroll-target="#optional-precision-recall-curve">(Optional) Precision-Recall Curve</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
+  <ul class="collapse">
+  <li><a href="#things-to-remember" id="toc-things-to-remember" class="nav-link" data-scroll-target="#things-to-remember">Things to remember</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Evaluation metrics: ROC and AUC</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="logistic-regression-and-roc" class="level1">
+<h1>Logistic regression and ROC</h1>
+<p>Practitioners often seek to evaluate the overall goodness of a classification model. However, model evaluation metrics such as accuracy, precision, recall, and F1 score can be significantly impacted by the choice of the cut-off probability, making it challenging to accurately assess the model’s overall performance.</p>
+<p>Hence, one of the most popular tools is the Receiver Operating Characteristic (ROC) curve or Precision-Recall (PR) curve. The ROC or PR curves evaluate the model’s performance across various cut-off probabilities and help gain a more comprehensive understanding of its predictive power.</p>
+<section id="roc-curve" class="level2">
+<h2 class="anchored" data-anchor-id="roc-curve">ROC Curve</h2>
+<p>Receiver Operating Characteristic (ROC) curve is a graphical representation that showcases the performance of a classification model across different classification thresholds. The ROC curve plots the true positive rate TPR (sensitivity) against the false positive rate FPR (1-specificity) at various threshold settings.</p>
+<p>True positive rate, <span class="math inline">\(\text{TPR}=\frac{\text{TP}}{\text{TP+FN}}\)</span>: is the proportion of true positives correctly predicted as positive.</p>
+<p>False positive rate, <span class="math inline">\(\text{FPR}=\frac{\text{FP}}{\text{FP+TN}}=1-\frac{\text{TN}}{\text{FP+TN}}\)</span>: is the proportion of true negatives incorrectly predicted as positive.</p>
+<p><kbd><img src="images/ClassTable.PNG" class="img-fluid" style="width:45.0%"></kbd> <kbd><img src="images/ROC_curve.PNG" class="img-fluid" style="width:45.0%"> </kbd></p>
+</section>
+</section>
+<section id="example-credit-card-default" class="level1">
+<h1>Example: Credit Card Default</h1>
+<p>We will use a Credit Card Default Data for this lab and illustration. The details of the data can be found at <a href="http://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients">here</a>. Think about what kind of factors could affect people to fail to pay their credit balance. This study emphasizes that accurately estimating default probability is more valuable for risk management than a binary classification of clients as credible or not credible.</p>
+<p>This dataset usually includes various features such as demographic information (age, gender, education), credit card usage details (credit limit, balance, payment history), and whether or not the cardholder defaulted on their payments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing credit data from a CSV file hosted online.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The 'read.csv()' function is used to read the data from the specified URL.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 'header=T' indicates that the first row of the CSV file contains column names.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>credit_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"https://xiaorui.site/Data-Mining-R/lecture/data/credit_default.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="a-brief-exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="a-brief-exploratory-data-analysis">A brief exploratory data analysis</h2>
+<p>Explore what information do we have.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(credit_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "LIMIT_BAL"                  "SEX"                       
+ [3] "EDUCATION"                  "MARRIAGE"                  
+ [5] "AGE"                        "PAY_0"                     
+ [7] "PAY_2"                      "PAY_3"                     
+ [9] "PAY_4"                      "PAY_5"                     
+[11] "PAY_6"                      "BILL_AMT1"                 
+[13] "BILL_AMT2"                  "BILL_AMT3"                 
+[15] "BILL_AMT4"                  "BILL_AMT5"                 
+[17] "BILL_AMT6"                  "PAY_AMT1"                  
+[19] "PAY_AMT2"                   "PAY_AMT3"                  
+[21] "PAY_AMT4"                   "PAY_AMT5"                  
+[23] "PAY_AMT6"                   "default.payment.next.month"</code></pre>
+</div>
+</div>
+<p>Let’s look at how many people were actually default in this sample.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(credit_data<span class="sc">$</span>default.payment.next.month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   0    1 
+9368 2632 </code></pre>
+</div>
+</div>
+<p>The name of response variable is too long! I want to make it shorter by renaming. Recall the <code>rename()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>credit_data <span class="ot">&lt;-</span> <span class="fu">rename</span>(credit_data, <span class="at">default=</span>default.payment.next.month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How about the variable type and summary statistics?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(credit_data)    <span class="co"># structure - see variable type</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(credit_data) <span class="co"># summary statistics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We see all variables are <strong>int</strong>, but we know that <em>SEX, EDUCATION, MARRIAGE</em> are categorical, we convert them to <strong>factor</strong>, the categorical variable type in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>credit_data<span class="sc">$</span>SEX <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(credit_data<span class="sc">$</span>SEX)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>credit_data<span class="sc">$</span>EDUCATION <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(credit_data<span class="sc">$</span>EDUCATION)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>credit_data<span class="sc">$</span>MARRIAGE <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(credit_data<span class="sc">$</span>MARRIAGE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><em>We omit other EDA, but you shouldn’t whenever you are doing data analysis.</em></p>
+</section>
+<section id="fit-logistic-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-logistic-regression-model">Fit logistic regression model</h2>
+<p>Randomly split the data to training (80%) and testing (20%) datasets:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(credit_data),<span class="fu">nrow</span>(credit_data)<span class="sc">*</span><span class="fl">0.80</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>credit_train <span class="ot">&lt;-</span> credit_data[index,]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>credit_test <span class="ot">&lt;-</span> credit_data[<span class="sc">-</span>index,]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or use a more straightforward splitting</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># credit_train &lt;- credit_data[1:10000,]</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># credit_test &lt;- credit_data[10001:12000,]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Train a logistic regression model with all variables:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>credit_logit <span class="ot">&lt;-</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(default<span class="sc">~</span>., </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> credit_train)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(credit_logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = default ~ ., family = binomial, data = credit_train)
+
+Coefficients:
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -1.011e+00  1.550e-01  -6.523 6.88e-11 ***
+LIMIT_BAL   -7.879e-07  2.832e-07  -2.782 0.005401 ** 
+SEX2        -1.463e-01  5.484e-02  -2.668 0.007626 ** 
+EDUCATION2  -1.151e-01  6.360e-02  -1.810 0.070278 .  
+EDUCATION3  -1.632e-01  8.570e-02  -1.904 0.056932 .  
+EDUCATION4  -1.249e+00  3.339e-01  -3.741 0.000183 ***
+MARRIAGE2   -1.717e-01  6.204e-02  -2.768 0.005641 ** 
+MARRIAGE3   -1.594e-01  2.407e-01  -0.662 0.507863    
+AGE          6.590e-03  3.353e-03   1.965 0.049384 *  
+PAY_0        5.611e-01  3.144e-02  17.845  &lt; 2e-16 ***
+PAY_2        1.102e-01  3.615e-02   3.049 0.002297 ** 
+PAY_3        7.462e-02  4.019e-02   1.857 0.063365 .  
+PAY_4        1.699e-02  4.468e-02   0.380 0.703720    
+PAY_5        6.100e-02  4.779e-02   1.276 0.201786    
+PAY_6        1.042e-02  3.983e-02   0.262 0.793632    
+BILL_AMT1   -6.046e-06  2.118e-06  -2.854 0.004311 ** 
+BILL_AMT2    6.059e-06  2.587e-06   2.342 0.019183 *  
+BILL_AMT3   -2.576e-06  2.252e-06  -1.144 0.252710    
+BILL_AMT4   -3.535e-06  2.640e-06  -1.339 0.180710    
+BILL_AMT5    3.028e-06  3.084e-06   0.982 0.326287    
+BILL_AMT6    1.782e-06  2.377e-06   0.750 0.453345    
+PAY_AMT1    -1.035e-05  3.666e-06  -2.824 0.004748 ** 
+PAY_AMT2    -5.502e-06  3.430e-06  -1.604 0.108724    
+PAY_AMT3    -2.102e-06  2.996e-06  -0.702 0.482882    
+PAY_AMT4    -3.971e-06  3.072e-06  -1.293 0.196051    
+PAY_AMT5    -2.846e-06  3.125e-06  -0.911 0.362536    
+PAY_AMT6    -4.978e-06  2.511e-06  -1.982 0.047476 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 10060.6  on 9599  degrees of freedom
+Residual deviance:  8770.4  on 9573  degrees of freedom
+AIC: 8824.4
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+</div>
+<p>You have seen <code>glm()</code> before. In this lab, this is the main function used to build logistic regression model because it is a member of generalized linear model. In <code>glm()</code>, the only thing new is <code>family</code>. It specifies the distribution of your response variable. You may also specify the link function after the name of distribution, for example, <code>family=binomial(logit)</code> (default link is logit). You can also specify <code>family=binomial(link = "probit")</code> to run probit regression. You may also use <code>glm()</code> to build many other generalized linear models.</p>
+</section>
+<section id="in-sample-auc-roc" class="level2">
+<h2 class="anchored" data-anchor-id="in-sample-auc-roc">In-sample AUC-ROC</h2>
+<p>Next, we predict the approval probability for training set (also called in-sample).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'ROCR'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicted probability for training set</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pred_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(credit_logit, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ROCR)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code creates a prediction object 'pred' using the 'prediction()' </span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>pred_obj_train <span class="ot">&lt;-</span> <span class="fu">prediction</span>(pred_train, credit_train<span class="sc">$</span>default)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code calculates True Positive Rate (TPR) and False Positive Rate</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># (FPR) based on the prediction object 'pred_obj_train' using the 'performance()'</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># function from the 'ROCR' package. </span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># It stores the resulting performance object in the variable 'perf_train'.</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>perf_train <span class="ot">&lt;-</span> <span class="fu">performance</span>(pred_obj_train, <span class="st">"tpr"</span>, <span class="st">"fpr"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieves the values of the True Positive Rate (TPR) from the 'perf_train' object.</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># The 'attr()' function is used to access the attributes of the performance object,</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># and "x.values" specifies the TPR values.</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(perf_train, <span class="st">"x.values"</span>)[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.0000000000 0.0000000000 0.0001331558 0.0002663116 0.0003994674
+ [6] 0.0003994674 0.0005326232 0.0005326232 0.0005326232 0.0005326232</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieves the values of the False Positive Rate (FPR) thresholds from the 'perf_train' object</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to the previous line, 'attr()' function is used to access the attributes</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the performance object, and "alpha.values" specifies the FPR values.</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(perf_train, <span class="st">"alpha.values"</span>)[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]       Inf 0.9935758 0.9935684 0.9924404 0.9922434 0.9907627 0.9852759
+ [8] 0.9778936 0.9756481 0.9618603</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code generates a plot of the ROC curve using the performance object 'perf_train'. </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The 'colorize=TRUE' argument adds color to the plot for better visualization.</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf_train, <span class="at">colorize=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sec-3-3-Logit-AUC-ROC_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code calculates the Area Under the ROC Curve (AUC) using the 'performance()' function with "auc" as the argument. </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># It extracts the AUC value from the resulting performance object and returns it as</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a numeric value.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The 'unlist()' function is used to convert the AUC value from a list to a numeric vector.</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">slot</span>(<span class="fu">performance</span>(pred_obj_train, <span class="st">"auc"</span>), <span class="st">"y.values"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7330443</code></pre>
+</div>
+</div>
+<p>Be careful that the function <code>prediction()</code> is different from <code>predict()</code>. It is in the Package <code>ROCR</code> and is particularly used for preparing for the ROC curve. Recall from our lecture that this function essentially calculates many confusion matrices with different cut-off probabilities. Therefore, it requires two vectors as inputs: <strong>predicted probability</strong> and <strong>observed response (0/1)</strong>.</p>
+<p>The next line, <code>performance()</code>, calculates True Positive Rate (TPR) and False Positive Rate (FPR) based on all the confusion matrices obtained from the previous step. Then, you can simply draw the ROC curve, which is a curve of FPR versus TPR.</p>
+<p>The last line is to calculate the Area Under the Curve (AUC). I would recommend you to group these four lines of code together and use them to obtain the ROC curve and AUC. If you don’t want to draw the ROC curve (because it takes time), you can simply comment out the plot line.</p>
+</section>
+<section id="out-of-sample-auc-roc-more-important" class="level2">
+<h2 class="anchored" data-anchor-id="out-of-sample-auc-roc-more-important">Out-of-sample AUC-ROC (more important)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code generates predictions for the test dataset using the logistic </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># regression model 'credit_logit'.</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The 'predict()' function is applied with the 'newdata' argument set to 'test' to </span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># indicate the test dataset,</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># and 'type="response"' specifies that the predicted probabilities of the response </span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># variable are returned.</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>pred_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(credit_logit, <span class="at">newdata =</span> credit_test, <span class="at">type=</span><span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following codes will draw the ROC Curve and the AUC-ROC.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a prediction object 'pred_obj_test' using predicted probabilities 'pred_test' </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and actual responses 'credit_test$default'.</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>pred_obj_test <span class="ot">&lt;-</span> <span class="fu">prediction</span>(pred_test, credit_test<span class="sc">$</span>default)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate True Positive Rate (TPR) and False Positive Rate (FPR) using the prediction object.</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>perf_test <span class="ot">&lt;-</span> <span class="fu">performance</span>(pred_obj_test, <span class="st">"tpr"</span>, <span class="st">"fpr"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the ROC curve based on TPR and FPR, with colorization for better visualization.</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf_test, <span class="at">colorize=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sec-3-3-Logit-AUC-ROC_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the Area Under the ROC Curve (AUC) from the performance object and convert</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it into a numeric value.</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">slot</span>(<span class="fu">performance</span>(pred_obj_test, <span class="st">"auc"</span>), <span class="st">"y.values"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7122963</code></pre>
+</div>
+</div>
+</section>
+<section id="optional-precision-recall-curve" class="level2">
+<h2 class="anchored" data-anchor-id="optional-precision-recall-curve">(Optional) Precision-Recall Curve</h2>
+<div class="cell-output-display">
+<div class="card bg-light mb-3" style="max-width: 1200px;">
+  <div class="card-header">Ask Educate Us GPT</div>
+  <div class="card-body">
+    <h4 class="card-title anchored">Why should one use the Precision-Recall Curve rather than the ROC curve?</h4>
+    <div class="chat-container" id="chat-container-331">
+        <div id="chat-messages-331"></div>
+        <input type="text" id="user-input-331" class="chat-input" placeholder="Ask your question here ..." value="Why should one use the Precision-Recall Curve rather than the ROC curve?">
+        <button onclick="sendMessage(331)" class="chat-button">Ask</button>
+    </div>
+  </div>
+</div>
+</div>
+<p>Precision-Recall Curve is particularly useful when dealing with imbalanced datasets where one class significantly outnumbers the other. In such cases, Precision-Recall Curve provides a better insight into the model’s performance compared to ROC curve.</p>
+<p>We use package <code>PRROC</code> to draw the PR curve. It can also draw the ROC curve. More details of the package can be found <a href="https://cran.r-project.org/web/packages/PRROC/vignettes/PRROC.pdf">here</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"PRROC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary library for PRROC package.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PRROC)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Splitting predicted scores for default=1 and default=0 for training dataset.</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>score1_train <span class="ot">&lt;-</span> pred_train[credit_train<span class="sc">$</span>default<span class="sc">==</span><span class="dv">1</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>score0_train <span class="ot">&lt;-</span> pred_train[credit_train<span class="sc">$</span>default<span class="sc">==</span><span class="dv">0</span>]</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating ROC curve and AUC for in-sample prediction.</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>roc <span class="ot">&lt;-</span> <span class="fu">roc.curve</span>(score1_train, score0_train, <span class="at">curve =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>roc<span class="sc">$</span>auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7330443</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating precision-recall curve for in-sample prediction.</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">pr.curve</span>(score1_train, score0_train, <span class="at">curve =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Precision-recall curve
+
+    Area under curve (Integral):
+     0.5079389 
+
+    Area under curve (Davis &amp; Goadrich):
+     0.5079316 
+
+    Curve for scores from  1.352668e-06  to  0.9935758 
+    ( can be plotted with plot(x) )</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the precision-recall curve for in-sample prediction.</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr, <span class="at">main=</span><span class="st">"In-sample PR curve"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Out-of-sample prediction: </span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Splitting predicted scores for default=1 and default=0 for test dataset.</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>score1_test <span class="ot">&lt;-</span> pred_test[credit_test<span class="sc">$</span>default<span class="sc">==</span><span class="dv">1</span>]</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>score0_test <span class="ot">&lt;-</span> pred_test[credit_test<span class="sc">$</span>default<span class="sc">==</span><span class="dv">0</span>]</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating ROC curve and AUC for out-of-sample prediction.</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>roc_test <span class="ot">&lt;-</span> <span class="fu">roc.curve</span>(score1_test, score0_test, <span class="at">curve =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>roc_test<span class="sc">$</span>auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7122963</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating precision-recall curve for out-of-sample prediction.</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pr_test <span class="ot">&lt;-</span> <span class="fu">pr.curve</span>(score1_test, score0_test, <span class="at">curve =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>pr_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Precision-recall curve
+
+    Area under curve (Integral):
+     0.5191342 
+
+    Area under curve (Davis &amp; Goadrich):
+     0.5191149 
+
+    Curve for scores from  8.063677e-05  to  0.9946733 
+    ( can be plotted with plot(x) )</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the precision-recall curve for out-of-sample prediction.</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr_test, <span class="at">main=</span><span class="st">"Out-of-sample PR curve"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="sec-3-3-Logit-AUC-ROC_files/figure-html/figures-side-1.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="sec-3-3-Logit-AUC-ROC_files/figure-html/figures-side-2.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<section id="things-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="things-to-remember">Things to remember</h2>
+<ul>
+<li><p>Know how to use glm() to build logistic regression;</p></li>
+<li><p>Know how to get ROC and AUC based on predicted probability;</p></li>
+<li><p>Know how to get PR curve and AUC based on predicted probability;</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+
+<script>
+        // Initialize conversation history for each chat
+        const chatHistory = {
+            1: [],
+            331: [],
+            327: [],
+            326: [],
+            324: [],
+            325: [],
+            101: [],
+            102: [],
+            103: [],
+            104: [], 
+            121: [], 
+            122: [], 
+            123: [], 
+            124: [], 
+            125: [], 
+            321: [], 
+            322: [], 
+            323: []
+        };
+
+        async function sendMessage(chatId) {
+            const userInput = document.getElementById(`user-input-${chatId}`).value;
+            const chatContainer = document.getElementById(`chat-messages-${chatId}`);
+           
+            // Add user's message to chat container
+            chatContainer.innerHTML += `<div class="chat-message user-message">Me: ${userInput}</div>`;
+
+            // Send user's message to ChatGPT API
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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' // Replace with your actual API key
+                },
+                body: JSON.stringify({
+                model: 'gpt-3.5-turbo-0125',
+                messages: [
+                    {
+                        role: 'system',
+                        content: "You are an expert in business analytics, data mining, machine learning, who is also a friendly and helpful instructor. \n Explain the concepts in these fields in a intuitive and easy-to-understand way with at least one example. \n Briefly explain why the concepts are important if the student asks. Your name is EducateUsBot and reply in the style of Marques Brownlee. You are an assistant from EducateUsGPT company to help professor Zhu. The EducateUsGPT's mission or goal is to inspire and cultivate people to learn and improve their knowledge base in various fields, especially in STEM. Do not answer question too long. "
+                    },
+                    // Include chat history in the request
+                    ...chatHistory[chatId],
+                    {
+                        role: 'user',
+                        content: userInput
+                    }
+                ]
+            })
+            });
+            if (!response.ok) {
+                throw new Error('An error occurred in the request to the \'API');
+            }
+        
+            // Display ChatGPT's response
+        const data = await response.json();
+        const botResponse = data.choices[0].message.content;
+        // Check if the response contains code blocks
+        
+        const formattedResponsetemp = formatCode(botResponse);
+        
+        const formattedResponse = formattedResponsetemp.replace(/\n/g, '<br>'); // Preserve line breaks
+        
+        chatContainer.innerHTML += `<div class="chat-message card-text"><strong>EducateUsGPT:</strong> ${formattedResponse}</div>`;
+        
+        // Add user's message to chat history
+        chatHistory[chatId].push({ role: 'user', content: userInput });
+        // Add bot's response to chat history
+        chatHistory[chatId].push({ role: 'assistant', content: botResponse });
+
+        // Clear user input
+        document.getElementById(`user-input-${chatId}`).value = '';
+        // Re-enable input field after sending message
+        document.getElementById(`user-input-${chatId}`).disabled = false;
+        document.getElementById(`user-input-${chatId}`).focus();
+        
+        }
+
+        function formatCode(message) {
+            // Format code blocks
+            message = message.replace(/```([\s\S]+?)```/g, '<pre><code>$1</code></pre>');
+
+            // Format inline code
+            message = message.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            return message;
+        }
+    
+    </script>
+</div>
+</div>
+<p><a href="#ROC-and-AUC">go to top</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

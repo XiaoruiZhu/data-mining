@@ -218,6 +218,12 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
  <span class="menu-text">Logistic regression and classifications</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-3-3-Logit-AUC-ROC.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluation metrics: ROC and AUC</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -255,6 +261,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
   <li><a href="#fit-the-logistic-regression-model" id="toc-fit-the-logistic-regression-model" class="nav-link" data-scroll-target="#fit-the-logistic-regression-model">Fit the logistic regression model</a></li>
   <li><a href="#compare-these-two-models" id="toc-compare-these-two-models" class="nav-link" data-scroll-target="#compare-these-two-models">Compare these two models</a></li>
   <li><a href="#predict-a-loan-application" id="toc-predict-a-loan-application" class="nav-link" data-scroll-target="#predict-a-loan-application">Predict a loan application</a></li>
+  <li><a href="#predict-all-applications-in-training-and-testing-sets" id="toc-predict-all-applications-in-training-and-testing-sets" class="nav-link" data-scroll-target="#predict-all-applications-in-training-and-testing-sets">Predict all applications in training and testing sets</a></li>
   <li><a href="#fitting-performance" id="toc-fitting-performance" class="nav-link" data-scroll-target="#fitting-performance">Fitting performance</a>
   <ul class="collapse">
   <li><a href="#aic-and-bic" id="toc-aic-and-bic" class="nav-link" data-scroll-target="#aic-and-bic">AIC and BIC</a></li>
@@ -268,7 +275,11 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
   <li><a href="#splitting-the-data-into-training-and-testing-sets" id="toc-splitting-the-data-into-training-and-testing-sets" class="nav-link" data-scroll-target="#splitting-the-data-into-training-and-testing-sets">Splitting the data into training and testing sets</a></li>
   <li><a href="#fit-the-logistic-regression-model-1" id="toc-fit-the-logistic-regression-model-1" class="nav-link" data-scroll-target="#fit-the-logistic-regression-model-1">Fit the logistic regression model</a></li>
   <li><a href="#making-predictions" id="toc-making-predictions" class="nav-link" data-scroll-target="#making-predictions">Making predictions</a></li>
-  <li><a href="#evaluating-the-model" id="toc-evaluating-the-model" class="nav-link" data-scroll-target="#evaluating-the-model">Evaluating the model</a></li>
+  <li><a href="#evaluating-the-model" id="toc-evaluating-the-model" class="nav-link" data-scroll-target="#evaluating-the-model">Evaluating the model</a>
+  <ul class="collapse">
+  <li><a href="#accuracy-ratio" id="toc-accuracy-ratio" class="nav-link" data-scroll-target="#accuracy-ratio">Accuracy ratio</a></li>
+  <li><a href="#roc-curve-and-area-under-the-roc-curve-auc-roc" id="toc-roc-curve-and-area-under-the-roc-curve-auc-roc" class="nav-link" data-scroll-target="#roc-curve-and-area-under-the-roc-curve-auc-roc">ROC Curve and area under the ROC curve (AUC-ROC)</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -305,7 +316,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="download-and-import-the-morgage.csv-dataset">Download and import the <a href="examples/Morgage.csv"><code>Morgage.csv</code></a> dataset</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Morgage <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"examples/Morgage.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Morgage <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"examples/Morgage.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -817,6 +828,90 @@ F Statistic
 <p><img src="images/LPM-Logit.png" class="img-fluid"></p>
 <p>As shown in the above figure, the linear probability model can lead to predicted probabilities that are outside the range of 0 to 1 at the extreme ends of the predictor variable values. The predicted probabilities that are negative or greater than 100% are not meaningful and interpretable. So it is more appropriate to use a logistic regression model for the classification of the problems with a binary outcome such that the predicted probability is always within the rage of 0 to 1.</p>
 </section>
+<section id="predict-all-applications-in-training-and-testing-sets" class="level2">
+<h2 class="anchored" data-anchor-id="predict-all-applications-in-training-and-testing-sets">Predict all applications in training and testing sets</h2>
+<p>For the logistic regression models, you can predict the log odds ratio, the probability being 1, or you can have binary predicted outcome of 0 or 1 given a cut-off probability.</p>
+<ol type="1">
+<li>In logistic regression, the <span class="math inline">\(\hat{\eta}\)</span> are called <strong>log odds ratio</strong>, which is <span class="math inline">\(\log(P(y_i=1)/(1-P(y_i=1)))\)</span>. The fitted model <span class="math inline">\(\hat{\eta} = b_0 +b_1 x_1 + b_2 x_2 + ...\)</span> provides the estimated log odds ratio before the inverse of link (such as the logit function in logistic regression). In R, the <code>predict()</code> function is utilized to obtain a vector containing all in-sample <span class="math inline">\(\hat{\eta}\)</span> values for each training observation.</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">predict</span>(Logit_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sec-3-2-Logit_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>To calculate the <strong>predicted probability</strong> <span class="math inline">\(P(y_i=1)\)</span>, you apply the inverse of the link function (in this case, the logit function) to <span class="math inline">\(\hat{\eta}\)</span>. This is expressed by the equation <span class="math inline">\(P(y_i=1) = 1 / (1 + \exp(-\hat{\eta}_i))\)</span>. In R, you can obtain the predicted probability for each training observation using either the <code>fitted()</code> function or <code>predict(, type="response")</code>.</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pred_resp <span class="ot">&lt;-</span> <span class="fu">predict</span>(Logit_mod, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pred_resp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sec-3-2-Logit_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Finally, consider the necessity of a binary classification decision rule. An intuitive rule is to assign the outcome a value of 1 if the estimated probability (<span class="math inline">\(P(y=1)\)</span>) exceeds 0.5. This threshold probability of 0.5 is commonly referred to as the <strong>cut-off probability</strong>. However, it’s crucial to note that you have the flexibility to adjust this cut-off probability according to various factors such as the misclassification rate or the implications of the decision. For instance, one may weigh the cost function, which assesses the balance between the risk of approving a loan for someone unable to repay (predicting 0 when the truth is 1) and the risk of denying a loan to someone who is qualified (predicting 1 when the truth is 0).</li>
+</ol>
+<p>These tables (confusion matrix) below illustrate the impact of choosing different cut-off probabilities. Choosing a large cut-off probability will result in few cases being predicted as 1, and choosing a small cut-off probability will result in many cases being predicted as 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code generates a contingency table comparing the actual values of the response variable 'y' in the Logit_mod dataset </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># with the predicted values obtained from the logistic regression model 'pred_resp'. </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The predicted values are dichotomized using a threshold of 0.5, where any value greater than 0.5 is classified as 1 and any value less than or equal to 0.5 is classified as 0. </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The resulting table displays the counts of observations where the actual value and the predicted value fall into each category.</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Logit_mod<span class="sc">$</span>y, (pred_resp <span class="sc">&gt;</span> <span class="fl">0.5</span>)<span class="sc">*</span><span class="dv">1</span>, <span class="at">dnn=</span><span class="fu">c</span>(<span class="st">"Truth"</span>,<span class="st">"Predicted"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Predicted
+Truth  0  1
+    0 11  2
+    1  2 15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code is similar to the previous one, but it uses a different threshold value of 0.2 to dichotomize the predicted values. </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Consequently, the resulting table provides counts of observations based on a lower threshold for predicting the positive class (1).</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Logit_mod<span class="sc">$</span>y, (pred_resp <span class="sc">&gt;</span> <span class="fl">0.2</span>)<span class="sc">*</span><span class="dv">1</span>, <span class="at">dnn=</span><span class="fu">c</span>(<span class="st">"Truth"</span>,<span class="st">"Predicted"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Predicted
+Truth  0  1
+    0  7  6
+    1  1 16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code again generates a contingency table, but this time using an extremely low threshold value of 0.0001 to dichotomize the predicted values. </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># As a result, almost all predicted values are likely to be classified as 1. </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This table helps to understand the impact of setting an extremely low threshold on the classification of observations.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Logit_mod<span class="sc">$</span>y, (pred_resp <span class="sc">&gt;</span> <span class="fl">0.0001</span>)<span class="sc">*</span><span class="dv">1</span>, <span class="at">dnn=</span><span class="fu">c</span>(<span class="st">"Truth"</span>,<span class="st">"Predicted"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Predicted
+Truth  1
+    0 13
+    1 17</code></pre>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="card bg-light mb-3" style="max-width: 1200px;">
+  <div class="card-header">Ask Educate Us GPT</div>
+  <div class="card-body">
+    <h4 class="card-title anchored">what is the limitation of evaluating confusion matrix of the logistic regression model with only one specific cut-off-probability?</h4>
+    <div class="chat-container" id="chat-container-326">
+        <div id="chat-messages-326"></div>
+        <input type="text" id="user-input-326" class="chat-input" placeholder="Ask your question here ..." value="what is the limitation of evaluating confusion matrix of the logistic regression model with only one specific cut-off-probability?">
+        <button onclick="sendMessage(326)" class="chat-button">Ask</button>
+    </div>
+  </div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>One limitation is that the choice of the cut-off probability can significantly impact the model evaluation metrics such as accuracy, precision, recall, and F1 score. Different cut-off probabilities can lead to different trade-offs between true positive rate and false positive rate, making it challenging to accurately assess the model’s overall performance.</p>
+<p>Practitioners often use Receiver operating characteristic (ROC) curves or precision-recall curves evaluate the model’s performance across various cut-off probabilities and gain a more comprehensive understanding of its predictive power.</p>
+</blockquote>
+</section>
 <section id="fitting-performance" class="level2">
 <h2 class="anchored" data-anchor-id="fitting-performance">Fitting performance</h2>
 <blockquote class="blockquote">
@@ -865,20 +960,20 @@ F Statistic
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AIC() and BIC() function can work with linear models and logistic models.</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"AIC of Linear probability model:"</span>, <span class="fu">AIC</span>(LPM_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AIC() and BIC() function can work with linear models and logistic models.</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"AIC of Linear probability model:"</span>, <span class="fu">AIC</span>(LPM_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>AIC of Linear probability model: 29.86295</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"BIC of Linear probability model:"</span>, <span class="fu">BIC</span>(LPM_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"BIC of Linear probability model:"</span>, <span class="fu">BIC</span>(LPM_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>BIC of Linear probability model: 35.46774</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"AIC of logistic regression model:"</span>, <span class="fu">AIC</span>(Logit_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"AIC of logistic regression model:"</span>, <span class="fu">AIC</span>(Logit_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>AIC of logistic regression model: 27.8346</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"BIC of logistic regression model:"</span>, <span class="fu">BIC</span>(Logit_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"BIC of logistic regression model:"</span>, <span class="fu">BIC</span>(Logit_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>BIC of logistic regression model: 32.03819</code></pre>
 </div>
@@ -897,13 +992,13 @@ F Statistic
 </ul>
 <p>A lower residual deviance indicates a better fit of the model to the data, while a higher residual deviance suggests that the model does not fit the data well.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training set residual deviance</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Logit_mod<span class="sc">$</span>deviance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training set residual deviance</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>Logit_mod<span class="sc">$</span>deviance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 21.8346</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training set mean residual deviance using df </span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>Logit_mod<span class="sc">$</span>deviance<span class="sc">/</span>Logit_mod<span class="sc">$</span>df.residual </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training set mean residual deviance using df </span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>Logit_mod<span class="sc">$</span>deviance<span class="sc">/</span>Logit_mod<span class="sc">$</span>df.residual </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8086888</code></pre>
 </div>
@@ -940,10 +1035,10 @@ F Statistic
 <li><span class="math inline">\({\bar{z}} = \sum_{i=1}^n \hat{z}_i /n\)</span></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Surrogate R-squared of training set</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SurrogateRsq)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">surr_rsq</span>(<span class="at">model =</span> Logit_mod, </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">full_model =</span> Logit_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Surrogate R-squared of training set</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SurrogateRsq)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">surr_rsq</span>(<span class="at">model =</span> Logit_mod, </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">full_model =</span> Logit_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>------------------------------------------------------------------------ 
 The surrogate R-squared of the model 
@@ -951,16 +1046,16 @@ The surrogate R-squared of the model
 y ~ x1 + x2 
 ------------------------------------------------------------------------ 
 is: 
-[1]  0.67086</code></pre>
+[1]  0.6516</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># McFadden's Pseudo R-squared of training set</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(Logit_mod, <span class="at">which =</span> <span class="st">"McFadden"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># McFadden's Pseudo R-squared of training set</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(Logit_mod, <span class="at">which =</span> <span class="st">"McFadden"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> McFadden 
 0.4681481 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># McKelvey and Zavoina's Pseudo R-squared of training set</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(Logit_mod, <span class="at">which =</span> <span class="st">"McKelveyZavoina"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># McKelvey and Zavoina's Pseudo R-squared of training set</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(Logit_mod, <span class="at">which =</span> <span class="st">"McKelveyZavoina"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>McKelveyZavoina 
       0.6481221 </code></pre>
@@ -979,8 +1074,8 @@ is:
 <section id="download-and-import-the-spam.csv-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="download-and-import-the-spam.csv-dataset">Download and import the <a href="examples/Spam.csv"><code>Spam.csv</code></a> dataset</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>Spam <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"examples/Spam.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>Spam <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"examples/Spam.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -4506,9 +4601,9 @@ is:
 <section id="splitting-the-data-into-training-and-testing-sets" class="level2">
 <h2 class="anchored" data-anchor-id="splitting-the-data-into-training-and-testing-sets">Splitting the data into training and testing sets</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sample_index <span class="ot">&lt;-</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sample_index <span class="ot">&lt;-</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="fit-the-logistic-regression-model-1" class="level2">
@@ -4532,60 +4627,67 @@ is:
 <section id="making-predictions" class="level2">
 <h2 class="anchored" data-anchor-id="making-predictions">Making predictions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>train_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Logit_mod, <span class="at">newdata=</span>train, <span class="at">type=</span><span class="st">'response'</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>test_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Logit_mod, <span class="at">newdata=</span>test, <span class="at">type=</span><span class="st">'response'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>train_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Logit_mod, <span class="at">newdata=</span>train, <span class="at">type=</span><span class="st">'response'</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>test_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Logit_mod, <span class="at">newdata=</span>test, <span class="at">type=</span><span class="st">'response'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="evaluating-the-model" class="level2">
 <h2 class="anchored" data-anchor-id="evaluating-the-model">Evaluating the model</h2>
-<div class="cell">
 <div class="cell-output-display">
 <div class="card bg-light mb-3" style="max-width: 1200px;">
   <div class="card-header">Ask Educate Us GPT</div>
   <div class="card-body">
-    <h4 class="card-title anchored">How should I evaluate a logistic regression model?</h4>
-    <div class="chat-container" id="chat-container-125">
-        <div id="chat-messages-125"></div>
-        <input type="text" id="user-input-125" class="chat-input" placeholder="Ask your question here ..." value="How should I evaluate a logistic regression model?">
-        <button onclick="sendMessage(125)" class="chat-button">Ask</button>
+    <h4 class="card-title anchored">What are the popular evaluation metrics of a logistic regression model?</h4>
+    <div class="chat-container" id="chat-container-327">
+        <div id="chat-messages-327"></div>
+        <input type="text" id="user-input-327" class="chat-input" placeholder="Ask your question here ..." value="What are the popular evaluation metrics of a logistic regression model?">
+        <button onclick="sendMessage(327)" class="chat-button">Ask</button>
     </div>
   </div>
 </div>
 </div>
-</div>
+<section id="accuracy-ratio" class="level3">
+<h3 class="anchored" data-anchor-id="accuracy-ratio">Accuracy ratio</h3>
+<p>It measures the proportion of correctly classified instances out of the total instances.</p>
+<p><span class="math display">\[\text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}} \times 100\% \]</span> Based on the confusion matrix we introduced before, the accuracy ratio can be written as: <span class="math display">\[\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \times 100\%\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluating the accuracy</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>train_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((train_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> train<span class="sc">$</span>Spam)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Train_Accuracy:'</span>, train_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluating the accuracy</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>train_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((train_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> train<span class="sc">$</span>Spam)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Train_Accuracy:'</span>, train_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Train_Accuracy: 0.7975"</code></pre>
+<pre><code>[1] "Train_Accuracy: 0.7825"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((test_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> test<span class="sc">$</span>Spam)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Test_Accuracy:'</span>, test_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((test_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> test<span class="sc">$</span>Spam)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Test_Accuracy:'</span>, test_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Test_Accuracy: 0.75"</code></pre>
+<pre><code>[1] "Test_Accuracy: 0.82"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating AUC for training and testing sets</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>train_auc <span class="ot">&lt;-</span> <span class="fu">roc</span>(train<span class="sc">$</span>Spam, train_pred)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>test_auc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>Spam, test_pred)</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>train_auc; test_auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="roc-curve-and-area-under-the-roc-curve-auc-roc" class="level3">
+<h3 class="anchored" data-anchor-id="roc-curve-and-area-under-the-roc-curve-auc-roc">ROC Curve and area under the ROC curve (AUC-ROC)</h3>
+<p>We will thoroughly introduce the ROC and AUC-ROC in a separate tutorial.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating AUC for training and testing sets</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>train_auc <span class="ot">&lt;-</span> <span class="fu">roc</span>(train<span class="sc">$</span>Spam, train_pred)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>test_auc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>Spam, test_pred)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>train_auc; test_auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 roc.default(response = train$Spam, predictor = train_pred)
 
-Data: train_pred in 191 controls (train$Spam 0) &lt; 209 cases (train$Spam 1).
-Area under the curve: 0.8722</code></pre>
+Data: train_pred in 192 controls (train$Spam 0) &lt; 208 cases (train$Spam 1).
+Area under the curve: 0.8689</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 roc.default(response = test$Spam, predictor = test_pred)
 
-Data: test_pred in 51 controls (test$Spam 0) &lt; 49 cases (test$Spam 1).
-Area under the curve: 0.8347</code></pre>
+Data: test_pred in 50 controls (test$Spam 0) &lt; 50 cases (test$Spam 1).
+Area under the curve: 0.8564</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -4595,8 +4697,9 @@ Area under the curve: 0.8347</code></pre>
         // Initialize conversation history for each chat
         const chatHistory = {
             1: [],
-            324: [],
-            325: [],
+            331: [],
+            327: [],
+            326: [],
             324: [],
             325: [],
             101: [],
@@ -4687,6 +4790,7 @@ Area under the curve: 0.8347</code></pre>
 <p><a href="#header">go to top</a></p>
 
 
+</section>
 </section>
 </section>
 

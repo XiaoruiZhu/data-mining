@@ -2,26 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.educateusgpt.org/about.html</loc>
-    <lastmod>2024-03-19T17:54:57.693Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.educateusgpt.org/sec-1-2-examples.html</loc>
-    <lastmod>2024-03-19T17:54:48.924Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.educateusgpt.org/how.html</loc>
-    <lastmod>2024-03-19T17:54:43.899Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.educateusgpt.org/why.html</loc>
-    <lastmod>2024-03-19T17:54:41.951Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.educateusgpt.org/sec-1-1-overview.html</loc>
-    <lastmod>2024-03-19T17:54:45.890Z</lastmod>
+    <lastmod>2024-03-20T04:23:32.709Z</lastmod>
   </url>
   <url>
     <loc>https://www.educateusgpt.org/sec-3-2-Logit.html</loc>
-    <lastmod>2024-03-19T17:54:57.397Z</lastmod>
+    <lastmod>2024-03-20T04:23:26.953Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.educateusgpt.org/sec-1-1-overview.html</loc>
+    <lastmod>2024-03-20T04:23:14.925Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.educateusgpt.org/why.html</loc>
+    <lastmod>2024-03-20T04:23:10.687Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.educateusgpt.org/how.html</loc>
+    <lastmod>2024-03-20T04:23:12.733Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.educateusgpt.org/sec-1-2-examples.html</loc>
+    <lastmod>2024-03-20T04:23:18.015Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.educateusgpt.org/sec-3-3-Logit-AUC-ROC.html</loc>
+    <lastmod>2024-03-20T04:23:32.408Z</lastmod>
   </url>
 </urlset>
