@@ -6,10 +6,10 @@ project:
     - sec-1-1-overview.qmd
     - sec-1-2-examples.qmd
     - sec-3-2-Logit.qmd
+    - sec-3-3-Logit-AUC-ROC.qmd
     # - Ch-2-EDA-vis.qmd
     # - Ch-3-LM.qmd
     # - Ch-3-VarSele.qmd
-    # - Ch-3-Logit.qmd
     - about.qmd
     
 website:
@@ -33,6 +33,7 @@ website:
         contents:
           # - Ch-3-LM.qmd
           - sec-3-2-Logit.qmd
+          - sec-3-3-Logit-AUC-ROC.qmd
           # - Ch-3-VarSele.qmd
       - section: "About"
         contents:

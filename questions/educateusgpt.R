@@ -54,7 +54,7 @@ educateusgpt <- function(id, question) {
   
   # Check if the 5th line is added already, 
   # if the question needs to add is already in the 6th row, then no need to add again
-  if (!(new_line == html_openai[6])) {
+  if (!(new_line %in% html_openai)) {
     html_openai <- c(html_openai[1:5], 
                      new_line, 
                      html_openai[(5 + 1):length(html_openai)])
