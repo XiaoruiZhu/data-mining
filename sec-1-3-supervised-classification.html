@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Mining for Business Analytics - An Overview of Data Mining</title>
+<title>Data Mining for Business Analytics - Supervised: Classification Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -71,11 +105,11 @@ gtag('js', new Date());
 gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Data Mining for Business Analytics - An Overview of Data Mining">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://www.educateusgpt.org/images/digits.jpg">
+<meta property="og:title" content="Data Mining for Business Analytics - Supervised: Classification Models">
 <meta property="og:site-name" content="Data Mining for Business Analytics">
 </head>
 
@@ -88,7 +122,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">1 Overview</a></li><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">An Overview of Data Mining</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">1 Overview</a></li><li class="breadcrumb-item"><a href="./sec-1-3-supervised-classification.html">Supervised: Classification Models</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -156,7 +190,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link active">
+  <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">An Overview of Data Mining</span></a>
   </div>
 </li>
@@ -168,7 +202,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sec-1-3-supervised-classification.html" class="sidebar-item-text sidebar-link">
+  <a href="./sec-1-3-supervised-classification.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Supervised: Classification Models</span></a>
   </div>
 </li>
@@ -236,17 +270,9 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#artificial-intelligence-vs.-machine-learning-vs.-data-mining" id="toc-artificial-intelligence-vs.-machine-learning-vs.-data-mining" class="nav-link active" data-scroll-target="#artificial-intelligence-vs.-machine-learning-vs.-data-mining">Artificial Intelligence vs.&nbsp;Machine Learning vs.&nbsp;Data Mining</a>
+  <li><a href="#header" id="toc-header" class="nav-link active" data-scroll-target="#header">Examples of supervised data mining</a>
   <ul class="collapse">
-  <li><a href="#artificial-intelligence-ai" id="toc-artificial-intelligence-ai" class="nav-link" data-scroll-target="#artificial-intelligence-ai">Artificial Intelligence (AI)</a></li>
-  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine Learning</a></li>
-  <li><a href="#data-mining" id="toc-data-mining" class="nav-link" data-scroll-target="#data-mining">Data Mining</a></li>
-  </ul></li>
-  <li><a href="#data-mining-algorithms" id="toc-data-mining-algorithms" class="nav-link" data-scroll-target="#data-mining-algorithms">Data Mining Algorithms</a>
-  <ul class="collapse">
-  <li><a href="#supervised-data-mining" id="toc-supervised-data-mining" class="nav-link" data-scroll-target="#supervised-data-mining">Supervised data mining</a></li>
-  <li><a href="#unsupervised-data-mining" id="toc-unsupervised-data-mining" class="nav-link" data-scroll-target="#unsupervised-data-mining">Unsupervised data mining</a></li>
-  <li><a href="#skill-sets-for-data-science" id="toc-skill-sets-for-data-science" class="nav-link" data-scroll-target="#skill-sets-for-data-science">Skill sets for Data Science</a></li>
+  <li><a href="#classification-model-response-variable-is-categorical" id="toc-classification-model-response-variable-is-categorical" class="nav-link" data-scroll-target="#classification-model-response-variable-is-categorical">Classification model: response variable is <span style="color:red;"><strong>categorical</strong></span></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -256,7 +282,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">An Overview of Data Mining</h1>
+<h1 class="title">Supervised: Classification Models</h1>
 </div>
 
 
@@ -370,196 +396,132 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
     </script>
 </div>
 </div>
-<section id="artificial-intelligence-vs.-machine-learning-vs.-data-mining" class="level1">
-<h1>Artificial Intelligence vs.&nbsp;Machine Learning vs.&nbsp;Data Mining</h1>
-<p>The terms “<strong>artificial intelligence</strong>”, “<strong>machine learning</strong>”, and “<strong>data mining</strong>” are all used interchangeably. The boundaries between their definitions are ambiguous, with significant overlap. They delineate the uses of computer software to derive insightful solutions that conventional data analysis methods might struggle to attain.</p>
-<section id="artificial-intelligence-ai" class="level2">
-<h2 class="anchored" data-anchor-id="artificial-intelligence-ai">Artificial Intelligence (AI)</h2>
-<p>In a broad context, <strong>artificial intelligence (AI)</strong> refers to computer systems exhibiting human-like intelligence and cognitive capabilities. Examples:</p>
-<ul>
-<li>Deep Blue playing chess (mid-1980s),</li>
-<li>Watson by IBM (2011),</li>
-<li>Alpha Go (2014),</li>
-<li>ChatGPT (2022): designed for generating human-like text responses based on the input it receives. It uses a large-scale deep learning model called GPT (Generative Pre-trained Transformer).</li>
-</ul>
-</section>
-<section id="machine-learning" class="level2">
-<h2 class="anchored" data-anchor-id="machine-learning">Machine Learning</h2>
-<p>Machine learning describes techniques that the machine <span style="color:red;">integrate self-learning algorithms to uncover hidden patterns and relationships in data</span>. The Machine learning techniques are designed to evaluate results and be able to improve its performance over time. Its an application of artificial intelligence</p>
-<p>Examples: Predict rider demand to strategically dispatch drivers for Uber</p>
-<section id="machine-learning-in-different-fields" class="level3">
-<h3 class="anchored" data-anchor-id="machine-learning-in-different-fields">Machine Learning in Different Fields</h3>
-<p>Learning from data is essential in different scientific disciplines</p>
-<ul>
-<li>Predict stock returns in the next six months based on historical data;</li>
-<li>Predict the probability of a loan default based on the customer’s information and historical records;</li>
-<li>Identify certain diseases based on medical image;</li>
-<li>Identify handwritten digits from the image;</li>
-<li>Facial recognition;</li>
-<li>Natural language processing;</li>
-<li>Cluster customers based on their purchase behavior and other information</li>
-</ul>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">Give me a few very important application of Machine Learning?</h4>
-    <div class="chat-container" id="chat-container-103">
-        <div id="chat-messages-103"></div>
-        <input type="text" id="user-input-103" class="chat-input" placeholder="Ask your question here ..." value="Give me a few very important applications of Machine Learning?">
-        <button onclick="sendMessage(103)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-</section>
-<section id="data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="data-mining">Data Mining</h2>
-<p>Data mining entails the application of a range of analytical techniques crucial for the advancement of machine learning and artificial intelligence. It is widely acknowledged as a fundamental component of both fields. Through data mining, hidden patterns and relationships within data are unearthed, enabling the extraction of valuable insights to inform decision-making processes.</p>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">What is Data Mining with real world example?</h4>
-    <div class="chat-container" id="chat-container-101">
-        <div id="chat-messages-101"></div>
-        <input type="text" id="user-input-101" class="chat-input" placeholder="Ask your question here ..." value="What is Data Mining with real world example?">
-        <button onclick="sendMessage(101)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-
-    
-</div>
-<section id="difference-between-data-mining-and-machine-learning" class="level3">
-<h3 class="anchored" data-anchor-id="difference-between-data-mining-and-machine-learning">Difference between Data Mining and Machine Learning</h3>
+<section id="header" class="level1">
+<h1>Examples of supervised data mining</h1>
 <ol type="1">
-<li>Data mining focuses on discovering patterns and relationships in a given data</li>
-<li>Machine learning focuses on training models and predicting future</li>
-<li>A large overlap, but have different focuses</li>
-<li>No need to distinguish them conceptually for our course</li>
-<li>Article: <a href="https://bernardmarr.com/default.asp?contentID=1741">Difference between Data Mining and Machine Learning</a></li>
-</ol>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">Why Data Mining is so important nowadays?</h4>
-    <div class="chat-container" id="chat-container-102">
-        <div id="chat-messages-102"></div>
-        <input type="text" id="user-input-102" class="chat-input" placeholder="Ask your question here ..." value="Why Data Mining is so important nowadays?">
-        <button onclick="sendMessage(102)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="data-mining-algorithms" class="level1">
-<h1>Data Mining Algorithms</h1>
-<p>Two types of techniques depending on the way they learn about data.</p>
+<li>In <strong>supervised</strong> data mining, <span style="color:red;"><strong>the target variable is identified</strong></span></li>
+<li>The goal is to predict or explain certain outcome</li>
+<li>Common applications:
 <ul>
-<li><p><strong>Supervised data mining</strong> techniques are used for developing predictive models.</p></li>
-<li><p><strong>Unsupervised data mining</strong> techniques are effective for data exploration, dimension reduction, and pattern recognition.</p></li>
-<li><p><strong>Semi-supervised learning</strong>: Mixture of both</p></li>
-</ul>
-<p>The key distinction:</p>
-<ul>
-<li>in <strong>supervised</strong> data mining, <span style="color:red;"><strong>the target variable is identified</strong></span>.</li>
-<li>in <strong>unsupervised</strong> data mining, <span style="color:red;"><strong>no target variable is identified</strong></span>.</li>
-</ul>
-<section id="supervised-data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="supervised-data-mining">Supervised data mining</h2>
-<p>Common applications of supervised data mining include prediction models and classification.</p>
-<ol type="1">
-<li>Prediction model: The response variable is <span style="color:red;"><strong>numerical</strong></span>
-<ul>
-<li>Regression method</li>
-<li>e.g., stock return, housing price, temperature, spending of a customer.</li>
+<li>prediction models</li>
+<li>classification models</li>
 </ul></li>
-<li>Classification model: The response variable is <span style="color:red;"><strong>categorical</strong></span>.
+</ol>
+<section id="classification-model-response-variable-is-categorical" class="level2">
+<h2 class="anchored" data-anchor-id="classification-model-response-variable-is-categorical">Classification model: response variable is <span style="color:red;"><strong>categorical</strong></span></h2>
 <ul>
-<li>e.g., {A, B, C}, {dog, cat}, {0, 1}.</li>
-<li>Predict the class memberships of customer.</li>
+<li>generalized linear regression, CART, gradient boosting, neural network, deep learning</li>
+<li>example: problems that has response as {A, B, C}, {dog, cat}, {0, 1}.</li>
 <li>logistic regression model can do the classification.</li>
-</ul></li>
-</ol>
+</ul>
+<section id="example-predicting-binary-purchase-action-using-purchase-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="example-predicting-binary-purchase-action-using-purchase-dataset">Example: Predicting binary purchase action using <a href="examples/Purchase.csv"><code>Purchase</code></a> dataset</h3>
+<p>Suppose we need predict whether a customer will purchase a product based on factors like their age, gender, browsing history, and the time of day they visit the website.</p>
+<section id="splitting-the-data-into-training-and-testing-sets" class="level4">
+<h4 class="anchored" data-anchor-id="splitting-the-data-into-training-and-testing-sets">Splitting the data into training and testing sets</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Purchase <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"examples/Purchase.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># View(Purchase)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sample_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(Purchase),<span class="fu">nrow</span>(Purchase)<span class="sc">*</span><span class="fl">0.80</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> Purchase[sample_index,]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> Purchase[<span class="sc">-</span>sample_index,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fitting-a-logistic-regression-model" class="level4">
+<h4 class="anchored" data-anchor-id="fitting-a-logistic-regression-model">Fitting a logistic regression model</h4>
+<p>The estimated coefficient of a logistic model does not allow us to determine the partial effect of a predictor variable on the probability. It is preferable to interpret logistic regression coefficients in terms of odds rather than probabilities. Odds are defined as the <strong>ratio of the probability of success and the probability of failure</strong>.</p>
+<p>Let <span class="math inline">\(p = p(y = 1)\)</span>, between <span class="math inline">\([0,1]\)</span>.</p>
+<p>Odds = <span class="math inline">\(\frac{p}{1-p}\)</span>, between 0 and infinity.</p>
+<p>After fitted, the odds(logit) can be expressed as <span class="math inline">\(\frac{\hat{p}}{(1-\hat{p})}= \exp(b_0 + b_1 x_1)\)</span>.</p>
+<ul>
+<li>The natural log of the odds (logit) is a linear function. <span class="math inline">\(\log{odds}= b_0 + b_1 x_1\)</span></li>
+<li>So the <span class="math inline">\(b_1\times 100\)</span> is is the approximate percentage change in the odds when the predictor variable increases by one unit.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting a logistic regression model</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(Purchase <span class="sc">~</span> Age <span class="sc">+</span> Browsing_History <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        Gender <span class="sc">+</span> Time_Of_Day, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">data=</span>train, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">family=</span><span class="st">'binomial'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Purchase ~ Age + Browsing_History + Gender + Time_Of_Day, 
+    family = "binomial", data = train)
+
+Coefficients:
+                    Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)        -2.455345   0.349856  -7.018 2.25e-12 ***
+Age                 0.039224   0.007023   5.585 2.34e-08 ***
+Browsing_History    2.055102   0.170595  12.047  &lt; 2e-16 ***
+GenderMale          0.107295   0.163755   0.655  0.51233    
+Time_Of_DayEvening  0.562403   0.207128   2.715  0.00662 ** 
+Time_Of_DayMorning -0.197684   0.191721  -1.031  0.30249    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1101.80  on 799  degrees of freedom
+Residual deviance:  893.15  on 794  degrees of freedom
+AIC: 905.15
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</section>
+<section id="making-predictions" class="level4">
+<h4 class="anchored" data-anchor-id="making-predictions">Making predictions</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>train_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata=</span>train, <span class="at">type=</span><span class="st">'response'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>test_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata=</span>test, <span class="at">type=</span><span class="st">'response'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What about purchase probability of a female, 35-year-old customer who has browsed the product in the evening?</p>
+</section>
+<section id="evaluating-the-model" class="level4">
+<h4 class="anchored" data-anchor-id="evaluating-the-model">Evaluating the model</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div class="card bg-light mb-3" style="max-width: 1200px;">
   <div class="card-header">Ask Educate Us GPT</div>
   <div class="card-body">
-    <h4 class="card-title anchored">Give me an example of logistic regression model?</h4>
-    <div class="chat-container" id="chat-container-104">
-        <div id="chat-messages-104"></div>
-        <input type="text" id="user-input-104" class="chat-input" placeholder="Ask your question here ..." value="Give me an example of logistic regression model?">
-        <button onclick="sendMessage(104)" class="chat-button">Ask</button>
+    <h4 class="card-title anchored">How should I evaluate a logistic regression model?</h4>
+    <div class="chat-container" id="chat-container-125">
+        <div id="chat-messages-125"></div>
+        <input type="text" id="user-input-125" class="chat-input" placeholder="Ask your question here ..." value="How should I evaluate a logistic regression model?">
+        <button onclick="sendMessage(125)" class="chat-button">Ask</button>
     </div>
   </div>
 </div>
 </div>
 </div>
-<section id="an-example-neural-networks-for-identifying-digits" class="level3">
-<h3 class="anchored" data-anchor-id="an-example-neural-networks-for-identifying-digits">An example: Neural Networks for identifying digits</h3>
-<p>How to recognize these handwritten digits?</p>
-<p><img src="images/digits.jpg" class="img-fluid"></p>
-<p>The neural networks is one of the models that can identify digits.</p>
-<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*FLD5PNYJgWknPvJQ.gif#center" class="img-fluid"></p>
-<p>Here is an intuitive and complete explanation with animation for identifying digits using neural networks: <a href="https://www.3blue1brown.com/lessons/neural-networks">What is neural networks</a>.</p>
-</section>
-</section>
-<section id="unsupervised-data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="unsupervised-data-mining">Unsupervised data mining</h2>
-<p>The algorithms allow the computer to identify patterns and relationships in the data without any specific guidance from the analyst.</p>
-<ul>
-<li>Subjective, no simple goal such as prediction</li>
-<li>Common applications: <strong>dimension reduction</strong> and <strong>pattern recognition</strong></li>
-<li>Other Examples: Recommendation systems, clustering, principle component analysis (PCA), association rules</li>
-</ul>
-<p><img src="images/clustering.png" class="img-fluid"></p>
-<section id="dimension-reduction" class="level3">
-<h3 class="anchored" data-anchor-id="dimension-reduction">Dimension reduction</h3>
-<ul>
-<li>Attempt: converts a set of high-dimensional data (large number of variables) into data with lesser dimensions without losing much of the information.</li>
-<li>Why: Reduce information redundancy, improve model stability.</li>
-<li>When: Deploy before other data mining methods.</li>
-<li>When: Relevant for big data to bring out important patterns and build more stable models.</li>
-<li>Example: principle component analysis (PCA): reduce the dimensionality of data while preserving most of the variability present in the dataset.</li>
-</ul>
-</section>
-<section id="pattern-recognition" class="level3">
-<h3 class="anchored" data-anchor-id="pattern-recognition">Pattern recognition</h3>
-<ul>
-<li>Attempt: recognizing patterns using machine learning.</li>
-<li>Examples: Recurring sequences, Frequent combinations, Recognizable features, Common characteristics.</li>
-</ul>
-</section>
-<section id="clustering" class="level3">
-<h3 class="anchored" data-anchor-id="clustering">Clustering</h3>
-<ol type="1">
-<li><p>K-Means Clustering: This is a popular clustering algorithm that partitions data into k clusters based on the mean distance between data points and cluster centers. It aims to minimize the intra-cluster variance and is efficient for large datasets.</p></li>
-<li><p>Hierarchical Clustering: This method creates a hierarchy of clusters by either starting with each data point as a single cluster (agglomerative) or starting with all data points in one cluster and recursively splitting them (divisive). It does not require specifying the number of clusters beforehand.</p></li>
-<li><p>Gaussian Mixture Models (GMM): GMM assumes that the data is generated from a mixture of several Gaussian distributions and assigns probabilities to data points belonging to each cluster. It is suitable for data with complex multivariate distributions.</p></li>
-</ol>
-</section>
-<section id="association-rules" class="level3">
-<h3 class="anchored" data-anchor-id="association-rules">Association rules</h3>
-<p>Essentially, association rules reveal how items or attributes are related to each other, based on their co-occurrence or association in transactions or records.</p>
-<p>For example, in a retail dataset, association rules can help identify patterns like “If a customer buys product A, they are likely to buy product B as well.” This information can be used for market basket analysis, recommendations, and decision-making in various domains.</p>
-</section>
-</section>
-<section id="skill-sets-for-data-science" class="level2">
-<h2 class="anchored" data-anchor-id="skill-sets-for-data-science">Skill sets for Data Science</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="http://2.bp.blogspot.com/-Qi-0utjhySM/UsteLrV6NyI/AAAAAAAACNQ/AdkizQfS8l8/s1600/moz-screenshot-3-729576.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Data Science Venn Diagram by Steve Geringer</figcaption>
-</figure>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluating the accuracy</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>train_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((train_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> train<span class="sc">$</span>Purchase)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Train_Accuracy:'</span>, train_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Train_Accuracy: 0.71625"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((test_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> test<span class="sc">$</span>Purchase)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Test_Accuracy:'</span>, test_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Test_Accuracy: 0.68"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating AUC for training and testing sets</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>train_auc <span class="ot">&lt;-</span> <span class="fu">roc</span>(train<span class="sc">$</span>Purchase, train_pred)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>test_auc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>Purchase, test_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#header">go to top</a></p>
 
 
+</section>
+</section>
 </section>
 </section>
 

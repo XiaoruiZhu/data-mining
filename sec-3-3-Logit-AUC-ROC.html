@@ -124,7 +124,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-3-2-Logit.html">3 Supervised Data Mining</a></li><li class="breadcrumb-item"><a href="./sec-3-3-Logit-AUC-ROC.html">Evaluation metrics: ROC and AUC</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-3-2-Logit.html">3 Classification: Logistic regression</a></li><li class="breadcrumb-item"><a href="./sec-3-3-Logit-AUC-ROC.html">Evaluation metrics: ROC and AUC</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -170,7 +170,13 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./how.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">How to use this website</span></a>
+ <span class="menu-text">How to use EducateUs GPT</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how-datacamp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to use interactive coding</span></a>
   </div>
 </li>
       </ul>
@@ -178,7 +184,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">1 Data Mining</span></a>
+ <span class="menu-text">1 Overview</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -187,13 +193,25 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Mining Overview</span></a>
+ <span class="menu-text">An Overview of Data Mining</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sec-1-2-examples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Examples of Data Mining Algorithms</span></a>
+  <a href="./sec-1-2-supervised-prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised: Prediction Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-1-3-supervised-classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised: Classification Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-1-4-unsupervised.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised: Clustering Analysis</span></a>
   </div>
 </li>
       </ul>
@@ -201,7 +219,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">3 Supervised Data Mining</span></a>
+ <span class="menu-text">3 Classification: Logistic regression</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -217,6 +235,12 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="./sec-3-3-Logit-AUC-ROC.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Evaluation metrics: ROC and AUC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-3-4-Logit-VarSele.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variable selection for logistic regression</span></a>
   </div>
 </li>
       </ul>
@@ -247,7 +271,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
+  <ul class="collapse">
   <li><a href="#logistic-regression-and-roc" id="toc-logistic-regression-and-roc" class="nav-link active" data-scroll-target="#logistic-regression-and-roc">Logistic regression and ROC</a>
   <ul class="collapse">
   <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve">ROC Curve</a></li>
@@ -382,43 +406,43 @@ glm(formula = default ~ ., family = binomial, data = credit_train)
 
 Coefficients:
               Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -1.011e+00  1.550e-01  -6.523 6.88e-11 ***
-LIMIT_BAL   -7.879e-07  2.832e-07  -2.782 0.005401 ** 
-SEX2        -1.463e-01  5.484e-02  -2.668 0.007626 ** 
-EDUCATION2  -1.151e-01  6.360e-02  -1.810 0.070278 .  
-EDUCATION3  -1.632e-01  8.570e-02  -1.904 0.056932 .  
-EDUCATION4  -1.249e+00  3.339e-01  -3.741 0.000183 ***
-MARRIAGE2   -1.717e-01  6.204e-02  -2.768 0.005641 ** 
-MARRIAGE3   -1.594e-01  2.407e-01  -0.662 0.507863    
-AGE          6.590e-03  3.353e-03   1.965 0.049384 *  
-PAY_0        5.611e-01  3.144e-02  17.845  &lt; 2e-16 ***
-PAY_2        1.102e-01  3.615e-02   3.049 0.002297 ** 
-PAY_3        7.462e-02  4.019e-02   1.857 0.063365 .  
-PAY_4        1.699e-02  4.468e-02   0.380 0.703720    
-PAY_5        6.100e-02  4.779e-02   1.276 0.201786    
-PAY_6        1.042e-02  3.983e-02   0.262 0.793632    
-BILL_AMT1   -6.046e-06  2.118e-06  -2.854 0.004311 ** 
-BILL_AMT2    6.059e-06  2.587e-06   2.342 0.019183 *  
-BILL_AMT3   -2.576e-06  2.252e-06  -1.144 0.252710    
-BILL_AMT4   -3.535e-06  2.640e-06  -1.339 0.180710    
-BILL_AMT5    3.028e-06  3.084e-06   0.982 0.326287    
-BILL_AMT6    1.782e-06  2.377e-06   0.750 0.453345    
-PAY_AMT1    -1.035e-05  3.666e-06  -2.824 0.004748 ** 
-PAY_AMT2    -5.502e-06  3.430e-06  -1.604 0.108724    
-PAY_AMT3    -2.102e-06  2.996e-06  -0.702 0.482882    
-PAY_AMT4    -3.971e-06  3.072e-06  -1.293 0.196051    
-PAY_AMT5    -2.846e-06  3.125e-06  -0.911 0.362536    
-PAY_AMT6    -4.978e-06  2.511e-06  -1.982 0.047476 *  
+(Intercept) -9.368e-01  1.544e-01  -6.066 1.31e-09 ***
+LIMIT_BAL   -1.031e-06  2.867e-07  -3.597 0.000322 ***
+SEX2        -1.809e-01  5.465e-02  -3.311 0.000931 ***
+EDUCATION2  -1.329e-01  6.362e-02  -2.088 0.036766 *  
+EDUCATION3  -1.727e-01  8.541e-02  -2.022 0.043202 *  
+EDUCATION4  -8.247e-01  2.943e-01  -2.802 0.005072 ** 
+MARRIAGE2   -1.955e-01  6.186e-02  -3.161 0.001573 ** 
+MARRIAGE3   -2.520e-02  2.343e-01  -0.108 0.914372    
+AGE          5.725e-03  3.322e-03   1.723 0.084863 .  
+PAY_0        5.920e-01  3.161e-02  18.728  &lt; 2e-16 ***
+PAY_2        9.981e-02  3.601e-02   2.772 0.005569 ** 
+PAY_3        1.730e-02  4.064e-02   0.426 0.670451    
+PAY_4        3.685e-02  4.533e-02   0.813 0.416250    
+PAY_5        4.628e-02  4.786e-02   0.967 0.333546    
+PAY_6        1.886e-02  3.964e-02   0.476 0.634260    
+BILL_AMT1   -5.945e-06  2.069e-06  -2.873 0.004065 ** 
+BILL_AMT2    3.501e-06  2.682e-06   1.306 0.191654    
+BILL_AMT3    2.121e-06  2.198e-06   0.965 0.334477    
+BILL_AMT4   -3.111e-06  2.336e-06  -1.332 0.182973    
+BILL_AMT5    2.159e-06  2.764e-06   0.781 0.434888    
+BILL_AMT6    4.764e-07  2.215e-06   0.215 0.829689    
+PAY_AMT1    -1.039e-05  3.545e-06  -2.933 0.003362 ** 
+PAY_AMT2    -8.780e-06  3.455e-06  -2.541 0.011040 *  
+PAY_AMT3    -1.549e-06  3.035e-06  -0.510 0.609709    
+PAY_AMT4    -2.109e-06  2.758e-06  -0.765 0.444457    
+PAY_AMT5    -1.380e-06  2.985e-06  -0.462 0.643938    
+PAY_AMT6    -2.831e-06  2.247e-06  -1.260 0.207565    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 10060.6  on 9599  degrees of freedom
-Residual deviance:  8770.4  on 9573  degrees of freedom
-AIC: 8824.4
+    Null deviance: 10050.4  on 9599  degrees of freedom
+Residual deviance:  8805.5  on 9573  degrees of freedom
+AIC: 8859.5
 
-Number of Fisher Scoring iterations: 6</code></pre>
+Number of Fisher Scoring iterations: 5</code></pre>
 </div>
 </div>
 <p>You have seen <code>glm()</code> before. In this lab, this is the main function used to build logistic regression model because it is a member of generalized linear model. In <code>glm()</code>, the only thing new is <code>family</code>. It specifies the distribution of your response variable. You may also specify the link function after the name of distribution, for example, <code>family=binomial(logit)</code> (default link is logit). You can also specify <code>family=binomial(link = "probit")</code> to run probit regression. You may also use <code>glm()</code> to build many other generalized linear models.</p>
@@ -448,16 +472,16 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># and "x.values" specifies the TPR values.</span></span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(perf_train, <span class="st">"x.values"</span>)[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.0000000000 0.0000000000 0.0001331558 0.0002663116 0.0003994674
- [6] 0.0003994674 0.0005326232 0.0005326232 0.0005326232 0.0005326232</code></pre>
+<pre><code> [1] 0.0000000000 0.0000000000 0.0001330849 0.0002661698 0.0003992547
+ [6] 0.0005323396 0.0005323396 0.0006654245 0.0006654245 0.0006654245</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieves the values of the False Positive Rate (FPR) thresholds from the 'perf_train' object</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to the previous line, 'attr()' function is used to access the attributes</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the performance object, and "alpha.values" specifies the FPR values.</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(perf_train, <span class="st">"alpha.values"</span>)[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]       Inf 0.9935758 0.9935684 0.9924404 0.9922434 0.9907627 0.9852759
- [8] 0.9778936 0.9756481 0.9618603</code></pre>
+<pre><code> [1]       Inf 0.9944007 0.9928145 0.9915584 0.9913313 0.9912118 0.9896657
+ [8] 0.9844129 0.9779095 0.9765546</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This line of code generates a plot of the ROC curve using the performance object 'perf_train'. </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The 'colorize=TRUE' argument adds color to the plot for better visualization.</span></span>
@@ -475,7 +499,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The 'unlist()' function is used to convert the AUC value from a list to a numeric vector.</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">slot</span>(<span class="fu">performance</span>(pred_obj_train, <span class="st">"auc"</span>), <span class="st">"y.values"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7330443</code></pre>
+<pre><code>[1] 0.7293219</code></pre>
 </div>
 </div>
 <p>Be careful that the function <code>prediction()</code> is different from <code>predict()</code>. It is in the Package <code>ROCR</code> and is particularly used for preparing for the ROC curve. Recall from our lecture that this function essentially calculates many confusion matrices with different cut-off probabilities. Therefore, it requires two vectors as inputs: <strong>predicted probability</strong> and <strong>observed response (0/1)</strong>.</p>
@@ -515,7 +539,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it into a numeric value.</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">slot</span>(<span class="fu">performance</span>(pred_obj_test, <span class="st">"auc"</span>), <span class="st">"y.values"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7122963</code></pre>
+<pre><code>[1] 0.7257193</code></pre>
 </div>
 </div>
 </section>
@@ -551,7 +575,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>roc <span class="ot">&lt;-</span> <span class="fu">roc.curve</span>(score1_train, score0_train, <span class="at">curve =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>roc<span class="sc">$</span>auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7330443</code></pre>
+<pre><code>[1] 0.7293219</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating precision-recall curve for in-sample prediction.</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">pr.curve</span>(score1_train, score0_train, <span class="at">curve =</span> <span class="cn">TRUE</span>)</span>
@@ -561,12 +585,12 @@ Number of Fisher Scoring iterations: 6</code></pre>
   Precision-recall curve
 
     Area under curve (Integral):
-     0.5079389 
+     0.5090108 
 
     Area under curve (Davis &amp; Goadrich):
-     0.5079316 
+     0.5090047 
 
-    Curve for scores from  1.352668e-06  to  0.9935758 
+    Curve for scores from  0.0001226287  to  0.9944007 
     ( can be plotted with plot(x) )</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the precision-recall curve for in-sample prediction.</span></span>
@@ -581,7 +605,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>roc_test <span class="ot">&lt;-</span> <span class="fu">roc.curve</span>(score1_test, score0_test, <span class="at">curve =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>roc_test<span class="sc">$</span>auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7122963</code></pre>
+<pre><code>[1] 0.7257193</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating precision-recall curve for out-of-sample prediction.</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pr_test <span class="ot">&lt;-</span> <span class="fu">pr.curve</span>(score1_test, score0_test, <span class="at">curve =</span> <span class="cn">TRUE</span>)</span>
@@ -591,12 +615,12 @@ Number of Fisher Scoring iterations: 6</code></pre>
   Precision-recall curve
 
     Area under curve (Integral):
-     0.5191342 
+     0.5119394 
 
     Area under curve (Davis &amp; Goadrich):
-     0.5191149 
+     0.5119288 
 
-    Curve for scores from  8.063677e-05  to  0.9946733 
+    Curve for scores from  7.989059e-08  to  0.993051 
     ( can be plotted with plot(x) )</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the precision-recall curve for out-of-sample prediction.</span></span>
@@ -626,6 +650,8 @@ Number of Fisher Scoring iterations: 6</code></pre>
         // Initialize conversation history for each chat
         const chatHistory = {
             1: [],
+            342: [],
+            341: [],
             331: [],
             327: [],
             326: [],
@@ -716,13 +742,12 @@ Number of Fisher Scoring iterations: 6</code></pre>
     </script>
 </div>
 </div>
-<p><a href="#ROC-and-AUC">go to top</a></p>
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

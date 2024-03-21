@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Mining for Business Analytics - An Overview of Data Mining</title>
+<title>Data Mining for Business Analytics - Unsupervised: Clustering Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,10 +107,12 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Data Mining for Business Analytics - An Overview of Data Mining">
+<meta property="og:title" content="Data Mining for Business Analytics - Unsupervised: Clustering Analysis">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://www.educateusgpt.org/images/digits.jpg">
+<meta property="og:image" content="https://www.educateusgpt.org/images/flower.png">
 <meta property="og:site-name" content="Data Mining for Business Analytics">
+<meta property="og:image:height" content="156">
+<meta property="og:image:width" content="557">
 </head>
 
 <body class="nav-sidebar docked">
@@ -88,7 +124,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">1 Overview</a></li><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">An Overview of Data Mining</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">1 Overview</a></li><li class="breadcrumb-item"><a href="./sec-1-4-unsupervised.html">Unsupervised: Clustering Analysis</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -156,7 +192,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link active">
+  <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">An Overview of Data Mining</span></a>
   </div>
 </li>
@@ -174,7 +210,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sec-1-4-unsupervised.html" class="sidebar-item-text sidebar-link">
+  <a href="./sec-1-4-unsupervised.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Unsupervised: Clustering Analysis</span></a>
   </div>
 </li>
@@ -236,17 +272,9 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#artificial-intelligence-vs.-machine-learning-vs.-data-mining" id="toc-artificial-intelligence-vs.-machine-learning-vs.-data-mining" class="nav-link active" data-scroll-target="#artificial-intelligence-vs.-machine-learning-vs.-data-mining">Artificial Intelligence vs.&nbsp;Machine Learning vs.&nbsp;Data Mining</a>
+  <li><a href="#unsupervised-data-mining-clustering-techniques" id="toc-unsupervised-data-mining-clustering-techniques" class="nav-link active" data-scroll-target="#unsupervised-data-mining-clustering-techniques">Unsupervised data mining: Clustering techniques</a>
   <ul class="collapse">
-  <li><a href="#artificial-intelligence-ai" id="toc-artificial-intelligence-ai" class="nav-link" data-scroll-target="#artificial-intelligence-ai">Artificial Intelligence (AI)</a></li>
-  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine Learning</a></li>
-  <li><a href="#data-mining" id="toc-data-mining" class="nav-link" data-scroll-target="#data-mining">Data Mining</a></li>
-  </ul></li>
-  <li><a href="#data-mining-algorithms" id="toc-data-mining-algorithms" class="nav-link" data-scroll-target="#data-mining-algorithms">Data Mining Algorithms</a>
-  <ul class="collapse">
-  <li><a href="#supervised-data-mining" id="toc-supervised-data-mining" class="nav-link" data-scroll-target="#supervised-data-mining">Supervised data mining</a></li>
-  <li><a href="#unsupervised-data-mining" id="toc-unsupervised-data-mining" class="nav-link" data-scroll-target="#unsupervised-data-mining">Unsupervised data mining</a></li>
-  <li><a href="#skill-sets-for-data-science" id="toc-skill-sets-for-data-science" class="nav-link" data-scroll-target="#skill-sets-for-data-science">Skill sets for Data Science</a></li>
+  <li><a href="#application-clustering-iris-flowers-in-iris-dataset" id="toc-application-clustering-iris-flowers-in-iris-dataset" class="nav-link" data-scroll-target="#application-clustering-iris-flowers-in-iris-dataset">Application: Clustering Iris flowers in <code>Iris</code> dataset</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -256,7 +284,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">An Overview of Data Mining</h1>
+<h1 class="title">Unsupervised: Clustering Analysis</h1>
 </div>
 
 
@@ -370,194 +398,127 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
     </script>
 </div>
 </div>
-<section id="artificial-intelligence-vs.-machine-learning-vs.-data-mining" class="level1">
-<h1>Artificial Intelligence vs.&nbsp;Machine Learning vs.&nbsp;Data Mining</h1>
-<p>The terms “<strong>artificial intelligence</strong>”, “<strong>machine learning</strong>”, and “<strong>data mining</strong>” are all used interchangeably. The boundaries between their definitions are ambiguous, with significant overlap. They delineate the uses of computer software to derive insightful solutions that conventional data analysis methods might struggle to attain.</p>
-<section id="artificial-intelligence-ai" class="level2">
-<h2 class="anchored" data-anchor-id="artificial-intelligence-ai">Artificial Intelligence (AI)</h2>
-<p>In a broad context, <strong>artificial intelligence (AI)</strong> refers to computer systems exhibiting human-like intelligence and cognitive capabilities. Examples:</p>
+<section id="unsupervised-data-mining-clustering-techniques" class="level1">
+<h1>Unsupervised data mining: Clustering techniques</h1>
+<p><strong>K-Means Clustering</strong>: This is a popular clustering algorithm that partitions data into k clusters based on the mean distance between data points and cluster centers. It aims to minimize the intra-cluster variance and is efficient for large datasets.</p>
+<section id="application-clustering-iris-flowers-in-iris-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="application-clustering-iris-flowers-in-iris-dataset">Application: Clustering Iris flowers in <code>Iris</code> dataset</h2>
+<p>Let’s first load the <strong>Iris</strong> dataset. This is a very famous dataset in almost all data mining, machine learning courses, and it has been an R build-in dataset. The dataset consists of 50 samples from each of three species of Iris flowers (Iris setosa, Iris virginicaand Iris versicolor). Four features(variables) were measured from each sample, they are the <strong>length</strong> and the <strong>width</strong> of sepal and petal, in centimeters. It is introduced by Sir Ronald Fisher in 1936 with 3 Iris Species.</p>
+<p><img src="images/flower.png" class="img-fluid"></p>
 <ul>
-<li>Deep Blue playing chess (mid-1980s),</li>
-<li>Watson by IBM (2011),</li>
-<li>Alpha Go (2014),</li>
-<li>ChatGPT (2022): designed for generating human-like text responses based on the input it receives. It uses a large-scale deep learning model called GPT (Generative Pre-trained Transformer).</li>
+<li>Four features of flower: <strong>length</strong> and the <strong>width</strong> of sepal and petal</li>
 </ul>
-</section>
-<section id="machine-learning" class="level2">
-<h2 class="anchored" data-anchor-id="machine-learning">Machine Learning</h2>
-<p>Machine learning describes techniques that the machine <span style="color:red;">integrate self-learning algorithms to uncover hidden patterns and relationships in data</span>. The Machine learning techniques are designed to evaluate results and be able to improve its performance over time. Its an application of artificial intelligence</p>
-<p>Examples: Predict rider demand to strategically dispatch drivers for Uber</p>
-<section id="machine-learning-in-different-fields" class="level3">
-<h3 class="anchored" data-anchor-id="machine-learning-in-different-fields">Machine Learning in Different Fields</h3>
-<p>Learning from data is essential in different scientific disciplines</p>
-<ul>
-<li>Predict stock returns in the next six months based on historical data;</li>
-<li>Predict the probability of a loan default based on the customer’s information and historical records;</li>
-<li>Identify certain diseases based on medical image;</li>
-<li>Identify handwritten digits from the image;</li>
-<li>Facial recognition;</li>
-<li>Natural language processing;</li>
-<li>Cluster customers based on their purchase behavior and other information</li>
-</ul>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">Give me a few very important application of Machine Learning?</h4>
-    <div class="chat-container" id="chat-container-103">
-        <div id="chat-messages-103"></div>
-        <input type="text" id="user-input-103" class="chat-input" placeholder="Ask your question here ..." value="Give me a few very important applications of Machine Learning?">
-        <button onclick="sendMessage(103)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-</section>
-<section id="data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="data-mining">Data Mining</h2>
-<p>Data mining entails the application of a range of analytical techniques crucial for the advancement of machine learning and artificial intelligence. It is widely acknowledged as a fundamental component of both fields. Through data mining, hidden patterns and relationships within data are unearthed, enabling the extraction of valuable insights to inform decision-making processes.</p>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">What is Data Mining with real world example?</h4>
-    <div class="chat-container" id="chat-container-101">
-        <div id="chat-messages-101"></div>
-        <input type="text" id="user-input-101" class="chat-input" placeholder="Ask your question here ..." value="What is Data Mining with real world example?">
-        <button onclick="sendMessage(101)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-
-    
-</div>
-<section id="difference-between-data-mining-and-machine-learning" class="level3">
-<h3 class="anchored" data-anchor-id="difference-between-data-mining-and-machine-learning">Difference between Data Mining and Machine Learning</h3>
-<ol type="1">
-<li>Data mining focuses on discovering patterns and relationships in a given data</li>
-<li>Machine learning focuses on training models and predicting future</li>
-<li>A large overlap, but have different focuses</li>
-<li>No need to distinguish them conceptually for our course</li>
-<li>Article: <a href="https://bernardmarr.com/default.asp?contentID=1741">Difference between Data Mining and Machine Learning</a></li>
-</ol>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">Why Data Mining is so important nowadays?</h4>
-    <div class="chat-container" id="chat-container-102">
-        <div id="chat-messages-102"></div>
-        <input type="text" id="user-input-102" class="chat-input" placeholder="Ask your question here ..." value="Why Data Mining is so important nowadays?">
-        <button onclick="sendMessage(102)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="data-mining-algorithms" class="level1">
-<h1>Data Mining Algorithms</h1>
-<p>Two types of techniques depending on the way they learn about data.</p>
-<ul>
-<li><p><strong>Supervised data mining</strong> techniques are used for developing predictive models.</p></li>
-<li><p><strong>Unsupervised data mining</strong> techniques are effective for data exploration, dimension reduction, and pattern recognition.</p></li>
-<li><p><strong>Semi-supervised learning</strong>: Mixture of both</p></li>
-</ul>
-<p>The key distinction:</p>
-<ul>
-<li>in <strong>supervised</strong> data mining, <span style="color:red;"><strong>the target variable is identified</strong></span>.</li>
-<li>in <strong>unsupervised</strong> data mining, <span style="color:red;"><strong>no target variable is identified</strong></span>.</li>
-</ul>
-<section id="supervised-data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="supervised-data-mining">Supervised data mining</h2>
-<p>Common applications of supervised data mining include prediction models and classification.</p>
-<ol type="1">
-<li>Prediction model: The response variable is <span style="color:red;"><strong>numerical</strong></span>
-<ul>
-<li>Regression method</li>
-<li>e.g., stock return, housing price, temperature, spending of a customer.</li>
-</ul></li>
-<li>Classification model: The response variable is <span style="color:red;"><strong>categorical</strong></span>.
-<ul>
-<li>e.g., {A, B, C}, {dog, cat}, {0, 1}.</li>
-<li>Predict the class memberships of customer.</li>
-<li>logistic regression model can do the classification.</li>
-</ul></li>
-</ol>
+<p><img src="images/parts.png" class="img-fluid"></p>
+<p>The <em>iris</em> flower data set is included in R. It is a data frame with 150 cases (rows) and 5 variables (columns) named Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, and Species.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="card bg-light mb-3" style="max-width: 1200px;">
   <div class="card-header">Ask Educate Us GPT</div>
   <div class="card-body">
-    <h4 class="card-title anchored">Give me an example of logistic regression model?</h4>
-    <div class="chat-container" id="chat-container-104">
-        <div id="chat-messages-104"></div>
-        <input type="text" id="user-input-104" class="chat-input" placeholder="Ask your question here ..." value="Give me an example of logistic regression model?">
-        <button onclick="sendMessage(104)" class="chat-button">Ask</button>
+    <h4 class="card-title anchored">Why do we apply clustering analysis to the Iris dataset?</h4>
+    <div class="chat-container" id="chat-container-124">
+        <div id="chat-messages-124"></div>
+        <input type="text" id="user-input-124" class="chat-input" placeholder="Ask your question here ..." value="Why do we apply clustering analysis to the Iris dataset?">
+        <button onclick="sendMessage(124)" class="chat-button">Ask</button>
     </div>
   </div>
 </div>
 </div>
 </div>
-<section id="an-example-neural-networks-for-identifying-digits" class="level3">
-<h3 class="anchored" data-anchor-id="an-example-neural-networks-for-identifying-digits">An example: Neural Networks for identifying digits</h3>
-<p>How to recognize these handwritten digits?</p>
-<p><img src="images/digits.jpg" class="img-fluid"></p>
-<p>The neural networks is one of the models that can identify digits.</p>
-<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*FLD5PNYJgWknPvJQ.gif#center" class="img-fluid"></p>
-<p>Here is an intuitive and complete explanation with animation for identifying digits using neural networks: <a href="https://www.3blue1brown.com/lessons/neural-networks">What is neural networks</a>.</p>
-</section>
-</section>
-<section id="unsupervised-data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="unsupervised-data-mining">Unsupervised data mining</h2>
-<p>The algorithms allow the computer to identify patterns and relationships in the data without any specific guidance from the analyst.</p>
-<ul>
-<li>Subjective, no simple goal such as prediction</li>
-<li>Common applications: <strong>dimension reduction</strong> and <strong>pattern recognition</strong></li>
-<li>Other Examples: Recommendation systems, clustering, principle component analysis (PCA), association rules</li>
-</ul>
-<p><img src="images/clustering.png" class="img-fluid"></p>
-<section id="dimension-reduction" class="level3">
-<h3 class="anchored" data-anchor-id="dimension-reduction">Dimension reduction</h3>
-<ul>
-<li>Attempt: converts a set of high-dimensional data (large number of variables) into data with lesser dimensions without losing much of the information.</li>
-<li>Why: Reduce information redundancy, improve model stability.</li>
-<li>When: Deploy before other data mining methods.</li>
-<li>When: Relevant for big data to bring out important patterns and build more stable models.</li>
-<li>Example: principle component analysis (PCA): reduce the dimensionality of data while preserving most of the variability present in the dataset.</li>
-</ul>
-</section>
-<section id="pattern-recognition" class="level3">
-<h3 class="anchored" data-anchor-id="pattern-recognition">Pattern recognition</h3>
-<ul>
-<li>Attempt: recognizing patterns using machine learning.</li>
-<li>Examples: Recurring sequences, Frequent combinations, Recognizable features, Common characteristics.</li>
-</ul>
-</section>
-<section id="clustering" class="level3">
-<h3 class="anchored" data-anchor-id="clustering">Clustering</h3>
-<ol type="1">
-<li><p>K-Means Clustering: This is a popular clustering algorithm that partitions data into k clusters based on the mean distance between data points and cluster centers. It aims to minimize the intra-cluster variance and is efficient for large datasets.</p></li>
-<li><p>Hierarchical Clustering: This method creates a hierarchy of clusters by either starting with each data point as a single cluster (agglomerative) or starting with all data points in one cluster and recursively splitting them (divisive). It does not require specifying the number of clusters beforehand.</p></li>
-<li><p>Gaussian Mixture Models (GMM): GMM assumes that the data is generated from a mixture of several Gaussian distributions and assigns probabilities to data points belonging to each cluster. It is suitable for data with complex multivariate distributions.</p></li>
-</ol>
-</section>
-<section id="association-rules" class="level3">
-<h3 class="anchored" data-anchor-id="association-rules">Association rules</h3>
-<p>Essentially, association rules reveal how items or attributes are related to each other, based on their co-occurrence or association in transactions or records.</p>
-<p>For example, in a retail dataset, association rules can help identify patterns like “If a customer buys product A, they are likely to buy product B as well.” This information can be used for market basket analysis, recommendations, and decision-making in various domains.</p>
-</section>
-</section>
-<section id="skill-sets-for-data-science" class="level2">
-<h2 class="anchored" data-anchor-id="skill-sets-for-data-science">Skill sets for Data Science</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="http://2.bp.blogspot.com/-Qi-0utjhySM/UsteLrV6NyI/AAAAAAAACNQ/AdkizQfS8l8/s1600/moz-screenshot-3-729576.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Data Science Venn Diagram by Steve Geringer</figcaption>
-</figure>
+<p>First, load iris data to the current workspace. This is a random grouping (first step).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"iris"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the Iris dataset columns (excluding columns 2, 4, and 5)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>iris1 <span class="ot">&lt;-</span> <span class="fu">scale</span>(iris[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>)])</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the number of rows in the scaled dataset</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(iris1)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a random index sample for splitting the dataset</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">2</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two subsets based on the random index</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>iris.sub1 <span class="ot">&lt;-</span> iris1[index <span class="sc">==</span> <span class="dv">1</span>,]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>iris.sub2 <span class="ot">&lt;-</span> iris1[index <span class="sc">==</span> <span class="dv">2</span>,]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of each column in the subsets</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>mean.sub1 <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris.sub1, <span class="dv">2</span>, mean)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>mean.sub2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris.sub2, <span class="dv">2</span>, mean)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the scaled Iris dataset with different colors based on the subset index</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris1, <span class="at">col =</span> index <span class="sc">+</span> <span class="dv">1</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the mean of each subset as points in different colors</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> mean.sub1[<span class="dv">1</span>], <span class="at">y =</span> mean.sub1[<span class="dv">2</span>], <span class="at">col =</span> <span class="dv">2</span>, <span class="at">pch =</span> <span class="dv">8</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> mean.sub2[<span class="dv">1</span>], <span class="at">y =</span> mean.sub2[<span class="dv">2</span>], <span class="at">col =</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="sec-1-4-unsupervised_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
+</div>
+<p>The next step</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function 'Eudist' to calculate Euclidean distance between two vectors</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Eudist <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="fu">sqrt</span>(<span class="fu">sum</span>((x <span class="sc">-</span> y)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Euclidean distance between mean.sub1 and each row in iris1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(i) <span class="fu">Eudist</span>(mean.sub1, iris1[i,]))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Euclidean distance between mean.sub2 and each row in iris1</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(i) <span class="fu">Eudist</span>(mean.sub2, iris1[i,]))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine the index of the minimum distance for each row to assign to a new index</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>index.new <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">cbind</span>(d1, d2), <span class="dv">1</span>, which.min)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new subsets 'iris.sub1' and 'iris.sub2' based on the new index</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>iris.sub1 <span class="ot">&lt;-</span> iris1[index.new <span class="sc">==</span> <span class="dv">1</span>,]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>iris.sub2 <span class="ot">&lt;-</span> iris1[index.new <span class="sc">==</span> <span class="dv">2</span>,]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of each column in the new subsets</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>mean.sub1 <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris.sub1, <span class="dv">2</span>, mean)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>mean.sub2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris.sub2, <span class="dv">2</span>, mean)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatter plot of iris1 with points colored based on the new index</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris1, <span class="at">col =</span> index.new <span class="sc">+</span> <span class="dv">1</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the mean of each new subset as points in different colors on the scatter plot</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> mean.sub1[<span class="dv">1</span>], <span class="at">y =</span> mean.sub1[<span class="dv">2</span>], <span class="at">col =</span> <span class="dv">2</span>, <span class="at">pch =</span> <span class="dv">8</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> mean.sub2[<span class="dv">1</span>], <span class="at">y =</span> mean.sub2[<span class="dv">2</span>], <span class="at">col =</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="sec-1-4-unsupervised_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the Euclidean distance between 'mean.sub1' and each row in 'iris1' and store in 'd1'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(i) <span class="fu">Eudist</span>(mean.sub1, iris1[i,]))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the Euclidean distance between 'mean.sub2' and each row in 'iris1' and store in 'd2'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(i) <span class="fu">Eudist</span>(mean.sub2, iris1[i,]))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine the index of the minimum distance between 'd1' and 'd2' for each row and assign to 'index.new'</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>index.new <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">cbind</span>(d1, d2), <span class="dv">1</span>, which.min)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new subsets 'iris.sub1' and 'iris.sub2' based on 'index.new'</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>iris.sub1 <span class="ot">&lt;-</span> iris1[index.new <span class="sc">==</span> <span class="dv">1</span>,]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>iris.sub2 <span class="ot">&lt;-</span> iris1[index.new <span class="sc">==</span> <span class="dv">2</span>,]</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of each column in the new subsets</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>mean.sub1 <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris.sub1, <span class="dv">2</span>, mean)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>mean.sub2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris.sub2, <span class="dv">2</span>, mean)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatter plot of 'iris1' with points colored based on 'index.new'</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris1, <span class="at">col =</span> index.new <span class="sc">+</span> <span class="dv">1</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the mean of 'iris.sub1' as points in color 2 on the scatter plot</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> mean.sub1[<span class="dv">1</span>], <span class="at">y =</span> mean.sub1[<span class="dv">2</span>], <span class="at">col =</span> <span class="dv">2</span>, <span class="at">pch =</span> <span class="dv">8</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the mean of 'iris.sub2' as points in color 3 on the scatter plot</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> mean.sub2[<span class="dv">1</span>], <span class="at">y =</span> mean.sub2[<span class="dv">2</span>], <span class="at">col =</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="sec-1-4-unsupervised_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><a href="#header">go to top</a></p>
 
 
 </section>

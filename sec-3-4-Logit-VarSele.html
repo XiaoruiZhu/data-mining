@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Mining for Business Analytics - An Overview of Data Mining</title>
+<title>Data Mining for Business Analytics - Variable selection for logistic regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,10 +107,12 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Data Mining for Business Analytics - An Overview of Data Mining">
+<meta property="og:title" content="Data Mining for Business Analytics - Variable selection for logistic regression">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://www.educateusgpt.org/images/digits.jpg">
+<meta property="og:image" content="https://www.educateusgpt.org/sec-3-4-Logit-VarSele_files/figure-html/unnamed-chunk-6-1.png">
 <meta property="og:site-name" content="Data Mining for Business Analytics">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-sidebar docked">
@@ -88,7 +124,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">1 Overview</a></li><li class="breadcrumb-item"><a href="./sec-1-1-overview.html">An Overview of Data Mining</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec-3-2-Logit.html">3 Classification: Logistic regression</a></li><li class="breadcrumb-item"><a href="./sec-3-4-Logit-VarSele.html">Variable selection for logistic regression</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -156,7 +192,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link active">
+  <a href="./sec-1-1-overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">An Overview of Data Mining</span></a>
   </div>
 </li>
@@ -203,7 +239,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sec-3-4-Logit-VarSele.html" class="sidebar-item-text sidebar-link">
+  <a href="./sec-3-4-Logit-VarSele.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Variable selection for logistic regression</span></a>
   </div>
 </li>
@@ -236,17 +272,14 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#artificial-intelligence-vs.-machine-learning-vs.-data-mining" id="toc-artificial-intelligence-vs.-machine-learning-vs.-data-mining" class="nav-link active" data-scroll-target="#artificial-intelligence-vs.-machine-learning-vs.-data-mining">Artificial Intelligence vs.&nbsp;Machine Learning vs.&nbsp;Data Mining</a>
+  <li><a href="#variable-selection-methods" id="toc-variable-selection-methods" class="nav-link active" data-scroll-target="#variable-selection-methods">Variable selection methods</a></li>
+  <li><a href="#popular-variable-selection-methods" id="toc-popular-variable-selection-methods" class="nav-link" data-scroll-target="#popular-variable-selection-methods">Popular variable selection methods</a></li>
+  <li><a href="#application-spam-detector" id="toc-application-spam-detector" class="nav-link" data-scroll-target="#application-spam-detector">Application: Spam detector</a>
   <ul class="collapse">
-  <li><a href="#artificial-intelligence-ai" id="toc-artificial-intelligence-ai" class="nav-link" data-scroll-target="#artificial-intelligence-ai">Artificial Intelligence (AI)</a></li>
-  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine Learning</a></li>
-  <li><a href="#data-mining" id="toc-data-mining" class="nav-link" data-scroll-target="#data-mining">Data Mining</a></li>
-  </ul></li>
-  <li><a href="#data-mining-algorithms" id="toc-data-mining-algorithms" class="nav-link" data-scroll-target="#data-mining-algorithms">Data Mining Algorithms</a>
-  <ul class="collapse">
-  <li><a href="#supervised-data-mining" id="toc-supervised-data-mining" class="nav-link" data-scroll-target="#supervised-data-mining">Supervised data mining</a></li>
-  <li><a href="#unsupervised-data-mining" id="toc-unsupervised-data-mining" class="nav-link" data-scroll-target="#unsupervised-data-mining">Unsupervised data mining</a></li>
-  <li><a href="#skill-sets-for-data-science" id="toc-skill-sets-for-data-science" class="nav-link" data-scroll-target="#skill-sets-for-data-science">Skill sets for Data Science</a></li>
+  <li><a href="#download-and-import-the-spam.csv-dataset" id="toc-download-and-import-the-spam.csv-dataset" class="nav-link" data-scroll-target="#download-and-import-the-spam.csv-dataset">Download and import the <code>Spam.csv</code> dataset</a></li>
+  <li><a href="#fit-the-logistic-regression-model" id="toc-fit-the-logistic-regression-model" class="nav-link" data-scroll-target="#fit-the-logistic-regression-model">Fit the logistic regression model</a></li>
+  <li><a href="#best-subset-selection" id="toc-best-subset-selection" class="nav-link" data-scroll-target="#best-subset-selection">Best subset selection</a></li>
+  <li><a href="#forwardbackwardstepwise-selection" id="toc-forwardbackwardstepwise-selection" class="nav-link" data-scroll-target="#forwardbackwardstepwise-selection">Forward/Backward/Stepwise selection</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -256,7 +289,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">An Overview of Data Mining</h1>
+<h1 class="title">Variable selection for logistic regression</h1>
 </div>
 
 
@@ -271,6 +304,259 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 
 </header>
 
+<section id="variable-selection-methods" class="level1">
+<h1>Variable selection methods</h1>
+<p>Variable selection methods are techniques used to determine the most relevant and impactful features or variables in a dataset. These methods help to improve the accuracy and efficiency of machine learning models by focusing only on the most important variables, thereby reducing noise and enhancing predictive performance.</p>
+<p>Variable selection is important in data mining because it helps to improve the quality and efficiency of predictive models, reduces complexity, and enhances the interpretability of results.</p>
+</section>
+<section id="popular-variable-selection-methods" class="level1">
+<h1>Popular variable selection methods</h1>
+<p>Some popular variable selection methods in data mining include:</p>
+<ol type="1">
+<li><p><strong>Best Subset Selection</strong>: It evaluates all possible combinations of predictors (features) to find the best subset of variables that minimizes a chosen criterion, such as the Akaike Information Criterion (AIC) or the Bayesian Information Criterion (BIC).</p></li>
+<li><p><strong>Forward Selection</strong>: This method starts with an empty set of variables and adds one variable at a time based on their individual contribution to the model’s performance.</p></li>
+<li><p><strong>Backward Elimination</strong>: In contrast to forward selection, backward elimination starts with all variables included in the model and removes them one at a time based on their individual contribution to the model’s performance.</p></li>
+<li><p><strong>Lasso Regression</strong>: Lasso (Least Absolute Shrinkage and Selection Operator) is a regularization technique that penalizes the absolute size of coefficients, effectively setting some coefficients to zero and performing feature selection.</p></li>
+<li><p><strong>Random Forest Feature Importance</strong>: Random Forest algorithm can be used to measure the importance of each feature based on how much the tree nodes that use that feature reduce impurity on average.</p></li>
+</ol>
+</section>
+<section id="application-spam-detector" class="level1">
+<h1>Application: Spam detector</h1>
+<p>Jennifer Lee is a data scientist working for a telecommunications company. The company has been experiencing a surge in customer complaints about receiving spam and phishing emails that attempt to steal personal information. Jennifer is tasked with developing a machine learning model to detect and filter out these useless or malicious emails. Her objective is to implement spam filters that analyze the email content for suspicious URLs, phishing keywords, and unusual sender behavior to proactively protect customers from falling victim to phishing attacks.</p>
+<p>The objective is to detect spam based on the number of recipients, the number of hyperlinks, and the number of characters for each email.</p>
+<section id="download-and-import-the-spam.csv-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="download-and-import-the-spam.csv-dataset">Download and import the <a href="examples/Spam.csv"><code>Spam.csv</code></a> dataset</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the "Spam.csv" file from the URL and storing it in the 'Spam' dataframe.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Spam <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://www.educateusgpt.org/examples/Spam.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Providing a summary of the 'Spam' dataframe, including statistical summaries.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Spam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Record           Spam         Recipients      Hyperlinks    
+ Min.   :  1.0   Min.   :0.000   Min.   :12.00   Min.   : 0.000  
+ 1st Qu.:125.8   1st Qu.:0.000   1st Qu.:12.00   1st Qu.: 3.000  
+ Median :250.5   Median :1.000   Median :13.00   Median : 6.000  
+ Mean   :250.5   Mean   :0.516   Mean   :14.42   Mean   : 6.226  
+ 3rd Qu.:375.2   3rd Qu.:1.000   3rd Qu.:15.00   3rd Qu.: 9.000  
+ Max.   :500.0   Max.   :1.000   Max.   :52.00   Max.   :12.000  
+   Characters   
+ Min.   : 18.0  
+ 1st Qu.: 38.0  
+ Median : 58.0  
+ Mean   : 58.6  
+ 3rd Qu.: 79.0  
+ Max.   :103.0  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the useless 'Record' column</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Spam <span class="ot">&lt;-</span> Spam[,<span class="sc">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fit-the-logistic-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-the-logistic-regression-model">Fit the logistic regression model</h2>
+<p>Develop the logistic regression model for the Spam dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Splitting dataset to be training and testing sets.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_index &lt;- sample(nrow(Spam), nrow(Spam)*0.80)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># train &lt;- Spam[sample_index,]</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># test &lt;- Spam[-sample_index,]</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or use a more straightforward splitting</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> Spam[<span class="dv">1</span><span class="sc">:</span><span class="dv">400</span>,]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> Spam[<span class="dv">401</span><span class="sc">:</span><span class="dv">500</span>,]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Train a logistic regression model with all variables</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>Logit_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(Spam <span class="sc">~</span> Recipients <span class="sc">+</span> Hyperlinks <span class="sc">+</span> Characters,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> train, </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> binomial)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the summary of the model</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Logit_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Spam ~ Recipients + Hyperlinks + Characters, family = binomial, 
+    data = train)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -4.807162   0.812737  -5.915 3.32e-09 ***
+Recipients   0.160926   0.042556   3.782 0.000156 ***
+Hyperlinks   0.523397   0.049921  10.484  &lt; 2e-16 ***
+Characters  -0.010583   0.005542  -1.910 0.056181 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 553.71  on 399  degrees of freedom
+Residual deviance: 353.62  on 396  degrees of freedom
+AIC: 361.62
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+</section>
+<section id="best-subset-selection" class="level2">
+<h2 class="anchored" data-anchor-id="best-subset-selection">Best subset selection</h2>
+<p>It evaluates all possible combinations of predictors (features) to find the best subset of variables that minimizes a chosen criterion, such as the Akaike Information Criterion (AIC) or the Bayesian Information Criterion (BIC).</p>
+<p>If you cannot write your own codes, try to ask EducateUsGPT assistant to help you out.</p>
+<div class="cell-output-display">
+<div class="card bg-light mb-3" style="max-width: 1200px;">
+  <div class="card-header">Ask Educate Us GPT</div>
+  <div class="card-body">
+    <h4 class="card-title anchored">Show me the sample codes in R to apply best subset selection method on the model object 'Logit_mod'?</h4>
+    <div class="chat-container" id="chat-container-341">
+        <div id="chat-messages-341"></div>
+        <textarea id="user-input-341" class="chat-input" placeholder="Ask your question here ...">Show me the sample codes in R to apply best subset selection method on the model object 'Logit_mod'?</textarea>
+    <button onclick="sendMessage(341)" class="chat-button">Ask</button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the leaps package for regsubsets function</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaps)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate all possible models and select the best subset</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>best_subset_model <span class="ot">&lt;-</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">regsubsets</span>(Spam <span class="sc">~</span> ., </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">nbest=</span><span class="dv">1</span>, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">nvmax =</span> <span class="dv">3</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the best subset model</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>best_model <span class="ot">&lt;-</span> <span class="fu">summary</span>(best_subset_model)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>best_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Subset selection object
+Call: regsubsets.formula(Spam ~ ., data = train, nbest = 1, nvmax = 3)
+3 Variables  (and intercept)
+           Forced in Forced out
+Recipients     FALSE      FALSE
+Hyperlinks     FALSE      FALSE
+Characters     FALSE      FALSE
+1 subsets of each size up to 3
+Selection Algorithm: exhaustive
+         Recipients Hyperlinks Characters
+1  ( 1 ) " "        "*"        " "       
+2  ( 1 ) "*"        "*"        " "       
+3  ( 1 ) "*"        "*"        "*"       </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(best_subset_model, <span class="at">scale=</span><span class="st">"bic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="sec-3-4-Logit-VarSele_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="forwardbackwardstepwise-selection" class="level2">
+<h2 class="anchored" data-anchor-id="forwardbackwardstepwise-selection">Forward/Backward/Stepwise selection</h2>
+<p>To perform the Forward/Backward/Stepwise Regression in R, we need to define the starting models:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># nullmodel is the model with no varaible in it,</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>nullmodel <span class="ot">&lt;-</span> <span class="fu">lm</span>(Spam <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>train)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># while fullmodel is the model with every variable in it.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>fullmodel <span class="ot">&lt;-</span> Logit_mod</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="backward-elimination" class="level3">
+<h3 class="anchored" data-anchor-id="backward-elimination">Backward Elimination</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model_step_b <span class="ot">&lt;-</span> <span class="fu">step</span>(fullmodel, <span class="at">direction=</span><span class="st">'backward'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=361.62
+Spam ~ Recipients + Hyperlinks + Characters
+
+             Df Deviance    AIC
+&lt;none&gt;            353.62 361.62
+- Characters  1   357.32 363.32
+- Recipients  1   374.71 380.71
+- Hyperlinks  1   542.19 548.19</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p>Start: AIC=361.62: This indicates the starting Akaike Information Criterion (AIC) value before any variables are removed or added.</p></li>
+<li><p><strong>- Recipients</strong>, <strong>- Characters</strong>, <strong>- Hyperlinks</strong>: These lines represent the potential improvement in AIC if each variable is removed from the model individually. However, removing any one of them would lead to an increase in AIC or RSS, indicating a worse model fit. Therefore, the best model should be the starting model with all three predictors included.</p></li>
+</ol>
+</section>
+<section id="forward-selection" class="level3">
+<h3 class="anchored" data-anchor-id="forward-selection">Forward Selection</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model_step_f <span class="ot">&lt;-</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step</span>(nullmodel, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">scope =</span> <span class="fu">list</span>(<span class="at">lower =</span> nullmodel, <span class="at">upper =</span> fullmodel), </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">direction=</span><span class="st">'forward'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-553.33
+Spam ~ 1
+
+             Df Sum of Sq    RSS     AIC
++ Hyperlinks  1    37.528 62.270 -739.99
++ Recipients  1     1.866 97.931 -558.88
++ Characters  1     0.872 98.925 -554.84
+&lt;none&gt;                    99.798 -553.33
+
+Step:  AIC=-739.99
+Spam ~ Hyperlinks
+
+             Df Sum of Sq    RSS     AIC
++ Recipients  1    3.6487 58.621 -762.15
++ Characters  1    0.6559 61.614 -742.23
+&lt;none&gt;                    62.270 -739.99
+
+Step:  AIC=-762.15
+Spam ~ Hyperlinks + Recipients
+
+             Df Sum of Sq    RSS     AIC
++ Characters  1   0.52274 58.099 -763.73
+&lt;none&gt;                    58.621 -762.15
+
+Step:  AIC=-763.73
+Spam ~ Hyperlinks + Recipients + Characters</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Start: AIC=-553.33, Spam ~ 1. It shows adding the ‘+ Hyperlinks’ decreases the AIC the most. So the algorithm decides to add the ‘Hyperlinks’.</li>
+<li>Step: AIC=-739.99 shows the AIC for the model Spam ~ Hyperlinks. Based on this model, adding the ‘+ Recipients’ decreases the AIC again to be -762.15 So it should add ‘Recipients’ to the model.</li>
+<li>Likewise, in the third step, the final AIC value after adding ‘Characters’ to the model decreases to -763.73, which indicates that this is the best model with the lowest AIC value with all three predictors: ‘Hyperlinks’, ‘Characters’, and ‘Recipients’.</li>
+</ol>
+<blockquote class="blockquote">
+<p>Does the Forward selection give you the same selected model?</p>
+</blockquote>
+</section>
+<section id="stepwise-selection-output-omitted" class="level3">
+<h3 class="anchored" data-anchor-id="stepwise-selection-output-omitted">Stepwise Selection (Output Omitted)</h3>
+<div class="cell-output-display">
+<div class="card bg-light mb-3" style="max-width: 1200px;">
+  <div class="card-header">Ask Educate Us GPT</div>
+  <div class="card-body">
+    <h4 class="card-title anchored">Show me the sample codes in R to apply stepwise selection method on the model object 'Logit_mod'?</h4>
+    <div class="chat-container" id="chat-container-342">
+        <div id="chat-messages-342"></div>
+        <textarea id="user-input-342" class="chat-input" placeholder="Ask your question here ...">Show me the sample codes in R to apply stepwise selection method on the model object 'Logit_mod'?</textarea>
+    <button onclick="sendMessage(342)" class="chat-button">Ask</button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Applying stepwise selection</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>stepwise_model <span class="ot">&lt;-</span> <span class="fu">step</span>(Logit_mod, <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=361.62
+Spam ~ Recipients + Hyperlinks + Characters
+
+             Df Deviance    AIC
+&lt;none&gt;            353.62 361.62
+- Characters  1   357.32 363.32
+- Recipients  1   374.71 380.71
+- Hyperlinks  1   542.19 548.19</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Does the stepwise selection give you the same selected model?</p>
+</blockquote>
 <div class="cell">
 <div class="cell-output-display">
 
@@ -370,196 +656,9 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
     </script>
 </div>
 </div>
-<section id="artificial-intelligence-vs.-machine-learning-vs.-data-mining" class="level1">
-<h1>Artificial Intelligence vs.&nbsp;Machine Learning vs.&nbsp;Data Mining</h1>
-<p>The terms “<strong>artificial intelligence</strong>”, “<strong>machine learning</strong>”, and “<strong>data mining</strong>” are all used interchangeably. The boundaries between their definitions are ambiguous, with significant overlap. They delineate the uses of computer software to derive insightful solutions that conventional data analysis methods might struggle to attain.</p>
-<section id="artificial-intelligence-ai" class="level2">
-<h2 class="anchored" data-anchor-id="artificial-intelligence-ai">Artificial Intelligence (AI)</h2>
-<p>In a broad context, <strong>artificial intelligence (AI)</strong> refers to computer systems exhibiting human-like intelligence and cognitive capabilities. Examples:</p>
-<ul>
-<li>Deep Blue playing chess (mid-1980s),</li>
-<li>Watson by IBM (2011),</li>
-<li>Alpha Go (2014),</li>
-<li>ChatGPT (2022): designed for generating human-like text responses based on the input it receives. It uses a large-scale deep learning model called GPT (Generative Pre-trained Transformer).</li>
-</ul>
-</section>
-<section id="machine-learning" class="level2">
-<h2 class="anchored" data-anchor-id="machine-learning">Machine Learning</h2>
-<p>Machine learning describes techniques that the machine <span style="color:red;">integrate self-learning algorithms to uncover hidden patterns and relationships in data</span>. The Machine learning techniques are designed to evaluate results and be able to improve its performance over time. Its an application of artificial intelligence</p>
-<p>Examples: Predict rider demand to strategically dispatch drivers for Uber</p>
-<section id="machine-learning-in-different-fields" class="level3">
-<h3 class="anchored" data-anchor-id="machine-learning-in-different-fields">Machine Learning in Different Fields</h3>
-<p>Learning from data is essential in different scientific disciplines</p>
-<ul>
-<li>Predict stock returns in the next six months based on historical data;</li>
-<li>Predict the probability of a loan default based on the customer’s information and historical records;</li>
-<li>Identify certain diseases based on medical image;</li>
-<li>Identify handwritten digits from the image;</li>
-<li>Facial recognition;</li>
-<li>Natural language processing;</li>
-<li>Cluster customers based on their purchase behavior and other information</li>
-</ul>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">Give me a few very important application of Machine Learning?</h4>
-    <div class="chat-container" id="chat-container-103">
-        <div id="chat-messages-103"></div>
-        <input type="text" id="user-input-103" class="chat-input" placeholder="Ask your question here ..." value="Give me a few very important applications of Machine Learning?">
-        <button onclick="sendMessage(103)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-</section>
-<section id="data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="data-mining">Data Mining</h2>
-<p>Data mining entails the application of a range of analytical techniques crucial for the advancement of machine learning and artificial intelligence. It is widely acknowledged as a fundamental component of both fields. Through data mining, hidden patterns and relationships within data are unearthed, enabling the extraction of valuable insights to inform decision-making processes.</p>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">What is Data Mining with real world example?</h4>
-    <div class="chat-container" id="chat-container-101">
-        <div id="chat-messages-101"></div>
-        <input type="text" id="user-input-101" class="chat-input" placeholder="Ask your question here ..." value="What is Data Mining with real world example?">
-        <button onclick="sendMessage(101)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-
-    
-</div>
-<section id="difference-between-data-mining-and-machine-learning" class="level3">
-<h3 class="anchored" data-anchor-id="difference-between-data-mining-and-machine-learning">Difference between Data Mining and Machine Learning</h3>
-<ol type="1">
-<li>Data mining focuses on discovering patterns and relationships in a given data</li>
-<li>Machine learning focuses on training models and predicting future</li>
-<li>A large overlap, but have different focuses</li>
-<li>No need to distinguish them conceptually for our course</li>
-<li>Article: <a href="https://bernardmarr.com/default.asp?contentID=1741">Difference between Data Mining and Machine Learning</a></li>
-</ol>
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">Why Data Mining is so important nowadays?</h4>
-    <div class="chat-container" id="chat-container-102">
-        <div id="chat-messages-102"></div>
-        <input type="text" id="user-input-102" class="chat-input" placeholder="Ask your question here ..." value="Why Data Mining is so important nowadays?">
-        <button onclick="sendMessage(102)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="data-mining-algorithms" class="level1">
-<h1>Data Mining Algorithms</h1>
-<p>Two types of techniques depending on the way they learn about data.</p>
-<ul>
-<li><p><strong>Supervised data mining</strong> techniques are used for developing predictive models.</p></li>
-<li><p><strong>Unsupervised data mining</strong> techniques are effective for data exploration, dimension reduction, and pattern recognition.</p></li>
-<li><p><strong>Semi-supervised learning</strong>: Mixture of both</p></li>
-</ul>
-<p>The key distinction:</p>
-<ul>
-<li>in <strong>supervised</strong> data mining, <span style="color:red;"><strong>the target variable is identified</strong></span>.</li>
-<li>in <strong>unsupervised</strong> data mining, <span style="color:red;"><strong>no target variable is identified</strong></span>.</li>
-</ul>
-<section id="supervised-data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="supervised-data-mining">Supervised data mining</h2>
-<p>Common applications of supervised data mining include prediction models and classification.</p>
-<ol type="1">
-<li>Prediction model: The response variable is <span style="color:red;"><strong>numerical</strong></span>
-<ul>
-<li>Regression method</li>
-<li>e.g., stock return, housing price, temperature, spending of a customer.</li>
-</ul></li>
-<li>Classification model: The response variable is <span style="color:red;"><strong>categorical</strong></span>.
-<ul>
-<li>e.g., {A, B, C}, {dog, cat}, {0, 1}.</li>
-<li>Predict the class memberships of customer.</li>
-<li>logistic regression model can do the classification.</li>
-</ul></li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<div class="card bg-light mb-3" style="max-width: 1200px;">
-  <div class="card-header">Ask Educate Us GPT</div>
-  <div class="card-body">
-    <h4 class="card-title anchored">Give me an example of logistic regression model?</h4>
-    <div class="chat-container" id="chat-container-104">
-        <div id="chat-messages-104"></div>
-        <input type="text" id="user-input-104" class="chat-input" placeholder="Ask your question here ..." value="Give me an example of logistic regression model?">
-        <button onclick="sendMessage(104)" class="chat-button">Ask</button>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-<section id="an-example-neural-networks-for-identifying-digits" class="level3">
-<h3 class="anchored" data-anchor-id="an-example-neural-networks-for-identifying-digits">An example: Neural Networks for identifying digits</h3>
-<p>How to recognize these handwritten digits?</p>
-<p><img src="images/digits.jpg" class="img-fluid"></p>
-<p>The neural networks is one of the models that can identify digits.</p>
-<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*FLD5PNYJgWknPvJQ.gif#center" class="img-fluid"></p>
-<p>Here is an intuitive and complete explanation with animation for identifying digits using neural networks: <a href="https://www.3blue1brown.com/lessons/neural-networks">What is neural networks</a>.</p>
-</section>
-</section>
-<section id="unsupervised-data-mining" class="level2">
-<h2 class="anchored" data-anchor-id="unsupervised-data-mining">Unsupervised data mining</h2>
-<p>The algorithms allow the computer to identify patterns and relationships in the data without any specific guidance from the analyst.</p>
-<ul>
-<li>Subjective, no simple goal such as prediction</li>
-<li>Common applications: <strong>dimension reduction</strong> and <strong>pattern recognition</strong></li>
-<li>Other Examples: Recommendation systems, clustering, principle component analysis (PCA), association rules</li>
-</ul>
-<p><img src="images/clustering.png" class="img-fluid"></p>
-<section id="dimension-reduction" class="level3">
-<h3 class="anchored" data-anchor-id="dimension-reduction">Dimension reduction</h3>
-<ul>
-<li>Attempt: converts a set of high-dimensional data (large number of variables) into data with lesser dimensions without losing much of the information.</li>
-<li>Why: Reduce information redundancy, improve model stability.</li>
-<li>When: Deploy before other data mining methods.</li>
-<li>When: Relevant for big data to bring out important patterns and build more stable models.</li>
-<li>Example: principle component analysis (PCA): reduce the dimensionality of data while preserving most of the variability present in the dataset.</li>
-</ul>
-</section>
-<section id="pattern-recognition" class="level3">
-<h3 class="anchored" data-anchor-id="pattern-recognition">Pattern recognition</h3>
-<ul>
-<li>Attempt: recognizing patterns using machine learning.</li>
-<li>Examples: Recurring sequences, Frequent combinations, Recognizable features, Common characteristics.</li>
-</ul>
-</section>
-<section id="clustering" class="level3">
-<h3 class="anchored" data-anchor-id="clustering">Clustering</h3>
-<ol type="1">
-<li><p>K-Means Clustering: This is a popular clustering algorithm that partitions data into k clusters based on the mean distance between data points and cluster centers. It aims to minimize the intra-cluster variance and is efficient for large datasets.</p></li>
-<li><p>Hierarchical Clustering: This method creates a hierarchy of clusters by either starting with each data point as a single cluster (agglomerative) or starting with all data points in one cluster and recursively splitting them (divisive). It does not require specifying the number of clusters beforehand.</p></li>
-<li><p>Gaussian Mixture Models (GMM): GMM assumes that the data is generated from a mixture of several Gaussian distributions and assigns probabilities to data points belonging to each cluster. It is suitable for data with complex multivariate distributions.</p></li>
-</ol>
-</section>
-<section id="association-rules" class="level3">
-<h3 class="anchored" data-anchor-id="association-rules">Association rules</h3>
-<p>Essentially, association rules reveal how items or attributes are related to each other, based on their co-occurrence or association in transactions or records.</p>
-<p>For example, in a retail dataset, association rules can help identify patterns like “If a customer buys product A, they are likely to buy product B as well.” This information can be used for market basket analysis, recommendations, and decision-making in various domains.</p>
-</section>
-</section>
-<section id="skill-sets-for-data-science" class="level2">
-<h2 class="anchored" data-anchor-id="skill-sets-for-data-science">Skill sets for Data Science</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="http://2.bp.blogspot.com/-Qi-0utjhySM/UsteLrV6NyI/AAAAAAAACNQ/AdkizQfS8l8/s1600/moz-screenshot-3-729576.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Data Science Venn Diagram by Steve Geringer</figcaption>
-</figure>
-</div>
 
 
+</section>
 </section>
 </section>
 
