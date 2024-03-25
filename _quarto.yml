@@ -3,13 +3,14 @@ project:
   render:
     - why.qmd
     - how.qmd
+    - how-datacamp.qmd
     - sec-1-1-overview.qmd
-    - sec-1-2-examples.qmd
+    - sec-1-2-supervised-prediction.qmd
+    - sec-1-3-supervised-classification.qmd
+    - sec-1-4-unsupervised.qmd
     - sec-3-2-Logit.qmd
     - sec-3-3-Logit-AUC-ROC.qmd
-    # - Ch-2-EDA-vis.qmd
-    # - Ch-3-LM.qmd
-    # - Ch-3-VarSele.qmd
+    - sec-3-4-Logit-VarSele.qmd
     - about.qmd
     
 website:
@@ -22,25 +23,29 @@ website:
         contents:
           - href: why.qmd
           - how.qmd
-      - section: "1 Data Mining"
+          - how-datacamp.qmd
+      - section: "1 Overview"
         contents:
           - sec-1-1-overview.qmd
-          - sec-1-2-examples.qmd
+          - sec-1-2-supervised-prediction.qmd
+          - sec-1-3-supervised-classification.qmd
+          - sec-1-4-unsupervised.qmd
       # - section: "2 Exploratory Data Analysis"
       #   contents:
       #     - Ch-2-EDA-vis.qmd
-      - section: "3 Supervised Data Mining"
+      - section: "3 Classification: Logistic regression"
         contents:
           # - Ch-3-LM.qmd
           - sec-3-2-Logit.qmd
           - sec-3-3-Logit-AUC-ROC.qmd
-          # - Ch-3-VarSele.qmd
+          - sec-3-4-Logit-VarSele.qmd
       - section: "About"
         contents:
           - about.qmd
   google-analytics: "G-PFYV0SJVTC"
   open-graph: true
-
+  back-to-top-navigation: true
+  
 resources: 
   - CRAME
 format:
@@ -50,8 +55,9 @@ format:
       dark: darkly
     css: styles.css
     toc: true
+    toc-depth: 2
     grid:
-      sidebar-width: 310px
+      sidebar-width: 330px
 
 editor: source
 execute: 

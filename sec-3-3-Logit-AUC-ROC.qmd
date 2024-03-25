@@ -247,5 +247,3 @@ plot(pr_test, main="Out-of-sample PR curve")
 htmltools::includeHTML("questions/openai-api.html")
 ```
 
-[go to top](#ROC-and-AUC)
-

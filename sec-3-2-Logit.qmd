@@ -410,4 +410,4 @@ train_auc; test_auc
 htmltools::includeHTML("questions/openai-api.html")
 ```
 
-[go to top](#header)
+[go to top](#logistic-regression-and-classifications)

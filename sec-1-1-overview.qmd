@@ -1,5 +1,5 @@
 ---
-title: "Data Mining Overview"
+title: "An Overview of Data Mining"
 editor_options: 
   chunk_output_type: console
 ---

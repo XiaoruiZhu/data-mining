@@ -1,5 +1,5 @@
 ---
-title: "How to use this website"
+title: "How to use EducateUs GPT"
 editor_options: 
   chunk_output_type: console
 ---
@@ -10,15 +10,15 @@ htmltools::includeHTML("questions/openai-api.html")
 
 # Learn concepts with "Why" in mind
 
-You should read the content provided in each section and chapter; however, you should NOT TAKE THEM FOR GRANTED. We are living in an information era where our understanding of the world is constantly evolving. My content can easily become outdated. Therefore, it's essential to consider why we should learn these techniques, the purpose behind the development of a particular technique, and the motivations of the pioneers who first developed or invented these methods.
+You should read the content provided in each section and chapter; however, you should NOT TAKE THEM FOR GRANTED. We are living in an information era where our understanding of the world is constantly evolving. My content can become outdated one day. Therefore, it's essential to learn why we should learn these techniques, the purpose behind the development of a particular technique, and the motivations of the pioneers who first developed or invented these methods, instead of remembering these concepts and tools.
 
-We believe that critical thinking will inspire you to better understand these concepts.
+We believe that critical thinking will inspire you to better understand these concepts. More importantly, the critical thinking will cultivate you to be able to develop or learn whatever new technologies in the future.
 
-> Moreover, we believe that:
+> We believe that:
 >
 > **your questions will truly enhance your skills as a thinker, leader, and communicator.**
 
-# How to use the interactive learning
+# How to use the EducateUs GPT interactive learning
 
 ## Use preset questions first
 

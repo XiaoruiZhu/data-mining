@@ -1,0 +1,168 @@
+---
+title: "Variable selection for logistic regression"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(message=FALSE)
+source(file = "questions/educateusgpt2.R")
+```
+
+# Variable selection methods
+
+Variable selection methods are techniques used to determine the most relevant and impactful features or variables in a dataset. These methods help to improve the accuracy and efficiency of machine learning models by focusing only on the most important variables, thereby reducing noise and enhancing predictive performance.
+
+Variable selection is important in data mining because it helps to improve the quality and efficiency of predictive models, reduces complexity, and enhances the interpretability of results.
+
+# Popular variable selection methods
+
+Some popular variable selection methods in data mining include:
+
+1. **Best Subset Selection**: It evaluates all possible combinations of predictors (features) to find the best subset of variables that minimizes a chosen criterion, such as the Akaike Information Criterion (AIC) or the Bayesian Information Criterion (BIC).
+
+2. **Forward Selection**: This method starts with an empty set of variables and adds one variable at a time based on their individual contribution to the model's performance.
+
+3. **Backward Elimination**: In contrast to forward selection, backward elimination starts with all variables included in the model and removes them one at a time based on their individual contribution to the model's performance.
+
+4. **Lasso Regression**: Lasso (Least Absolute Shrinkage and Selection Operator) is a regularization technique that penalizes the absolute size of coefficients, effectively setting some coefficients to zero and performing feature selection.
+
+5. **Random Forest Feature Importance**: Random Forest algorithm can be used to measure the importance of each feature based on how much the tree nodes that use that feature reduce impurity on average.
+
+# Application: Spam detector
+
+Jennifer Lee is a data scientist working for a telecommunications company. The company has been experiencing a surge in customer complaints about receiving spam and phishing emails that attempt to steal personal information. Jennifer is tasked with developing a machine learning model to detect and filter out these useless or malicious emails. Her objective is to implement spam filters that analyze the email content for suspicious URLs, phishing keywords, and unusual sender behavior to proactively protect customers from falling victim to phishing attacks.
+
+The objective is to detect spam based on the number of recipients, the number of hyperlinks, and the number of characters for each email.
+
+## Download and import the [`Spam.csv`](examples/Spam.csv) dataset
+
+```{r, message=FALSE}
+# Reading the "Spam.csv" file from the URL and storing it in the 'Spam' dataframe.
+Spam <- read.csv("https://www.educateusgpt.org/examples/Spam.csv", header = TRUE)
+
+# Providing a summary of the 'Spam' dataframe, including statistical summaries.
+summary(Spam)
+
+# Remove the useless 'Record' column
+Spam <- Spam[,-1]
+```
+
+## Fit the logistic regression model
+
+Develop the logistic regression model for the Spam dataset. 
+
+```{r, echo=TRUE}
+# Splitting dataset to be training and testing sets.
+# sample_index <- sample(nrow(Spam), nrow(Spam)*0.80)
+# train <- Spam[sample_index,]
+# test <- Spam[-sample_index,]
+
+# or use a more straightforward splitting
+train <- Spam[1:400,]
+test <- Spam[401:500,]
+
+# Train a logistic regression model with all variables
+Logit_mod <- glm(Spam ~ Recipients + Hyperlinks + Characters,
+                 data = train, 
+                 family = binomial)
+
+# Print the summary of the model
+summary(Logit_mod)
+```
+
+## Best subset selection
+
+It evaluates all possible combinations of predictors (features) to find the best subset of variables that minimizes a chosen criterion, such as the Akaike Information Criterion (AIC) or the Bayesian Information Criterion (BIC).
+
+If you cannot write your own codes, try to ask EducateUsGPT assistant to help you out. 
+```{r, echo=FALSE, results='asis'}
+id <- 341
+que <- "Show me the sample codes in R to apply best subset selection method on the model object 'Logit_mod'?"
+filename <- educateusgpt(id = id, question = que)
+htmltools::includeHTML(filename)
+```
+
+```{r}
+# Load the leaps package for regsubsets function
+library(leaps)
+
+# Generate all possible models and select the best subset
+best_subset_model <- 
+  regsubsets(Spam ~ ., 
+             data = train, 
+             nbest=1, 
+             nvmax = 3)
+
+# Extract the best subset model
+best_model <- summary(best_subset_model)
+best_model
+```
+
+```{r}
+plot(best_subset_model, scale="bic")
+```
+
+## Forward/Backward/Stepwise selection 
+
+To perform the Forward/Backward/Stepwise Regression in R, we need to define the starting models:
+
+```{r}
+# nullmodel is the model with no varaible in it,
+nullmodel <- lm(Spam ~ 1, data=train)
+# while fullmodel is the model with every variable in it.
+fullmodel <- Logit_mod
+```
+
+### Backward Elimination
+
+```{r}
+model_step_b <- step(fullmodel, direction='backward')
+```
+
+1. Start: AIC=361.62: This indicates the starting Akaike Information Criterion (AIC) value before any variables are removed or added.
+
+2. **- Recipients**, **- Characters**, **- Hyperlinks**: These lines represent the potential improvement in AIC if each variable is removed from the model individually. However, removing any one of them would lead to an increase in AIC or RSS, indicating a worse model fit. Therefore, the best model should be the starting model with all three predictors included.
+
+
+### Forward Selection
+
+```{r}
+model_step_f <- 
+  step(nullmodel, 
+       scope = list(lower = nullmodel, upper = fullmodel), 
+       direction='forward')
+```
+
+1. Start: AIC=-553.33, Spam ~ 1. It shows adding the '+ Hyperlinks' decreases the AIC the most. So the algorithm decides to add the 'Hyperlinks'. 
+2. Step: AIC=-739.99 shows the AIC for the model Spam ~ Hyperlinks. Based on this model, adding the '+ Recipients' decreases the AIC again to be -762.15 So it should add 'Recipients' to the model.
+3. Likewise, in the third step, the final AIC value after adding 'Characters' to the model decreases to -763.73, which indicates that this is the best model with the lowest AIC value with all three predictors: 'Hyperlinks', 'Characters', and 'Recipients'.
+
+> Does the Forward selection give you the same selected model?
+> 
+
+### Stepwise Selection (Output Omitted)
+
+```{r, echo=FALSE, results='asis'}
+id <- 342
+que <- "Show me the sample codes in R to apply stepwise selection method on the model object 'Logit_mod'?"
+filename <- educateusgpt(id = id, question = que)
+htmltools::includeHTML(filename)
+```
+
+```{r}
+# Applying stepwise selection
+stepwise_model <- step(Logit_mod, direction = "both")
+```
+
+> Does the stepwise selection give you the same selected model?
+> 
+
+```{r, echo=FALSE}
+# Need to put the openai-api file to the very end
+# since this file will be updated for every new
+# chat questions inserted, so the ids need to be 
+# included untill all of these questions are added.
+htmltools::includeHTML("questions/openai-api.html")
+```
+
