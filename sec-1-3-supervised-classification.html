@@ -246,12 +246,35 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">About</span></a>
+ <span class="menu-text">4 Neural Network Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-4-1-Neural-Network-Reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Neural Network Regression Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-4-2-Neural-Network-Class.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Neural Network Classification Models</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">About</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./about.html" class="sidebar-item-text sidebar-link">
@@ -304,6 +327,8 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
         // Initialize conversation history for each chat
         const chatHistory = {
             1: [],
+            421: [],
+            411: [],
             342: [],
             341: [],
             331: [],
@@ -455,20 +480,20 @@ glm(formula = Purchase ~ Age + Browsing_History + Gender + Time_Of_Day,
 
 Coefficients:
                     Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)        -2.455345   0.349856  -7.018 2.25e-12 ***
-Age                 0.039224   0.007023   5.585 2.34e-08 ***
-Browsing_History    2.055102   0.170595  12.047  &lt; 2e-16 ***
-GenderMale          0.107295   0.163755   0.655  0.51233    
-Time_Of_DayEvening  0.562403   0.207128   2.715  0.00662 ** 
-Time_Of_DayMorning -0.197684   0.191721  -1.031  0.30249    
+(Intercept)        -2.486609   0.344170  -7.225 5.01e-13 ***
+Age                 0.040836   0.006863   5.950 2.68e-09 ***
+Browsing_History    2.077667   0.170494  12.186  &lt; 2e-16 ***
+GenderMale          0.026840   0.163543   0.164   0.8696    
+Time_Of_DayEvening  0.397869   0.201900   1.971   0.0488 *  
+Time_Of_DayMorning -0.246351   0.196075  -1.256   0.2090    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 1101.80  on 799  degrees of freedom
-Residual deviance:  893.15  on 794  degrees of freedom
-AIC: 905.15
+    Null deviance: 1103.25  on 799  degrees of freedom
+Residual deviance:  893.51  on 794  degrees of freedom
+AIC: 905.51
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -504,12 +529,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>train_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((train_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> train<span class="sc">$</span>Purchase)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Train_Accuracy:'</span>, train_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Train_Accuracy: 0.71625"</code></pre>
+<pre><code>[1] "Train_Accuracy: 0.72375"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((test_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> test<span class="sc">$</span>Purchase)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Test_Accuracy:'</span>, test_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Test_Accuracy: 0.68"</code></pre>
+<pre><code>[1] "Test_Accuracy: 0.675"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating AUC for training and testing sets</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>

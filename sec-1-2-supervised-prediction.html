@@ -246,12 +246,35 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">About</span></a>
+ <span class="menu-text">4 Neural Network Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-4-1-Neural-Network-Reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Neural Network Regression Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sec-4-2-Neural-Network-Class.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Neural Network Classification Models</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">About</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./about.html" class="sidebar-item-text sidebar-link">
@@ -304,6 +327,8 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
         // Initialize conversation history for each chat
         const chatHistory = {
             1: [],
+            421: [],
+            411: [],
             342: [],
             341: [],
             331: [],
@@ -572,30 +597,30 @@ lm(formula = medv ~ ., data = Boston_train)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--14.8432  -2.8782  -0.5264   1.8663  25.8429 
+-14.1399  -2.7621  -0.4461   1.6367  25.9974 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  37.975385   5.541877   6.852 2.45e-11 ***
-crim         -0.100756   0.040339  -2.498 0.012863 *  
-zn            0.052222   0.014450   3.614 0.000336 ***
-indus         0.018263   0.067515   0.270 0.786904    
-chas          2.104801   0.914888   2.301 0.021880 *  
-nox         -18.437868   4.176199  -4.415 1.27e-05 ***
-rm            3.705872   0.451900   8.201 2.64e-15 ***
-age           0.003068   0.014199   0.216 0.829023    
-dis          -1.521906   0.214172  -7.106 4.83e-12 ***
-rad           0.348414   0.073586   4.735 2.96e-06 ***
-tax          -0.014609   0.004131  -3.536 0.000449 ***
-ptratio      -0.943134   0.140642  -6.706 6.15e-11 ***
-black         0.009079   0.002944   3.084 0.002173 ** 
-lstat        -0.524051   0.053739  -9.752  &lt; 2e-16 ***
+(Intercept)  3.961e+01  5.417e+00   7.311 1.26e-12 ***
+crim        -1.095e-01  3.410e-02  -3.211  0.00142 ** 
+zn           4.841e-02  1.480e-02   3.270  0.00116 ** 
+indus       -1.846e-02  6.373e-02  -0.290  0.77221    
+chas         2.230e+00  8.712e-01   2.560  0.01080 *  
+nox         -1.700e+01  3.997e+00  -4.252 2.59e-05 ***
+rm           3.476e+00  4.434e-01   7.840 3.42e-14 ***
+age         -1.536e-04  1.385e-02  -0.011  0.99116    
+dis         -1.544e+00  2.185e-01  -7.066 6.26e-12 ***
+rad          2.993e-01  7.082e-02   4.226 2.89e-05 ***
+tax         -1.174e-02  4.007e-03  -2.929  0.00357 ** 
+ptratio     -1.003e+00  1.367e-01  -7.341 1.03e-12 ***
+black        8.965e-03  2.770e-03   3.236  0.00130 ** 
+lstat       -5.149e-01  5.334e-02  -9.653  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 4.833 on 441 degrees of freedom
-Multiple R-squared:  0.7365,    Adjusted R-squared:  0.7287 
-F-statistic: 94.81 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 4.699 on 441 degrees of freedom
+Multiple R-squared:  0.7397,    Adjusted R-squared:  0.7321 
+F-statistic: 96.42 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>But, is this the model you want to use?</p>
@@ -636,32 +661,32 @@ F-statistic: 94.81 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(model_1)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>(model_summary<span class="sc">$</span>sigma)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 23.36079</code></pre>
+<pre><code>[1] 22.08131</code></pre>
 </div>
 </div>
 <p><span class="math inline">\(R^2\)</span> of the model</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7364936</code></pre>
+<pre><code>[1] 0.7397311</code></pre>
 </div>
 </div>
 <p>Adjusted-<span class="math inline">\(R^2\)</span> of the model, if you add a variable (or several in a group), SSE will decrease, <span class="math inline">\(R^2\)</span> will increase, but Adjusted-<span class="math inline">\(R^2\)</span> could go either way.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>adj.r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7287259</code></pre>
+<pre><code>[1] 0.7320587</code></pre>
 </div>
 </div>
 <p>AIC and BIC of the model, these are information criteria. Smaller values indicate better fit.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2740.746</code></pre>
+<pre><code>[1] 2715.117</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2802.55</code></pre>
+<pre><code>[1] 2776.921</code></pre>
 </div>
 </div>
 <p>BIC, AIC, and Adjusted <span class="math inline">\(R^2\)</span> have complexity penalty in the definition, thus when comparing across different models they are better indicators on how well the model will perform on future data.</p>
@@ -681,14 +706,14 @@ F-statistic: 94.81 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((medv_pred <span class="sc">-</span> Boston_test<span class="sc">$</span>medv)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 27.40168</code></pre>
+<pre><code>[1] 23.75183</code></pre>
 </div>
 </div>
 <p>A less popular measure is the Mean Absolute Prediction Error (MAPE). You can probably guess that here instead of taking the average of squared error, MAE is the average of absolute value of error.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(medv_pred <span class="sc">-</span> Boston_test<span class="sc">$</span>medv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.977677</code></pre>
+<pre><code>[1] 3.741077</code></pre>
 </div>
 </div>
 <p>Note that if you ignore the second argument of predict(), it gives you the in-sample prediction on the training set:</p>
