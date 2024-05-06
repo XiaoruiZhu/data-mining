@@ -1084,7 +1084,7 @@ The surrogate R-squared of the model
 y ~ x1 + x2 
 ------------------------------------------------------------------------ 
 is: 
-[1]  0.67794</code></pre>
+[1]  0.66402</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># McFadden's Pseudo R-squared of training set</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(Logit_mod, <span class="at">which =</span> <span class="st">"McFadden"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4693,12 +4693,12 @@ is:
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>train_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((train_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> train<span class="sc">$</span>Spam)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Train_Accuracy:'</span>, train_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Train_Accuracy: 0.7975"</code></pre>
+<pre><code>[1] "Train_Accuracy: 0.78"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((test_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> test<span class="sc">$</span>Spam)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Test_Accuracy:'</span>, test_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Test_Accuracy: 0.77"</code></pre>
+<pre><code>[1] "Test_Accuracy: 0.86"</code></pre>
 </div>
 </div>
 </section>
@@ -4716,16 +4716,16 @@ is:
 Call:
 roc.default(response = train$Spam, predictor = train_pred)
 
-Data: train_pred in 191 controls (train$Spam 0) &lt; 209 cases (train$Spam 1).
-Area under the curve: 0.874</code></pre>
+Data: train_pred in 188 controls (train$Spam 0) &lt; 212 cases (train$Spam 1).
+Area under the curve: 0.8606</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 roc.default(response = test$Spam, predictor = test_pred)
 
-Data: test_pred in 51 controls (test$Spam 0) &lt; 49 cases (test$Spam 1).
-Area under the curve: 0.8443</code></pre>
+Data: test_pred in 54 controls (test$Spam 0) &lt; 46 cases (test$Spam 1).
+Area under the curve: 0.8917</code></pre>
 </div>
 </div>
 <div class="cell">

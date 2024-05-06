@@ -480,20 +480,20 @@ glm(formula = Purchase ~ Age + Browsing_History + Gender + Time_Of_Day,
 
 Coefficients:
                     Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)        -2.486609   0.344170  -7.225 5.01e-13 ***
-Age                 0.040836   0.006863   5.950 2.68e-09 ***
-Browsing_History    2.077667   0.170494  12.186  &lt; 2e-16 ***
-GenderMale          0.026840   0.163543   0.164   0.8696    
-Time_Of_DayEvening  0.397869   0.201900   1.971   0.0488 *  
-Time_Of_DayMorning -0.246351   0.196075  -1.256   0.2090    
+(Intercept)        -2.160626   0.338652  -6.380 1.77e-10 ***
+Age                 0.035148   0.006814   5.158 2.50e-07 ***
+Browsing_History    2.048101   0.168325  12.168  &lt; 2e-16 ***
+GenderMale         -0.043162   0.162931  -0.265   0.7911    
+Time_Of_DayEvening  0.357064   0.203671   1.753   0.0796 .  
+Time_Of_DayMorning -0.171330   0.194250  -0.882   0.3778    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 1103.25  on 799  degrees of freedom
-Residual deviance:  893.51  on 794  degrees of freedom
-AIC: 905.51
+    Null deviance: 1099.77  on 799  degrees of freedom
+Residual deviance:  898.41  on 794  degrees of freedom
+AIC: 910.41
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -529,12 +529,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>train_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((train_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> train<span class="sc">$</span>Purchase)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Train_Accuracy:'</span>, train_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Train_Accuracy: 0.72375"</code></pre>
+<pre><code>[1] "Train_Accuracy: 0.725"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>((test_pred <span class="sc">&gt;</span> <span class="fl">0.5</span>) <span class="sc">==</span> test<span class="sc">$</span>Purchase)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'Test_Accuracy:'</span>, test_accuracy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Test_Accuracy: 0.675"</code></pre>
+<pre><code>[1] "Test_Accuracy: 0.69"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating AUC for training and testing sets</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>

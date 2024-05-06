@@ -402,7 +402,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 </div>
 <p><img src="images/plot_nn.png" class="img-fluid"></p>
 <ul>
-<li><strong>Calculate the MSPE of the above neural network model</strong> (what is <a href="MSPE">https://www.educateusgpt.org/sec-1-2-supervised-prediction.html#model-assessment</a>?):</li>
+<li><strong>Calculate the MSPE of the above neural network model</strong> (what is <a href="https://www.educateusgpt.org/sec-1-2-supervised-prediction.html#model-assessment">MSPE</a>?):</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pr_nn <span class="ot">&lt;-</span> <span class="fu">compute</span>(nn, test_Boston[,<span class="dv">1</span><span class="sc">:</span><span class="dv">13</span>])</span>
@@ -415,7 +415,7 @@ gtag('config', 'G-PFYV0SJVTC', { 'anonymize_ip': true});
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>MSPE_nn <span class="ot">&lt;-</span> <span class="fu">sum</span>((test_r <span class="sc">-</span> pr_nn_org)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">nrow</span>(test_Boston)</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>MSPE_nn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.796293</code></pre>
+<pre><code>[1] 5.826554</code></pre>
 </div>
 </div>
 <p>Remark: If the testing set is not available in practice, you may try to scale the data based on the training set only. Then the recovering process should be changed accordingly.</p>
