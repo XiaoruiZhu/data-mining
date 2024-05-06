@@ -11,6 +11,8 @@ project:
     - sec-3-2-Logit.qmd
     - sec-3-3-Logit-AUC-ROC.qmd
     - sec-3-4-Logit-VarSele.qmd
+    - sec-4-1-Neural-Network-Reg.qmd
+    - sec-4-2-Neural-Network-Class.qmd
     - about.qmd
     
 website:
@@ -39,6 +41,10 @@ website:
           - sec-3-2-Logit.qmd
           - sec-3-3-Logit-AUC-ROC.qmd
           - sec-3-4-Logit-VarSele.qmd
+      - section: "4 Neural Network Models"
+        contents:
+          - sec-4-1-Neural-Network-Reg.qmd
+          - sec-4-2-Neural-Network-Class.qmd
       - section: "About"
         contents:
           - about.qmd
